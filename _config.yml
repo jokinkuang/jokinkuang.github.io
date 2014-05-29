@@ -1,9 +1,9 @@
-title:            Lei Huang
-description:      I practice three hours a day,so that when I meet a pirate,I can kill it!
+title:            Blog Of helloxk
+description:      Just do more professional !
 url:              
 baseurl:          # Base url. ( if use subdirectory-like URL )
-signoff:          Lei # Your name.
-disqus_shortname: huanglei # disqus comment thread for post header options. ( leave blank if unwanted. )
+signoff:          Kuang # Your name.
+disqus_shortname: helloxk # disqus comment thread for post header options. ( leave blank if unwanted. )
 google_analytics_id: # set tracking, UA-XXXX-Y.
 encoding: utf-8
 links:
