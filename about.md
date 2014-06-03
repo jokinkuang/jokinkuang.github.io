@@ -2,9 +2,9 @@
 layout: page
 title: About
 ---
-<img src="http://leihuang.qiniudn.com/me2.jpg" height="150px" width="150px" />
+<img src="http://cuicui.jpg" height="150px" width="150px" />
 ##hello！
-- 黄磊
+- 翠翠
 - 重庆大学 2011级本科 软件工程专业
 - 兴趣：书法、游泳、编程、游戏、睡觉、吉他
 - c/c++,java,算法，数学，分布式，hadoop,linux
