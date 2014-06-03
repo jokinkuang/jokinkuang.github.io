@@ -1,9 +1,9 @@
-title:            Blog Of helloxk
-description:      Just do more professional !
+title:            Blog Of CuiCui
+description:      Just work much harder !
 url:              
 baseurl:          # Base url. ( if use subdirectory-like URL )
-signoff:          Kuang # Your name.
-disqus_shortname: helloxk # disqus comment thread for post header options. ( leave blank if unwanted. )
+signoff:          cuicui # Your name.
+disqus_shortname: cuicui # disqus comment thread for post header options. ( leave blank if unwanted. )
 google_analytics_id: # set tracking, UA-XXXX-Y.
 encoding: utf-8
 links:
