@@ -1,10 +1,8 @@
 ---
 layout: post
-title: Post Model
+title: 一个使用Play 2.0演示Japid渲染引擎的示例
 tags: [Variety]
 ---
-
-h1. 一个使用Play 2.0演示Japid渲染引擎的示例
 
 冉兵, 中国 (bing.ran@iclass.com)
 
