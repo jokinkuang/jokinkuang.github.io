@@ -1,9 +1,8 @@
-title:            Blog Of CuiCui
+title:            Blog Of Helloxk
 description:      Just work much harder !
 url:              
 baseurl:          # Base url. ( if use subdirectory-like URL )
-signoff:          cuicui # Your name.
-disqus_shortname: cuicui # disqus comment thread for post header options. ( leave blank if unwanted. )
+signoff:          helloxk # Your name.
 google_analytics_id: # set tracking, UA-XXXX-Y.
 encoding: utf-8
 links:
@@ -18,8 +17,11 @@ links:
   - name:         About
     url:          /about
 
+highlighter:      pygments
 pygments:         true
 permalink:        pretty
 markdown:         redcarpet
 redcarpet:
   extensions:     [autolink, tables]
+comments:
+   provider:    uyan 
