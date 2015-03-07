@@ -16,6 +16,8 @@ links:
     external:     true
   - name:         About
     url:          /about
+  - name:         MyCV 
+    url:          /me/jianli.html
 
 highlighter:      pygments
 pygments:         true
