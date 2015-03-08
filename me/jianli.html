@@ -376,9 +376,13 @@
 			table.className="table table-bordered";
 			
 			for(_d in _datas){
-				var tr=table.insertRow();
+                //** Attention: old DOM would insert Row/Cell at the first of table, 
+                //              But new DOM would insert at the tail of table! 
+                //   Fix: insert by index -1 to force to insert at the tail.
+                //*/
+				var tr=table.insertRow(-1);   
 				tr.className="tr-header";
-				var td=tr.insertCell();
+				var td=tr.insertCell(-1);
 				td.colSpan=t_column<=0 ? 1 : t_column;   				//**IE不支持colSpan<=0/
 				td.innerHTML=_datas[_d].tip;
 				
@@ -390,7 +394,7 @@
 				for(var _c=0;_c<_cells.length;_c++){						
 					///**行单元格*/					
 					if(_cells[_c].type===cell.LINE){
-						td=table.insertRow().insertCell();
+						td=table.insertRow(-1).insertCell(-1);
 						td.colSpan=t_column<=0 ? 1 : t_column; 			//**IE不支持colSpan<=0/
 						if(_cells[_c].value.charAt(0)==='\r'||_cells[_c].value.charAt(0)==='\n'){
 							_cells[_c].value="\n"+_cells[_c].value;  
@@ -399,24 +403,24 @@
 					}else{
 						//**根据情况创建单元格*/
 						if(_c==0||_n > t_column-1){			//**铺满一行*/          //** _c默认是字符串型,所以不能使用===;初始化为0也不可以*/
-							tr=table.insertRow();
+							tr=table.insertRow(-1);
 							if(_img==1 && _row<4 ){									//**有照片后,照片占位*/
 								_row=_row+1;				//**已占行数: 1开始  colSpan=4，相当于0,1,2,3 故下标最大为4,因为这里是即时创建._row=1时表示准备创建第2个.所以这里下标为4*/  /**下标为4但出错的页面较少,是因为row没有机会大于3,若row>3则异常*/
 								_n=2;						//**显示图片*/
 								if(_n>t_column-1){			//**仅图片就占了一行,但注意不是直接continue,而是先恢复数据.*/
 									_c=_c-1;
 									/*for(;_row<3;_row++)	//**要不要无所谓,不要思路更容易理解/
-										tr=table.insertRow();*/
+										tr=table.insertRow(-1);*/
 									continue;				//**continue是必须的,下面是内容处理,不能进入.*/
 								}else{
-									td=tr.insertCell();		//**插入新单元格*/
+									td=tr.insertCell(-1);		//**插入新单元格*/
 								}
 							}else{
-								td=tr.insertCell();			//**插入新单元格*/
+								td=tr.insertCell(-1);			//**插入新单元格*/
 								_n=0;
 							}
 						}else{
-							td=tr.insertCell();
+							td=tr.insertCell(-1);
 						}
 						//**根据情况处理单元格内容*/
 						if(_cells[_c].value.indexOf("头像")===-1){
@@ -440,7 +444,7 @@
 										//**图片前面单元格*/
 										td.colSpan=_colSpan<=0 ? 1 : _colSpan;
 										//**图片后面单元格/
-										td=tr.insertCell();
+										td=tr.insertCell(-1);
 										_colSpan=t_column-1-_imgRow;
 										if(isNaN(_colSpan)){
 											_colSpan=1;
@@ -545,7 +549,7 @@
 		
 		var initList = function(_id,_model){
 			if(_model===""){
-				alert("initTable: 空的模块");
+				alert("initList: 空的模块");
 				return -1;
 			}
 			var _title=_model.title;
