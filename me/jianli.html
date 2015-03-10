@@ -190,6 +190,20 @@
 				alert("Origin null is not allowed by Access-Control-Allow-Origin.\n 浏览器安全等级不允许本地Ajax操作文件 \n 请使用Sogou兼容模式,FireFox 或 IE 9预览");
 		   }
 		});
+
+        var resizeTable=function(_t_column){
+            /**清空标签*/
+			$("#nav").empty();
+			$("#sections").empty();
+			for(_i in models){
+				var _model=models[_i];
+				if(_model.title.format=="table"){
+					models[_i].title.t_column=_t_column;
+				}
+			}  
+			init();
+        };
+
 		var changeColumn=function(){
 			var _t_column=$("#t_column").val();
 			/**清空标签*/
@@ -490,7 +504,7 @@
             /* auto fit to the web-page */
             while( $("table").width() > $("body").width() ) {
                 document.getElementById(_id).removeChild(table);
-                _model.title.t_column -= 1;
+                _model.title.t_column -= 2;
                 initTable(_id, _model);
             }
 		}
@@ -686,6 +700,10 @@
 				$spy.scrollspy($spy.data());
 			})
 		}
+
+        $(window).resize(function(){
+            resizeTable(8);
+        });
 	});
   </script>
    <body data-spy="scroll" data-target=".nav-collapse"  >
