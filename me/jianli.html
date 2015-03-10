@@ -484,7 +484,15 @@
 				}
 				//
 			}
+
 			document.getElementById(_id).appendChild(table);
+
+            /* auto fit to the web-page */
+            while( $("table").width() > $("body").width() ) {
+                document.getElementById(_id).removeChild(table);
+                _model.title.t_column -= 1;
+                initTable(_id, _model);
+            }
 		}
 
 		var toList = function(_model){
@@ -664,7 +672,9 @@
 				}
 				var _id = "ss"+_m;
 				switch(_model.title.format){
-					case "table" : initTable(_id,_model);break;
+                    case "table" : initTable(_id,_model);
+			                       document.getElementById("t_column").value = _model.title.t_column;
+                                   break;
 					case "list" : initList(_id,_model);break;
 					default : break;
 				}
