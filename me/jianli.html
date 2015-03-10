@@ -504,7 +504,12 @@
             /* auto fit to the web-page */
             while( $("table").width() > $("body").width() ) {
                 document.getElementById(_id).removeChild(table);
-                _model.title.t_column -= 2;
+                if (_model.title.t_column % 2 == 0)
+                    _model.title.t_column -= 2;
+                else
+                    _model.title.t_column -= 1;
+                if (_model.title.t_column <= 0)
+                    _model.title.t_column = 1;
                 initTable(_id, _model);
             }
 		}
