@@ -52,7 +52,7 @@ icon:PO,title:个人作品展示,desc:Projects,
 format:list,t_column:5,
 /|
 2011~2013:  按开发时间从最近开始排序/;;
-	有些工具很简单,但这只是一个记录.请不要在意语言,因为java,C++,C#,Windows C,Linux C,QT等都可以实现./;
+	有些工具很简单,但这只是一个记录.请不要在意语言,因为java,C++,C#,Windows C,Linux C,QT等我都可以实现的./;
 /;;
 
 2013.09.20/;16,HTML简历模板/;/;
