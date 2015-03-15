@@ -2,7 +2,7 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">
-    <title>个人HTML简历Demo</title>
+    <title>个人HTML简历</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Bootstrap是Twitter推出的一个用于前端开发的开源工具包。它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。Bootstrap中文网致力于为广大国内开发者提供详尽的中文文档、代码实例等，助力开发者掌握并使用这一框架。">
 <meta name="keywords" content="Bootstrap,CSS,CSS框架,CSS framework,javascript,bootcss,bootstrap开发,bootstrap代码,bootstrap入门">
@@ -26,7 +26,7 @@
                     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
                                    <link rel="shortcut icon" href="assets/ico/favicon.png">
     <!-- jQuery要比$(document)先引入 -->
-	<script src="assets/plugins/js/jquery-1.8.2.min.js"></script>
+	<script src="assets/plugins/js/jquery-1.11.0.min.js"></script>
   </head>
   <style type="text/css">
   body{
@@ -166,17 +166,10 @@
   </style>
   
   <script type="text/javascript">
-	//***************************
-	//* Made By XK 2013.9
-	//***************************
+  //***************************
+  //* Made By XK 2013.9
+  //***************************
 	$(document).ready(function(){
-		/*$.get("info.txt", function(data){
-		  toObject(data);
-		  init();
-		  //alert("Data Loaded: " + data);
-		},"text");
-		*/
-		//$("#sections").load("info.txt");
 		if(!String.prototype.trim) { 
 		   String.prototype.trim = function() { return this.replace(/^\s\s*/, '').replace(/\s\s*$/, ''); } 
 		}
@@ -197,6 +190,20 @@
 				alert("Origin null is not allowed by Access-Control-Allow-Origin.\n 浏览器安全等级不允许本地Ajax操作文件 \n 请使用Sogou兼容模式,FireFox 或 IE 9预览");
 		   }
 		});
+
+        var resizeTable=function(_t_column){
+            /**清空标签*/
+			$("#nav").empty();
+			$("#sections").empty();
+			for(_i in models){
+				var _model=models[_i];
+				if(_model.title.format=="table"){
+					models[_i].title.t_column=_t_column;
+				}
+			}  
+			init();
+        };
+
 		var changeColumn=function(){
 			var _t_column=$("#t_column").val();
 			/**清空标签*/
@@ -253,12 +260,9 @@
 		var models=new Array();
 		
 		var toObject = function(data){
-			//alert(data);
 			var _models=data.split("/||");
 			var _model;
-			//alert(_models.length);
 			for(each in _models){
-				//alert(_models[each]);
 				_model=_models[each].trim();
 				if(_model===""){
 					alert("toObject空的模块");
@@ -281,13 +285,10 @@
 					_title="{"+_title+"'}";
 				}
 				
-				//alert(_title);
 				var tt=eval("("+_title.trim()+")");
-				//alert(tt.icon);
 				var _model = new Object();
 				_model.title=tt;
 				
-				//alert(tt.title);
 				//**数据段*/
 				_model.datas=_data;
 				
@@ -311,22 +312,18 @@
 			if(_data.charAt(_data.length-1)===';' && _data.charAt(_data.length-2)===';' && _data.charAt(_data.length-3)==='/'){	//**修正 a;;||与a|| 的兼容*/
 				_data=_data.substring(0,_data.length-3);
 			}
-			//alert(_data);
 			_data=_data.split("/;;");
-			//alert(_data.length);
 			
 			var _t_datas=new Array();
 			var _t_index=0;				
 			var _cells=new Array();
 			var _c_index=0;
-
+	
 			for(_d in _data){
-			//alert(_data[_d].indexOf(':'));
 				//**标题|行内容|单元格内容*/
 				if(_data[_d].indexOf(':')===-1){
 					if(_data[_d].indexOf('/;')===-1){
 						if(_d % 2===0){							//**下标为偶数->才是标题*/	
-							//alert("标题是:"+_data[_d].trim()); 	//**trim能消掉前后换行符*/
 							if(_t_index>0){
 								_cells=new Array();				//**下一个数据段数组初始化*/
 								_c_index=0;						//**初始化*/
@@ -337,11 +334,8 @@
 							_t_datas[_t_index]=_t_data;
 							_t_index=_t_index+1;
 						}else{
-							//alert("行内容:"+_data[_d].trim());
 							if(_data[_d].charAt(0)==='\r'||_data[_d].charAt(0)==='\n'){
-								//alert("如第一个是换行符,忽略");
 								_data[_d]=_data[_d].substring(2);  //**UTF8 1字符=2字节 */
-								//alert("-"+_data[_d]+"-");
 							}
 							_cell=new Object();
 							_cell.type=cell.LINE;
@@ -352,11 +346,8 @@
 					}else{
 						var _lines=_data[_d].split("/;");
 						for(_l in _lines){
-							//alert("行内容:"+_lines[_l].trim());
 							if(_lines[_l].charAt(0)==='\r'||_lines[_l].charAt(0)==='\n'){
-								//alert("如第一个是换行符,忽略");
 								_lines[_l]=_lines[_l].substring(2);  //**UTF8 1字符=2字节 */
-								//alert("-"+_lines[_l]+"-");
 							}
 							_cell=new Object();
 							_cell.type=cell.LINE;
@@ -368,7 +359,6 @@
 				}else{
 					var _tbs=_data[_d].trim().replace(/:/g,",").split(",");
 					for(_t in _tbs){
-						//alert("-"+_tbs[_t].trim()+"-");
 						_cell=new Object();
 						_cell.type=cell.CELL;
 						_cell.value=_tbs[_t].trim();
@@ -400,9 +390,13 @@
 			table.className="table table-bordered";
 			
 			for(_d in _datas){
-				var tr=table.insertRow();
+                //** Attention: old DOM would insert Row/Cell at the first of table, 
+                //              But new DOM would insert at the tail of table! 
+                //   Fix: insert by index -1 to force to insert at the tail.
+                //*/
+				var tr=table.insertRow(-1);   
 				tr.className="tr-header";
-				var td=tr.insertCell();
+				var td=tr.insertCell(-1);
 				td.colSpan=t_column<=0 ? 1 : t_column;   				//**IE不支持colSpan<=0/
 				td.innerHTML=_datas[_d].tip;
 				
@@ -411,39 +405,36 @@
 
 				var _cells=_datas[_d].cells;
 				var _n=0,_img=0,_row=0,_imgRow;
-				//alert(_cells.length);
 				for(var _c=0;_c<_cells.length;_c++){						
 					///**行单元格*/					
 					if(_cells[_c].type===cell.LINE){
-						td=table.insertRow().insertCell();
+						td=table.insertRow(-1).insertCell(-1);
 						td.colSpan=t_column<=0 ? 1 : t_column; 			//**IE不支持colSpan<=0/
-						//alert("here-"+_cells[_c].value+"-");
 						if(_cells[_c].value.charAt(0)==='\r'||_cells[_c].value.charAt(0)==='\n'){
-							//alert("第一个是换行,增加一个换行符");
 							_cells[_c].value="\n"+_cells[_c].value;  
 						}
 						td.innerHTML="<pre>"+_cells[_c].value+"</pre>"; //**如第一个是换行,PRE忽略一个换行,唯有在前面添加一个换行符/
 					}else{
 						//**根据情况创建单元格*/
 						if(_c==0||_n > t_column-1){			//**铺满一行*/          //** _c默认是字符串型,所以不能使用===;初始化为0也不可以*/
-							tr=table.insertRow();
+							tr=table.insertRow(-1);
 							if(_img==1 && _row<4 ){									//**有照片后,照片占位*/
 								_row=_row+1;				//**已占行数: 1开始  colSpan=4，相当于0,1,2,3 故下标最大为4,因为这里是即时创建._row=1时表示准备创建第2个.所以这里下标为4*/  /**下标为4但出错的页面较少,是因为row没有机会大于3,若row>3则异常*/
 								_n=2;						//**显示图片*/
 								if(_n>t_column-1){			//**仅图片就占了一行,但注意不是直接continue,而是先恢复数据.*/
 									_c=_c-1;
 									/*for(;_row<3;_row++)	//**要不要无所谓,不要思路更容易理解/
-										tr=table.insertRow();*/
+										tr=table.insertRow(-1);*/
 									continue;				//**continue是必须的,下面是内容处理,不能进入.*/
 								}else{
-									td=tr.insertCell();		//**插入新单元格*/
+									td=tr.insertCell(-1);		//**插入新单元格*/
 								}
 							}else{
-								td=tr.insertCell();			//**插入新单元格*/
+								td=tr.insertCell(-1);			//**插入新单元格*/
 								_n=0;
 							}
 						}else{
-							td=tr.insertCell();
+							td=tr.insertCell(-1);
 						}
 						//**根据情况处理单元格内容*/
 						if(_cells[_c].value.indexOf("头像")===-1){
@@ -460,7 +451,6 @@
 										_colSpan=1;						//**当_colSpan<=0时,IE不支持/
 									}else if(_row<4){	//**图像夹在中间/
 										_colSpan=t_column - 2 -(_nums) % (t_column-2)+1;
-										//alert(_colSpan+"|"+_imgRow+"|"+_n);  //**5,6,5=img:2+真正位置/
 										_colSpan=_imgRow-_n+2;
 										if(isNaN(_colSpan)){
 											_colSpan=1;
@@ -468,19 +458,17 @@
 										//**图片前面单元格*/
 										td.colSpan=_colSpan<=0 ? 1 : _colSpan;
 										//**图片后面单元格/
-										td=tr.insertCell();
+										td=tr.insertCell(-1);
 										_colSpan=t_column-1-_imgRow;
 										if(isNaN(_colSpan)){
 											_colSpan=1;
 										}
 										td.colSpan=_colSpan<=0 ? 1 : _colSpan;
-										//alert(_row);
 									}else{			 	//**图像在里面,与图像位置无关/
 										_colSpan=t_column - (_nums-(t_column-2)*4) % t_column+1;
 										if(isNaN(_colSpan)){
 											_colSpan=1;
 										}
-										//alert(">"+_colSpan);
 										td.colSpan=_colSpan<=0 ? 1 : _colSpan;
 									}
 								}else{
@@ -490,8 +478,6 @@
 									}
 									td.colSpan=t_column<=0 ? 1 : _colSpan;
 								}
-							   //**alert("+"+_colSpan);	NaN不能用于与0比较.故使用t_column<=0/
-										
 							}
 							_n=_n+1;
 						}else{
@@ -512,7 +498,20 @@
 				}
 				//
 			}
+
 			document.getElementById(_id).appendChild(table);
+
+            /* auto fit to the web-page */
+            while( $("table").width() > $("body").width() ) {
+                document.getElementById(_id).removeChild(table);
+                if (_model.title.t_column % 2 == 0)
+                    _model.title.t_column -= 2;
+                else
+                    _model.title.t_column -= 1;
+                if (_model.title.t_column <= 0)
+                    _model.title.t_column = 1;
+                initTable(_id, _model);
+            }
 		}
 
 		var toList = function(_model){
@@ -526,15 +525,13 @@
 			if(_datas.charAt(_datas.length-1)===';' && _datas.charAt(_datas.length-2)===';' && _datas.charAt(_datas.length-3)==='/'){	//**修正 a;;||与a|| 的兼容*/
 				_datas=_datas.substring(0,_datas.length-3);
 			}
-			//alert(_datas);
 			_datas=_datas.trim().split("/;;");
-			//alert(_datas.length);
 			
 			var _l_datas=new Array();
 			var _i=0;				
 			var _lists=new Array();
 			var _j=0;
-
+	
 			for(_d in _datas){
 				var _data = _datas[_d].trim();
 				//**标题|内容|*/
@@ -542,10 +539,8 @@
 					_data=_data.substring(0,_data.length-2);
 				}
 				var _lines = _data.split("/;");
-				//alert("行内容:"+_data[_d].trim());
 				for(_l in _lines){
 					if(_lines[_l].charAt(0)==='\r'||_lines[_l].charAt(0)==='\n'){
-						//alert("如第一个是换行符,忽略");
 						_lines[_l]=_lines[_l].substring(2);  //**UTF8 1字符=2字节 */
 					}
 				}
@@ -581,7 +576,7 @@
 		
 		var initList = function(_id,_model){
 			if(_model===""){
-				alert("initTable: 空的模块");
+				alert("initList: 空的模块");
 				return -1;
 			}
 			var _title=_model.title;
@@ -600,14 +595,12 @@
 					var _oline = _lines[_l];
 					var _line = _lines[_l].value;
 					if(_oline.type === line.IMG){
-						//alert (parseInt(_line.split(":")[0].trim().split('[')[1].trim()));
 						var _width = _line.split(":")[0].trim().split('[')[1].trim();
 						if(_width.indexOf('%')===-1){
 							_width = parseInt(_width)+"px";
 						}else{
 							_width = parseInt(_width)+"%";
 						}
-						//alert(_width);
 						var _img = _line.split(":")[1].trim();
 						_line='<div style="display:inline-block;width:'+_width+';"><img src="'+_img+'" class="img-polaroid" align="left3" alt="图片加载失败!" width="100%"></div>';
 					}else if(_line.charAt(0)==='\r'||_line.charAt(0)==='\n'){
@@ -649,41 +642,6 @@
 		}
 				
 		var init = function(){
-			/*
-			for(_m in models){
-				document.writeln("<h1>"+models[_m].title.title+"</h1>");
-				var _datas=models[_m].datas;
-				var _title=models[_m].title;
-				if(_title.format=="table"){
-					for(_d in _datas){
-						document.writeln("<h6>"+_datas[_d].tip+"</h6>");
-						var _cells=_datas[_d].cells;
-						for(_c in _cells){
-							document.write(_cells[_c].value);
-							if(_c % 2 === 0){
-								document.write(":");
-							}else{
-								document.write(",");
-							}
-						}
-						document.writeln("<br>");
-					}
-				}
-
-				if(_title.format=="list"){
-					for(_d in _datas){
-						document.writeln("<h6>"+_datas[_d].tip+"</h6>");
-						var _lines=_datas[_d];
-						for(_l in _lines){
-							document.write("Type:"+_lines[_l].type+"  Value:"+_lines[_l].value);
-						}
-						document.writeln("<br>");
-					}
-				}
-			}
-			return 0; 
-			*/
-			
 			var _div = document.createElement("div");
 			_div.className="span10";
 			_div.innerHTML='<div style="float:right;"><br><br>列:<input id="t_column" type="text" style="width:40px;margin:0px;" value="8"/><input id="t_input" class="btn btn-primary" type="button" value="预览"/></div>';
@@ -733,25 +691,27 @@
 				}
 				var _id = "ss"+_m;
 				switch(_model.title.format){
-					case "table" : initTable(_id,_model);break;
+                    case "table" : initTable(_id,_model);
+			                       document.getElementById("t_column").value = _model.title.t_column;
+                                   break;
 					case "list" : initList(_id,_model);break;
 					default : break;
 				}
 			}
 			//**重新启动Scroll Spy插件*/
-			//$('.scroll').ScrollSpy(50);
-			//$.fn.ScrollSpy.refresh();
-			//$.fn.scrollspy.refresh();
-			
 			$('[data-spy="scroll"]').each(function () {
 				var $spy = $(window);
 				//options.offset=50;
 				$spy.scrollspy($spy.data());
 			})
 		}
+
+        $(window).resize(function(){
+            resizeTable(8);
+        });
 	});
-	</script>
-	<body data-spy="scroll" data-target=".nav-collapse"  >
+  </script>
+   <body data-spy="scroll" data-target=".nav-collapse"  >
 
     <!-- Navbar
     ================================================== -->
@@ -763,7 +723,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="./demo.html">HTML简历Demo</a>
+          <a class="brand" href="./Demo/demo.html">HTML简历Demo</a>
           <div class="nav-collapse collapse">
             <ul class="nav" id="nav">
 			  <li><a href="#s1"><i class="icon-chevron-right"></i> 基本资料</a></li>
