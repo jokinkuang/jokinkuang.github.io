@@ -195,6 +195,7 @@
 			  $("#password").val("iwantyou");
 		   },
 		   error: function(){
+				$("#tip").text("由于脚本执行问题,您看到的不是动态生成的,要预览,请使用Sogou兼容模式,Firefox或IE9以上浏览器");
 				alert("Origin null is not allowed by Access-Control-Allow-Origin.\n 浏览器安全等级不允许本地Ajax操作文件 \n 请使用Sogou兼容模式,FireFox 或 IE 9预览");
 		   }
 		});
@@ -786,7 +787,7 @@
 
 		<div class="span12" id="sections">
 
-		<h3>由于脚本执行问题,您看到的不是动态生成的,要预览,请使用Sogou兼容模式,Firefox或IE9以上浏览器</h3>
+		<h3 id="tip"></h3>
 
         <!-- Base_
         ================================================== -->
