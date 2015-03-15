@@ -739,8 +739,16 @@
 				//options.offset=50;
 				$spy.scrollspy($spy.data());
 			})
+			
+			$("#ss2").hide();
+			$("#st2").append("<center><button id=\"loadmore\" class=\"btn\" type=\"submit\">点击加载更多...</button></center>");
+		    $("#loadmore").bind("click",loadmore);
 		}
-
+		
+		var loadmore=function(){
+			$("#loadmore").toggle();
+			$("#ss2").toggle();
+		};
         $(window).resize(function(){
             resizeTable(8);
         });
