@@ -24,8 +24,8 @@ highlighter:      pygments
 safe:             false
 pygments:         true
 permalink:        pretty
-#markdown:         redcarpet
-#redcarpet:
-#  extensions:     [fenced_code_blocks, autolink, tables]
+markdown:         redcarpet
+redcarpet:
+  extensions:     [fenced_code_blocks, autolink, tables]
 comments:
    provider:    uyan 
