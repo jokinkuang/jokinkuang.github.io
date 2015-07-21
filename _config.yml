@@ -21,11 +21,10 @@ links:
 
 
 highlighter:      pygments
-safe:             false
 pygments:         true
 permalink:        pretty
 markdown:         redcarpet
 redcarpet:
-  extensions:     [fenced_code_blocks, autolink, tables, quote]
+  extensions:     [autolink, tables, quote]
 comments:
    provider:    uyan 
