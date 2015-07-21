@@ -16,11 +16,14 @@ links:
     external:     true
   - name:         About
     url:          /about
+  - name:         MyCV 
+    url:          /me/jianli.html
 
 pygments:         true
 permalink:        pretty
 markdown:         redcarpet
 redcarpet:
-  extensions:     [fenced_code_blocks, autolink, tables]
+  extensions:     [autolink, tables]
+
 comments:
    provider:    uyan 
