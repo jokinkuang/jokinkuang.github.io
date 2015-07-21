@@ -17,9 +17,6 @@ links:
   - name:         About
     url:          /about
 
-
-highlighter:      pygments
-safe:             false
 pygments:         true
 permalink:        pretty
 markdown:         redcarpet
