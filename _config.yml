@@ -1,30 +1,16 @@
-title:            Blog Of Helloxk
-description:      Just work much harder !
-url:              
-baseurl:          # Base url. ( if use subdirectory-like URL )
-signoff:          helloxk # Your name.
-google_analytics_id: # set tracking, UA-XXXX-Y.
-encoding: utf-8
-links:
-  
-  - name:         Blog
-    url:          /
-  - name:         Categories
-    url:          /tags
-  - name:         GitHub
-    url:          http://github.com/hello-xk
-    external:     true
-  - name:         About
-    url:          /about
-  - name:         MyCV 
-    url:          /me/jianli.html
+# Site settings
+title: Your awesome title
+email: your-email@domain.com
+description: > # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://yourdomain.com" # the base hostname & protocol for your site
+twitter_username: jekyllrb
+github_username:  jekyll
 
-
-highlighter:      pygments
-pygments:         true
-permalink:        pretty
-markdown:         redcarpet
-redcarpet:
-  extensions:     [autolink, tables, quote]
-comments:
-   provider:    uyan 
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
