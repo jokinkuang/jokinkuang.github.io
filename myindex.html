@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Step By Step</title>
 
 <style type="text/css">
@@ -15,8 +16,7 @@ body {
 	display: block;
 	height: 100%;
 	margin: 0 0;
-	min-width: 1000px;
-}
+  }
 
 .header {
 	position: fixed;
@@ -47,7 +47,6 @@ body {
 	left: 0;
 	height: 100%;
 	width: 100%;
-	min-width: 1000px;
 	background-position: center 0;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -63,7 +62,7 @@ body {
 }
 .talk {
 	width: 100%;
-	position: fixed;
+	position: absolute;
 	z-index: 3;
 	bottom: 12px;
 	left: 0;
@@ -72,6 +71,16 @@ body {
 	zoom: 1;
 	margin: 0;
 	text-align: center;
+}
+/************duo shuo**************/
+#ds-thread {
+  margin: 5px;
+}
+</style>
+<style type="text/css">
+@media (max-width: 768px)
+{
+
 }
 </style>
 <style type="text/css">
@@ -116,8 +125,33 @@ body {
 	<a class="menu" href="#">github</a>
 </div>
 <div class="header-bg fadein"></div>
-<div class="content"></div>
+<div class="content">
+  <span class="ds-thread-count" data-thread-key="index" data-count-type="comments"></span>
+  <!-- 多说最新评论 start -->
+	<div class="ds-recent-comments" data-num-items="2" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-excerpt-length="70"></div>
+  <!-- 多说热评文章 start -->
+  	<div class="ds-top-threads" data-range="weekly" data-num-items="3"></div>
+  <!-- 多说热评文章 end -->
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="index" data-title="StepByStep" data-url="hello-xk.github.io"></div>
+  <!-- 多说评论框 end -->
+
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"jokin"};
+  	// (function() {
+  	// 	var ds = document.createElement('script');
+  	// 	ds.type = 'text/javascript';ds.async = true;
+  	// 	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+  	// 	ds.charset = 'UTF-8';
+  	// 	(document.getElementsByTagName('head')[0]
+  	// 	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+  	// })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</div>
 <div class="talk">Don't be afraid, Step By Step</div>
 <div class="footer"></div>
+<script src="./embed.js"></script>
 </body>
 </html>

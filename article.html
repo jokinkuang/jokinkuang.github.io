@@ -44,8 +44,9 @@ body {
 }
 .center-aside {
 	margin-left: 25.0%;	/* left-aside */
-	width: 75.0%;
+	width: 55.0%;
 	min-height: 30px;
+	float: left;
 }
 /*********************category*************************/
 .center-aside .top {
@@ -87,7 +88,6 @@ body {
 /* choose all .bottom in .center-aside */
 .center-aside .bottom {
 	margin-top: 120px;
-	width: 70%;
 }
 /* choose only the li children whose parent is .article-list */
 .article-list>li {
@@ -139,6 +139,11 @@ body {
 	line-height: 20px;
 	color: #999999;
 }
+.right-aside {
+	width: 20%;
+	float: left;
+}
+
 .talk {
 	width: 100%;
 	position: fixed;
@@ -150,6 +155,10 @@ body {
 	zoom: 1;
 	margin: 0;
 	text-align: center;
+}
+/************duo shuo**************/
+#ds-thread {
+  margin: 5px;
 }
 </style>
 <style type="text/css">
@@ -184,6 +193,9 @@ a {
 		width: 100%;
 	}
 	.center-aside .bottom {
+		width: 100%;
+	}
+	.right-aside{
 		width: 100%;
 	}
 }
@@ -257,6 +269,25 @@ a {
 											</li>
 										</ul>
 		</div>
+	</div>
+	<div class="right-aside">
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="index" data-title="StepByStep" data-url="hello-xk.github.io"></div>
+		<!-- 多说评论框 end -->
+
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"jokin"};
+			(function() {
+				var ds = document.createElement('script');
+				ds.type = 'text/javascript';ds.async = true;
+				ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+				ds.charset = 'UTF-8';
+				(document.getElementsByTagName('head')[0]
+				 || document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+		</script>
+		<!-- 多说公共JS代码 end -->
 	</div>
 </div>
 <div class="talk">Don't be afraid, Step By Step</div>
