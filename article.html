@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -194,11 +196,9 @@ a {
 	}
 }
 </style>
-
 </head>
 
 <body>
-
 <div class="content">
 	<div class="left-aside">
 		<div class="remark">
@@ -218,70 +218,35 @@ a {
 										  		</ul>
 		</div>
 		<div class="bottom">
-													<ul class="nostyle article-list">
-
-										  <li class="has-img">
-										      <a class="wrap-img" href="/p/fea813d5cb0d"><img src="http://upload-images.jianshu.io/upload_images/968486-4c91237e1a072675?imageMogr2/auto-orient/strip%7CimageView2/1/w/300/h/300" alt="300"></a>
-										    <div>
-										      <p class="list-top">
-										        <a class="author-name blue-link" target="_blank" href="/users/0b3a818f8195">乌素</a>
-										        <em>·</em>
-										        <span class="time" data-shared-at="2016-07-21T21:24:50+08:00">1天之前</span>
-										      </p>
-										      <h4 class="title"><a target="_blank" href="/p/fea813d5cb0d">一张方格纸，居然能治好读书困难症？</a></h4>
-										      <div class="list-footer">
-										        <a class="grey-link" target="_blank" href="/p/fea813d5cb0d">
-										          阅读 5915
-										</a>        <a class="grey-link" target="_blank" href="/p/fea813d5cb0d#comments">
-										           · 评论 76
-										</a>        <span> · 喜欢 261</span>
-										          <span> · 打赏 3</span>
-
-										      </div>
-										    </div>
-										  </li>
-
-											<li class="has-img">
-													<a class="wrap-img" href="/p/fea813d5cb0d"><img src="http://upload-images.jianshu.io/upload_images/968486-4c91237e1a072675?imageMogr2/auto-orient/strip%7CimageView2/1/w/300/h/300" alt="300"></a>
-												<div>
-													<p class="list-top">
-														<a class="author-name blue-link" target="_blank" href="/users/0b3a818f8195">乌素</a>
-														<em>·</em>
-														<span class="time" data-shared-at="2016-07-21T21:24:50+08:00">1天之前</span>
-													</p>
-													<h4 class="title"><a target="_blank" href="/p/fea813d5cb0d">一张方格纸，居然能治好读书困难症？</a></h4>
-													<div class="list-footer">
-														<a class="grey-link" target="_blank" href="/p/fea813d5cb0d">
-															阅读 5915
-										</a>        <a class="grey-link" target="_blank" href="/p/fea813d5cb0d#comments">
-															 · 评论 76
-										</a>        <span> · 喜欢 261</span>
-															<span> · 打赏 3</span>
-
-													</div>
-												</div>
-											</li>
-										</ul>
+		<ul class="nostyle article-list">
+			{% for post in site.posts %}
+			<li class="has-img">
+			  <a class="wrap-img" href="/p/fea813d5cb0d">
+			    <img src="http://upload-images.jianshu.io/upload_images/968486-4c91237e1a072675?imageMogr2/auto-orient/strip%7CimageView2/1/w/300/h/300" alt="300"></a>
+			  <div>
+			    <p class="list-top">
+			      <a class="author-name blue-link" target="_blank" href="/users/0b3a818f8195">乌素</a>
+			      <em>·</em>
+			      <span class="time" data-shared-at="2016-07-21T21:24:50+08:00">1天之前</span></p>
+			    <h4 class="title">
+			      <a target="_blank" href="{{post.url}}">{{post.title}}</a></h4>
+			    <div class="list-footer">
+						<!--<a class="grey-link" target="_blank" href="/p/fea813d5cb0d">阅读 5915</a>-->
+			      <a class="grey-link" target="_blank" href="/p/fea813d5cb0d">字数 {{ post.content | number_of_words }}</a>
+			      <a class="grey-link" target="_blank" href="/p/fea813d5cb0d#comments">· 评论 76</a>
+			      <span>· 喜欢 261</span>
+			      <span>· 打赏 3</span></div>
+			  </div>
+			</li>
+			{% endfor %}
+			</ul>
 		</div>
 	</div>
 	<div class="right-aside">
-		<!-- 多说评论框 start -->
 		<div class="ds-thread" data-thread-key="index" data-title="StepByStep" data-url="hello-xk.github.io"></div>
-		<!-- 多说评论框 end -->
-
-		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 		<script type="text/javascript">
 		var duoshuoQuery = {short_name:"jokin"};
-			// (function() {
-			// 	var ds = document.createElement('script');
-			// 	ds.type = 'text/javascript';ds.async = true;
-			// 	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-			// 	ds.charset = 'UTF-8';
-			// 	(document.getElementsByTagName('head')[0]
-			// 	 || document.getElementsByTagName('body')[0]).appendChild(ds);
-			// })();
 		</script>
-		<!-- 多说公共JS代码 end -->
 	</div>
 </div>
 <div class="talk">Don't be afraid, Step By Step</div>
