@@ -1,15 +1,15 @@
 ---
 layout: page
 title: About
+permalink: /about/
 ---
-<img src="https://avatars1.githubusercontent.com/u/6311398?s=460" height="150px" width="150px" />
-##hello！
-- 邝祖楷
-- 2014届本科 华南农业大学 软件工程专业
-- 兴趣：看电影
-- 格言：Work harder !
 
-##find me：
-- Email:  345106552@qq.com
+This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
 
+You can find the source code for the Jekyll new theme at:
+{% include icon-github.html username="jglovier" %} /
+[jekyll-new](https://github.com/jglovier/jekyll-new)
 
+You can find the source code for Jekyll at
+{% include icon-github.html username="jekyll" %} /
+[jekyll](https://github.com/jekyll/jekyll)

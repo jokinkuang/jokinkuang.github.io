@@ -124,9 +124,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  coffee-script (~> 2.2.0)
   github-pages
-  sass (~> 3.2.12)
 
 BUNDLED WITH
    1.12.5

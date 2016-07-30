@@ -1,10 +1,12 @@
+---
+---
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Step By Step</title>
+<title>{{ site.title }}</title>
 
 <style type="text/css">
 html {
@@ -42,7 +44,7 @@ body {
 }
 .header-bg {
 	display: block;
-	background-image: url("bg.jpg");
+	background-image: url("{{ site.w3c_url }}images/bg.jpg");
 	top: 0;
 	left: 0;
 	height: 100%;
@@ -123,11 +125,12 @@ body {
   <div class="ds-thread" data-thread-key="index" data-title="StepByStep" data-url="hello-xk.github.io"></div>
   <script type="text/javascript">
   	var duoshuoQuery = {short_name:"jokin"};
+		var duoshuoDir = "{{ site.duoshuo_url }}";
   </script>
 </div>
 <div class="talk">Don't be afraid, Step By Step</div>
 <div class="footer"></div>
-<script src="./embed.js"></script>
+<script src="{{ site.duoshuo_url }}embed.js"></script>
 <style type="text/css">
 /**************override duoshuo*************/
 #ds-thread {

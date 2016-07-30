@@ -1,21 +1,38 @@
-<footer>
+<footer class="site-footer">
 
-  <span class="muted">© {{ site.signoff }}. All Rights Reserved.</span><br>
-  <br>
-  <img src="{{ site.baseurl }}/images/scribble2.png" alt="scribble" />
-  <br>
-  
-  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1000437233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1000437233%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+  <div class="wrapper">
 
-  
-  <script type='text/javascript'>
-(function() {
-    var c = document.createElement('script'); 
-    c.type = 'text/javascript';
-    c.async = true;
-    c.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'www.clicki.cn/boot/50906';
-    var h = document.getElementsByTagName('script')[0];
-    h.parentNode.insertBefore(c, h);
-})();
-</script>
+    <h2 class="footer-heading">{{ site.title }}</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>{{ site.title }}</li>
+          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          {% if site.github_username %}
+          <li>
+            {% include icon-github.html username=site.github_username %}
+          </li>
+          {% endif %}
+
+          {% if site.twitter_username %}
+          <li>
+            {% include icon-twitter.html username=site.twitter_username %}
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>{{ site.description }}</p>
+      </div>
+    </div>
+
+  </div>
+
 </footer>

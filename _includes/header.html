@@ -1,8 +1,20 @@
-<header>
-<!--<a id="go-back-home" href="{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/portrait.png" alt="Home" width="120" height="120"></a> -->
-<p ><FONT face="Arial" size=3>{{ site.title }}</FONT></p>
-<p><FONT face="Comic Sans MS" size=2>{{ site.description }}</FONT></p>
-<p>helloxk</p>
+<header class="site-header">
 
+  <div class="wrapper">
+
+    <a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a>
+
+    <nav class="site-nav">
+
+      <div class="trigger">
+        {% for my_page in site.pages %}
+          {% if my_page.title %}
+          <a class="page-link" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </nav>
+
+  </div>
 
 </header>

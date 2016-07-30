@@ -1,26 +1,21 @@
 # Site settings
-title: Your awesome title
+title: Step By Step
 email: your-email@domain.com
 description: > # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
 twitter_username: jekyllrb
 github_username:  jekyll
 
+# Size URL
+base_url: "" # the subpath of your site, e.g. /blog
+w3c_url: "/w3c/"  # the base url of css js and images
+duoshuo_url: "/w3c/duoshuo/" # the duoshuo comment plugin
+url: "http://yourdomain.com" # the base hostname & protocol for your site
+
 # Build settings
-lsi: true
-safe: true
-highlighter: rouge
 markdown: kramdown
 kramdown:
-  auto_ids:       true
-  footnote_nr:    1
-  entity_output:  as_char
-  toc_levels:     1..6
-  smart_quotes:   lsquo,rsquo,ldquo,rdquo
-  input:          GFM
-  hard_wrap:      false
-  footnote_nr:    1
+  input: GFM
+highlighter: rouge
