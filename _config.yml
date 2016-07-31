@@ -1,6 +1,6 @@
 # Site settings
 title: Step By Step
-email: your-email@domain.com
+email: 345106552@qq.com
 description: > # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
@@ -9,12 +9,12 @@ twitter_username: jekyllrb
 github_username:  jekyll
 
 # Size URL
-base_url: "" # the subpath of your site, e.g. /blog
+domain: "http://yourdomain.com" # the base hostname & protocol for your site
+base_url: "" # the subpath of your site, eg. "/blog" NOT "yourdomain.com/"
 w3c_url: "/w3c/"  # the base url of css js and images
-duoshuo_url: "/w3c/duoshuo/" # the duoshuo comment plugin
-url: "http://yourdomain.com" # the base hostname & protocol for your site
+duoshuo_url: "/w3c/duoshuo/" # the local duoshuo comment plugin, you can change it to remote "http://static.duoshuo.com/"
 
-# Build settings
+# Build Settings
 markdown: kramdown
 kramdown:
   input: GFM

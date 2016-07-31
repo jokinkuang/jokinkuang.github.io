@@ -25,7 +25,7 @@
   color: #f6aa11;
 }
 .highlight .cm {
-  color: #75715e;
+  color: #9C9C9C;
 }
 .highlight .cp {
   color: #75715e;
@@ -146,7 +146,7 @@
   color: #ffffff;
 }
 .highlight .nl {
-  color: #ffffff;
+  color: #1E5335;
 }
 .highlight .ni {
   color: #ffffff;
@@ -167,10 +167,10 @@
   color: #ffffff;
 }
 .highlight {
-  color: #FF4141;
+  color: #D53FB7;
 }
 .highlight .n, .highlight .py, .highlight .nx {
-  color: #C205F1;
+  color: #34A6CA;
 }
 .highlight .ow {
   color: #f92672;

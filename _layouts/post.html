@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Step By Step</title>
-<link href='{{ site.w3c_url }}css/main.css' rel='stylesheet' type='text/css' />
+{% include head.html %}
+
+<link href='{{ site.w3c_url }}css/markdown.css' rel='stylesheet' type='text/css' />
 <link href='{{ site.w3c_url }}css/rouge.css' rel='stylesheet' type='text/css' />
 
 <style type="text/css">
@@ -21,17 +19,13 @@ body {
 	padding: 0;
 }
 .content {
-	z-index: 1;
-	width: 100%;
-	height: 100%;
-	font-size: 14px;
 	line-height: 20px;
 	color: #413838;
-	font-family: Arial, "Hiragino Sans GB", sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 /***********************post***************************/
 .center-aside {
-	width: 700px;
+	width: 800px;
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 80px;
@@ -81,6 +75,9 @@ body {
 }
 .center-aside .post {
 	padding: 0px 10px;
+	font-size: 16px;
+	line-height: 1.5;
+	color: #413838;
 }
 .footer {
   text-align: center;
@@ -150,8 +147,8 @@ a {
 			{{ content }}
 		</div>
 	</div>
-  <div class="talk"></div>
-  <div class="footer">Step By Step</div>
 </div>
+<div class="talk"></div>
+<div class="footer">&copy; Step By Step</div>
 </body>
 </html>
