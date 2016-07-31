@@ -148,6 +148,10 @@ a {
 		</div>
 	</div>
 </div>
+<!-- {{ site.categories.size }} -->
+{% for hash in site.categories %}
+	{{ hash[0] }}
+{% endfor %}
 <div class="talk"></div>
 <div class="footer">&copy; Step By Step</div>
 </body>
