@@ -86,8 +86,36 @@ $(document).ready(function(){
     showActivedCategory(g_category);
   }
 
+/* Handle Window Scroll Event */
+  var WindowScrollDown = function(top) {
+    if (top > 80) {
+      $("#top-menu").fadeOut(200);
+    }
+  }
+  var WindowScrollUp = function(top) {
+    $("#top-menu").fadeIn(200);
+  }
+
+/* Event Listening */
+
   $(".article-list").ready(function(){
     //showTimeAgo();
+  });
+
+  var g_top_pos = 0;
+  $(window).scroll(function(event){
+    var top = $(window).scrollTop();
+    //scroll down
+    if (top > g_top_pos) {
+      //console.log("down");
+      WindowScrollDown(top);
+    }
+    //scroll up
+    else {
+      //console.log("up");
+      WindowScrollUp(top);
+    }
+    g_top_pos = top;
   });
 
 });
