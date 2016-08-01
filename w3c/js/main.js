@@ -30,14 +30,14 @@ $(document).ready(function(){
     return false;
   }
 
-  var category = getUrlParam('category');
+  var g_category = getUrlParam('category');
 
   $.ajax({
     type: "get",
     url: postfile,
     dataType: "json",
     success: function (data) {
-      var posts = getPostsWithCategory(data, category);
+      var posts = getPostsWithCategory(data, g_category);
       console.log(posts);
       loadPosts(posts);
     },
@@ -53,8 +53,18 @@ $(document).ready(function(){
     });
   }
 
+  //Activative
+  var showActivedCategory = function(category) {
+    if (category == null || category == "" || category == "All") {
+      $("li[data='All']").addClass("active");
+    } else {
+      console.log(category);
+      $("li[data=" + category + "]").addClass("active");
+    }
+  }
+
   var getPostsWithCategory = function(data, category) {
-    if (category == null || category == "") {
+    if (category == null || category == "" || category == "All") {
       return data;
     }
     var tmp = data; // this is a reference, if need copy use $.extend
@@ -73,6 +83,7 @@ $(document).ready(function(){
     //console.log(text);
     $(".article-list").html(text);
     showTimeAgo();
+    showActivedCategory(g_category);
   }
 
   $(".article-list").ready(function(){

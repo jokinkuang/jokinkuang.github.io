@@ -72,7 +72,7 @@ body {
 .center-aside .category li.active a {
 	color: white;
 	border-color: #e78170;
-	background: #e78170;
+	background: #ffb0b0;
 }
 .center-aside .category li a {
 	padding: 5px 10px;
@@ -211,12 +211,12 @@ a {
 	<div class="center-aside">
 		<div class="top">
 			<ul class="nostyle category">
-						<li><a href="?">All</a></li>
+						<li data="All"><a href="?">All</a></li>
 				{% for item in site.categories %}
 					{% if forloop.index0 == 0 %}
-      			<li><a href="?category={{ item[0] }}">{{ item[0] }}</a></li>
+      			<li data="{{ item[0] }}"><a href="?category={{ item[0] }}">{{ item[0] }}</a></li>
 					{% else %}
-      			<li><a href="?category={{ item[0] }}">{{ item[0] }}</a></li>
+      			<li data="{{ item[0] }}"><a href="?category={{ item[0] }}">{{ item[0] }}</a></li>
 					{% endif %}
 				{% endfor %}
 			</ul>
