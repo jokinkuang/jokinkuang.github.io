@@ -211,6 +211,7 @@ a {
 	<div class="center-aside">
 		<div class="top">
 			<ul class="nostyle category">
+						<li><a href="?">All</a></li>
 				{% for item in site.categories %}
 					{% if forloop.index0 == 0 %}
       			<li><a href="?category={{ item[0] }}">{{ item[0] }}</a></li>

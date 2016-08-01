@@ -21,6 +21,15 @@ $(document).ready(function(){
       return null;
   }
 
+  function isInArray(item, array) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] == item) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   var category = getUrlParam('category');
 
   $.ajax({
@@ -28,7 +37,9 @@ $(document).ready(function(){
     url: postfile,
     dataType: "json",
     success: function (data) {
-      loadPosts(data);
+      var posts = getPostsWithCategory(data, category);
+      console.log(posts);
+      loadPosts(posts);
     },
     error: function (XMLHttpRequest, textStatus, errorThrown) {
       alert("Postfile的JSON格式化错误" + errorThrown);
@@ -42,10 +53,24 @@ $(document).ready(function(){
     });
   }
 
+  var getPostsWithCategory = function(data, category) {
+    if (category == null || category == "") {
+      return data;
+    }
+    var tmp = data; // this is a reference, if need copy use $.extend
+    for (var i = 0; i < tmp.posts.length; i++) {
+      if (! isInArray(category, tmp.posts[i].categories)) {
+        tmp.posts.splice(i, 1);
+        i--;  //while delete, the index should not increase
+      }
+    }
+    return tmp;
+  }
+
   var loadPosts = function(posts) {
-    console.log(posts);
+    //console.log(posts);
     var text = baidu.template('post-list', posts);
-    console.log(text);
+    //console.log(text);
     $(".article-list").html(text);
     showTimeAgo();
   }
