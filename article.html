@@ -211,7 +211,7 @@ a {
 	<div class="center-aside">
 		<div id="top-menu" class="top">
 			<ul class="nostyle category">
-						<li data="All"><a href="?">All</a></li>
+						<li data="All"><a href="?category=">All</a></li>
 				{% for item in site.categories %}
 					{% if forloop.index0 == 0 %}
       			<li data="{{ item[0] }}"><a href="?category={{ item[0] }}">{{ item[0] }}</a></li>
@@ -230,17 +230,20 @@ a {
 						<img src="	" alt="300"></a>
 					<div>
 						<p class="list-top">
-							<a class="author-name blue-link" target="_blank" href=""><%=posts[i].author%></a>
+							<a class="author-name blue-link" target="_parent" href=""><%=posts[i].author%></a>
 							<em>·</em>
-							<span class="time" date-time="<%=posts[i].date%>"></span></p>
+							<span class="time" date-time="<%=posts[i].date%>"></span>
+						</p>
 						<h4 class="title">
-							<a target="_blank" href="<%=posts[i].url%>"><%=posts[i].title%></a></h4>
+							<a target="_parent" href="<%=posts[i].url%>"><%=posts[i].title%></a>
+						</h4>
 						<div class="list-footer">
-							<!--<a class="grey-link" target="_blank" href="<%=posts[i].url%>">阅读 5915</a>-->
-							<a class="grey-link" target="_blank" href="">字数<%=posts[i].words%></a>
-							<a class="grey-link" target="_blank" href="<%=posts[i].url%>#comments">· 评论 76</a>
+							<!--<a class="grey-link" target="_parent" href="<%=posts[i].url%>">阅读 5915</a>-->
+							<a class="grey-link" target="_parent" href="">字数<%=posts[i].words%></a>
+							<a class="grey-link" target="_parent" href="<%=posts[i].url%>#comments">· 评论 76</a>
 							<span>· 喜欢 261</span>
-							<span>· 打赏 3</span></div>
+							<span>· 打赏 3</span>
+						</div>
 					</div>
 				</li>
 				<% } %>
@@ -257,13 +260,13 @@ a {
 <div class="footer"></div>
 
 <!-- baiduTemplate -->
-<script type="text/javascript" src="http://wangxiao.github.com/BaiduTemplate/debug/js/baiduTemplate.js"></script>
+<script type="text/javascript" src="{{ site.baiduTemplate_url }}"></script>
 
 <!-- jQuery -->
 <script type="text/javascript">
 	var postfile = "{{ site.postfile }}";
 </script>
-<script src="{{ site.jquery_url }}jquery.min.js"></script>
+<script src="{{ site.jquery_url }}"></script>
 <script src="{{ site.w3c_url }}js/timeago.js"></script>
 <script src="{{ site.w3c_url }}js/main.js"></script>
 

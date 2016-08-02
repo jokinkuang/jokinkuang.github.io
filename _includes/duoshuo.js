@@ -1,8 +1,8 @@
 <script type="text/javascript">
   var duoshuoQuery = {short_name:"{{ site.duoshuo_user }}"};
-  var duoshuoDir = "{{ site.duoshuo_url }}";
+  var duoshuoDir = "{{ site.duoshuo_path }}";
 </script>
-<script src="{{ site.duoshuo_url }}embed.js"></script>
+<script src="{{ site.duoshuo_path }}embed.js"></script>
 <style type="text/css">
 /**************override duoshuo css*************/
 #ds-thread {

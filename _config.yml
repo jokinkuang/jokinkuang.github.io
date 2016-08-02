@@ -8,17 +8,21 @@ description: > # this means to ignore newlines until "baseurl:"
   Google search results) and in your feed.xml site description.
 twitter_username: jekyllrb
 github_username:  jekyll
-
-# Size URL
 domain: "http://yourdomain.com" # the base hostname & protocol for your site
-base_url: "" # the subpath of your site, eg. "/blog" NOT "yourdomain.com/"
+
+# Site URL NOTE: end with / cause it's [URL + FILE]
+base_url: "" # the subpath of your site, eg. "/blog/"
 w3c_url: "/w3c/"  # the base url of css js and images
-duoshuo_url: "/w3c/duoshuo/" # the local duoshuo comment plugin, you can change it to remote "http://static.duoshuo.com/"
-duoshuo_user: "jokin" # the user of user.domain.com
-jquery_url: "//cdn.bootcss.com/jquery/3.1.0/" # use cdn
 postfile: "/Postfile" # the Database
 
+# 3rd URL
+duoshuo_user: "jokin" # the user of user.domain.com
+duoshuo_path: "/w3c/duoshuo/" # the local duoshuo comment plugin, you can change it to remote "http://static.duoshuo.com/"
+jquery_url: "//cdn.bootcss.com/jquery/3.1.0/jquery.min.js" # use cdn
+baiduTemplate_url: "/w3c/js/baiduTemplate.js" #use local
+
 # Build Settings
+permalink: /:year/:month/:day/:title.html
 markdown: kramdown
 kramdown:
   input: GFM
