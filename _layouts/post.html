@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-{% include head.html %}
+{% include head.meta %}
 
 <link href='{{ site.w3c_url }}css/markdown.css' rel='stylesheet' type='text/css' />
 <link href='{{ site.w3c_url }}css/rouge.css' rel='stylesheet' type='text/css' />
@@ -79,6 +79,11 @@ body {
 	line-height: 1.5;
 	color: #413838;
 }
+.post-footer {
+	text-align: center;
+  margin-top: 50px;
+  padding-bottom: 50px
+}
 .footer {
   text-align: center;
   margin-top: 50px;
@@ -128,9 +133,9 @@ a {
                 作者
             	</span>
             	<a class="author-name blue-link" href="/users/9c498d030b34">
-              	<span>哈默_howatto</span>
+              	<span>{{ site.author }}</span>
 							</a>
-							<span>2016.07.23 22:23</span>
+							<span>{{ page.date | date:"%Y-%m-%d %H:%M:%S" }}</span>
             	<div>
               	<span>写了82877字</span>，<span>被869人关注</span>，<span>获得了3676个喜欢</span>
             	</div>
@@ -146,13 +151,14 @@ a {
 		<div class="post">
 			{{ content }}
 		</div>
+		<div class="post-footer">&copy; Step By Step</div>
+		<!-- duoshuo -->
+		<div class="ds-thread" data-thread-key="index" data-title="StepByStep" data-url="hello-xk.github.io"></div>
 	</div>
 </div>
-<!-- {{ site.categories.size }} -->
-{% for hash in site.categories %}
-	{{ hash[0] }}
-{% endfor %}
-<div class="talk"></div>
-<div class="footer">&copy; Step By Step</div>
+
+<!-- duoshuo -->
+{% include duoshuo.js %}
+
 </body>
 </html>

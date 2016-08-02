@@ -230,15 +230,15 @@ a {
 						<img src="	" alt="300"></a>
 					<div>
 						<p class="list-top">
-							<a class="author-name blue-link" target="_blank" href="/users/0b3a818f8195">乌素</a>
+							<a class="author-name blue-link" target="_blank" href=""><%=posts[i].author%></a>
 							<em>·</em>
 							<span class="time" date-time="<%=posts[i].date%>"></span></p>
 						<h4 class="title">
 							<a target="_blank" href="<%=posts[i].url%>"><%=posts[i].title%></a></h4>
 						<div class="list-footer">
-							<!--<a class="grey-link" target="_blank" href="/p/fea813d5cb0d">阅读 5915</a>-->
-							<a class="grey-link" target="_blank" href="/p/fea813d5cb0d">字数<%=posts[i].words%></a>
-							<a class="grey-link" target="_blank" href="/p/fea813d5cb0d#comments">· 评论 76</a>
+							<!--<a class="grey-link" target="_blank" href="<%=posts[i].url%>">阅读 5915</a>-->
+							<a class="grey-link" target="_blank" href="">字数<%=posts[i].words%></a>
+							<a class="grey-link" target="_blank" href="<%=posts[i].url%>#comments">· 评论 76</a>
 							<span>· 喜欢 261</span>
 							<span>· 打赏 3</span></div>
 					</div>
@@ -254,33 +254,21 @@ a {
 	</div>
 </div>
 <div class="talk">Don't be afraid, Step By Step</div>
-<div class="footer">{{ site }}</div>
+<div class="footer"></div>
 
-<!-- duoshuo-js -->
-<script type="text/javascript">
-		var duoshuoQuery = {short_name:"jokin"};
-		var duoshuoDir = "{{ site.duoshuo_url }}";
-</script>
-<script src="{{ site.duoshuo_url }}embed.js"></script>
-<style type="text/css">
-/**************override duoshuo*************/
-#ds-thread {
-  margin: 5px 15px 5px 5px;
-}
-#ds-thread #ds-reset .ds-login-buttons .ds-social-links {
-	width: auto;
-}
-</style>
-<!-- 引入baiduTemplate -->
+<!-- baiduTemplate -->
 <script type="text/javascript" src="http://wangxiao.github.com/BaiduTemplate/debug/js/baiduTemplate.js"></script>
 
-/*jquery-js*/
+<!-- jQuery -->
 <script type="text/javascript">
 	var postfile = "{{ site.postfile }}";
 </script>
 <script src="{{ site.jquery_url }}jquery.min.js"></script>
 <script src="{{ site.w3c_url }}js/timeago.js"></script>
 <script src="{{ site.w3c_url }}js/main.js"></script>
+
+<!-- duoshuo -->
+{% include duoshuo.js %}
 
 </body>
 </html>

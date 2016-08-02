@@ -122,23 +122,14 @@ body {
 </div>
 <div class="header-bg fadein"></div>
 <div class="content">
+	<!-- duoshuo -->
   <div class="ds-thread" data-thread-key="index" data-title="StepByStep" data-url="hello-xk.github.io"></div>
-  <script type="text/javascript">
-  	var duoshuoQuery = {short_name:"{{ site.duoshuo_user }}"};
-		var duoshuoDir = "{{ site.duoshuo_url }}";
-  </script>
 </div>
 <div class="talk">Don't be afraid, Step By Step</div>
 <div class="footer"></div>
-<script src="{{ site.duoshuo_url }}embed.js"></script>
-<style type="text/css">
-/**************override duoshuo*************/
-#ds-thread {
-  margin: 5px 15px 5px 5px;
-}
-#ds-thread #ds-reset .ds-login-buttons .ds-social-links {
-	width: auto;
-}
-</style>
+
+<!-- duoshuo -->
+{% include duoshuo.js %}
+
 </body>
 </html>

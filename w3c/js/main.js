@@ -38,7 +38,6 @@ $(document).ready(function(){
     dataType: "json",
     success: function (data) {
       var posts = getPostsWithCategory(data, g_category);
-      console.log(posts);
       loadPosts(posts);
     },
     error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -89,11 +88,11 @@ $(document).ready(function(){
 /* Handle Window Scroll Event */
   var WindowScrollDown = function(top) {
     if (top > 80) {
-      $("#top-menu").fadeOut(200);
+      $("#top-menu").fadeOut(50);
     }
   }
   var WindowScrollUp = function(top) {
-    $("#top-menu").fadeIn(200);
+    $("#top-menu").fadeIn(50);
   }
 
 /* Event Listening */
