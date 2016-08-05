@@ -53,7 +53,11 @@ body {
 	box-sizing: border-box;
 }
 .center-aside .author .info {
-	margin-top: 30px;
+	margin-top: 7px;
+}
+.center-aside .author .info .talk{
+	margin: 0;
+	margin-top: 3px;
 }
 .center-aside .title {
 	font-size: 32px;
@@ -139,6 +143,7 @@ a {
             	<div>
               	<span>写了82877字</span>，<span>被869人关注</span>，<span>获得了3676个喜欢</span>
             	</div>
+							<p class="talk"> 天下房东一样黑呀<a class="blue-link">· 评论</a></p>
 						</div>
     </div>
 		<div class="title">{{ page.title }}</div>
@@ -151,7 +156,21 @@ a {
 		<div class="post">
 			{{ content }}
 		</div>
-		<div class="post-footer">&copy; Step By Step</div>
+		<div class="post-footer">
+			<p>&copy; Step By Step</p>
+		</div>
+		<div class="ds-share flat" data-thread-key="此处请替换为当前文章的thread-key" data-title="此处请替换为分享时显示的标题" data-images="此处请替换为分享时显示的图片的链接地址" data-content="此处请替换为分享时显示的内容" data-url="此处请替换为分享时显示的链接地址">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ 		</div>
 		<!-- duoshuo -->
 		<div class="ds-thread" data-thread-key="index" data-title="StepByStep" data-url="hello-xk.github.io"></div>
 	</div>

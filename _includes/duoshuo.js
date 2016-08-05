@@ -5,6 +5,9 @@
 <script src="{{ site.duoshuo_path }}embed.js"></script>
 <style type="text/css">
 /**************override duoshuo css*************/
+#ds-share #ds-reset.ds-share-inline {
+  margin: 0 7px;
+}
 #ds-thread {
   margin: 5px 10px 5px 5px;
 }
