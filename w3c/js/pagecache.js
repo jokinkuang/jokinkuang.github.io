@@ -35,6 +35,7 @@
       INFO: 1,
       ERROR: 0,
       level: 1,
+      owner: "[PageCache]",
       _log: function(level, info) {
         if (Log.level >= level && console) {
           console.log(info);
@@ -42,7 +43,7 @@
       },
       error: function(info, obj) {
         if (typeof(info) === 'string') {
-          Log._log(Log.ERROR, "[ERROR]>>" + info);
+          Log._log(Log.ERROR, Log.owner + "[ERROR]>>" + info);
         } else {
           obj = info;
           info = "";
@@ -53,7 +54,7 @@
       },
       info: function(info, obj) {
         if (typeof(info) === 'string') {
-          Log._log(Log.INFO, "[INFO]>>" + info);
+          Log._log(Log.INFO, Log.owner + "[INFO]>>" + info);
         } else {
           obj = info;
           info = "";
@@ -64,7 +65,7 @@
       },
       debug: function(info, obj) {
         if (typeof(info) === 'string') {
-          Log._log(Log.DEBUG, "[DEBUG]>>" + info);
+          Log._log(Log.DEBUG, Log.owner + "[DEBUG]>>" + info);
         } else {
           obj = info;
           info = "";
@@ -161,6 +162,10 @@
           if (_xmlhttp.readyState == 4) {
             if (_xmlhttp.status == 200) {
               var _cacheData = PageCache.cache[_xmlhttp.responseURL];
+              if (! _cacheData) {
+                Log.error("Error Occur");
+                return;
+              }
               _cacheData.state = 1;
               _cacheData.response = _xmlhttp.responseText;
               _cacheData.json = PageCache.fn._toJson(_xmlhttp.responseText);
@@ -173,7 +178,12 @@
                 }
               }
             } else {
+              Log.debug(_xmlhttp);
               var _cacheData = PageCache.cache[_xmlhttp.responseURL];
+              if (! _cacheData) {
+                Log.error("Error Occur");
+                return;
+              }
               _cacheData.state = 0;
               _cacheData.response = _xmlhttp.responseText;
               _cacheData.json = {};
@@ -189,6 +199,8 @@
           }
       }
       _xmlhttp.open("GET", url, true);
+      _xmlhttp.setRequestHeader("Origin","*");
+      Log.debug(_xmlhttp);
       _xmlhttp.send();
     }
   };
