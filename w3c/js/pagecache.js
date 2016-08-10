@@ -1,5 +1,5 @@
 /*!
- * PageCache
+ * PageCache v0.01
  *
  * Released under the MIT license, powered By jQuery
  *
@@ -30,27 +30,49 @@
     // means this Object is Global which can access by window.$PC or $PC or PageCache
     // if noGlobal is true means PageCache is one part of other modules
 })(typeof window !== "undefined" ? window : this, function(window, noGlobal) {
-  var Log = function() {
-    Log.prototype = {
-      level: 1,
+  var Log = {
       DEBUG: 2,
       INFO: 1,
       ERROR: 0,
+      level: 1,
       _log: function(level, info) {
         if (Log.level >= level && console) {
           console.log(info);
         }
       },
-      error: function(info) {
-        _log(Log.ERROR, "[ERROR]>>" + info);
+      error: function(info, obj) {
+        if (typeof(info) === 'string') {
+          Log._log(Log.ERROR, "[ERROR]>>" + info);
+        } else {
+          obj = info;
+          info = "";
+        }
+        if (obj) {
+          Log._log(Log.ERROR, obj);
+        }
       },
-      info: function(info) {
-        _log(Log.INFO, "[INFO]>>" + info);
+      info: function(info, obj) {
+        if (typeof(info) === 'string') {
+          Log._log(Log.INFO, "[INFO]>>" + info);
+        } else {
+          obj = info;
+          info = "";
+        }
+        if (obj) {
+          Log._log(Log.INFO, obj);
+        }
       },
-      debug: function(info) {
-        _log(Log.DEBUG, "[DEBUG]>>" + info);
+      debug: function(info, obj) {
+        if (typeof(info) === 'string') {
+          Log._log(Log.DEBUG, "[DEBUG]>>" + info);
+        } else {
+          obj = info;
+          info = "";
+        }
+        if (obj) {
+          Log._log(Log.DEBUG, obj);
+        }
       }
-    }
   };
 
   //Object Init
@@ -60,45 +82,109 @@
       return this;
     }
 
-    // $PC("url") or $PC("url", false)
-    if (! isForce) {
+    // $PC("url", callback) or $PC("url", callback, errCallback)
+    if (typeof(isForce) === 'function') {
+        callback = isForce;
+    }
+    if (typeof(isForce) === 'function' && typeof(callback) === 'function') {
+        callback = isForce;
+        errCallback = callback;
+    }
+
+    // $PC("url") or $PC("url", false) or $PC("url", callback)
+    if (typeof(isForce) === 'function' || ! isForce) {
       isForce = false;
     }
 
     // Get From PageCache
     if (! isForce) {
-      if (PageCache.cache[url]) {
-        callback(PageCache.cache[url]);
+      if (PageCache.cache[url] && PageCache.cache[url].state == 1) {
+        Log.debug("cache hit: " + url);
+        if (callback) {
+          callback(PageCache.cache[url]);
+        }
         return this;
       }
+      if (PageCache.cache[url] && PageCache.cache[url].state == 0) {
+        Log.debug("cache hit but still requesting: " + url);
+        if (callback) {
+          PageCache.cache[url].funs.push(callback);
+        }
+        if (errCallback) {
+          PageCache.cache[url].errFuns.push(errCallback);
+        }
+        return this;
+      }
+      Log.debug("cache Not hit: " + url)
     }
 
+    // new CacheData
+    PageCache.cache[url] = new CacheData(url, callback, errCallback);
+
     // Run
-    _doAjax(url, callback, errCallback);
+    PageCache.fn.doAjax(url);
+  }
+
+  // Cache Structure
+  PageCache.cache = {
+  };
+  function CacheData(url, func, errFunc){
+    this.url = url;
+    this.funs = [];
+    if (func) {
+      this.funs.push(func);
+    };
+    this.errFuns = [];
+    if (errFunc) {
+      this.errFuns.push(errFunc);
+    }
+    this.state = 0;
+    this.response = "";
+    this.json = {};
   }
 
   // Functions
   PageCache.fn = PageCache.prototype = {
     _toJson: function(text) {
-      var json = eval('(' + _xmlhttp.responseText + ')');
-      Log.debug("toJson:"+json);
+      var json = eval('(' + text + ')');
+      Log.debug("toJson:", json);
       return json;
     },
-    _doAjax: function(url, callback, errCallback) {
+    doAjax: function(url) {
       var _xmlhttp;
       if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
           _xmlhttp = new XMLHttpRequest();
-      } else { // code for IE6, IE5
+      } else {                    // code for IE6, IE5
           _xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
       }
       _xmlhttp.onreadystatechange = function() {
           if (_xmlhttp.readyState == 4) {
             if (_xmlhttp.status == 200) {
-              Log.debug(_xmlhttp.responseText);
-              callback(_toJson(_xmlhttp.responseText), _xmlhttp.status, _xmlhttp);
+              var _cacheData = PageCache.cache[_xmlhttp.responseURL];
+              _cacheData.state = 1;
+              _cacheData.response = _xmlhttp.responseText;
+              _cacheData.json = PageCache.fn._toJson(_xmlhttp.responseText);
+
+              Log.debug(PageCache.cache);
+
+              for (var i in _cacheData.funs) {
+                if (_cacheData.funs[i]) {
+                  _cacheData.funs[i](_cacheData.json, _xmlhttp.status, _xmlhttp);
+                }
+              }
             } else {
+              var _cacheData = PageCache.cache[_xmlhttp.responseURL];
+              _cacheData.state = 0;
+              _cacheData.response = _xmlhttp.responseText;
+              _cacheData.json = {};
+
               Log.error(_xmlhttp.status + "|" + _xmlhttp.responseText);
-              errCallback(_xmlhttp.responseText, _xmlhttp.status, _xmlhttp);
+
+              for (var i in _cacheData.errFuns) {
+                if (_cacheData.errFuns[i]) {
+                  _cacheData.errFuns[i](_xmlhttp.status, _xmlhttp);
+                }
+              }
             }
           }
       }
@@ -124,8 +210,10 @@
       return PageCache;
   };
 
-  if (!noGlobal) {
+  if (! noGlobal) {
       window.PageCache = window.$PC = PageCache;
       window.PageCache.Log = window.$PC.Log = Log;
   }
+
+return PageCache;
 });
