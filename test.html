@@ -1,0 +1,13 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+<div id="tt">评论 0</div>
+<script src="w3c/js/jQuery.js"></script>
+<script src="w3c/js/pagecache.js"></script>
+<script src="w3c/js/duoshuo.js"></script>
+<script>
+  $("#tt").duoshuo({name: "jokin"});
+  $("#tt").duoshuo("comments", "评论 %s", "thread_key", "data");
+  console.log($.Duoshuo.options);
+</script>
+</html>
