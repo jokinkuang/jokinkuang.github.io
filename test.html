@@ -7,9 +7,9 @@
 <script src="w3c/js/duoshuo.js"></script>
 <script>
   $("#tt").duoshuo({name: "jokin"});
-  $("#tt").duoshuo("comments", "评论 %s", "thread_key", "data");
+  $("#tt").duoshuo("comments", "评论 %s", "index", "data");
   console.log($.Duoshuo.options);
-  var countUrl = "http://api.duoshuo.com/threads/counts.json?short_name=jokin&threads=key";
+  var countUrl = "http://api.duoshuo.com/threads/counts.json?short_name=jokin&threads=index";
 $.getJSON(countUrl , function(data) {
   console.log(data);
         //这里返回的json跟官方给出的可能不一致，debugger一下就行
