@@ -28,7 +28,7 @@
       name: "",
       api: {
         comments: function(threadKey) {
-          return this.options.domain+"/threads/counts.json?short_name="+this.options.name+"&threads="+threadKey;
+          return this.options.domain+"/threads/counts.jsonp?short_name="+this.options.name+"&threads="+threadKey+"&callback=?";
         },
         likes: function(threadKey) {
           return this.options.api.comments.call(this, threadKey);
@@ -50,7 +50,13 @@
           this.options = $.extend(true, {}, $.Duoshuo.defaults, options);
         },
         comments: function(text, threadKey) {
-          $PC(this.options.api.comments.call(this, threadKey), this.options.cbs.comments);
+          console.log("this");
+          console.log(this);
+          var self = this.$el;
+          $PC(this.options.api.comments.call(this, threadKey), function(jsonObj){
+            console.log(jsonObj);
+            self.text(jsonObj.response[threadKey].comments);
+          });
         }
     };
 
@@ -66,6 +72,8 @@
             var args = Array.prototype.slice.call(arguments, 1);
             this.each(function() {
                 var instance = $.data(this, 'duoshuo');
+                console.log("getout")
+                console.log(instance);
                 if (!instance) {
                     logError("cannot call methods on duoshuo prior to initialization; " + "attempted to call method '" + options + "'");
                     return;
@@ -85,6 +93,8 @@
                 var instance = $.data(this, 'duoshuo');
                 if (!instance) {
                     $.data(this, 'duoshuo', new $.Duoshuo(options, this));
+                    console.log("new===");
+                    console.log(new $.Duoshuo(options, this));
                 }
             });
         }

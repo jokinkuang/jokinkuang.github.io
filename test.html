@@ -6,13 +6,21 @@
 <script src="w3c/js/pagecache.js"></script>
 <script src="w3c/js/duoshuo.js"></script>
 <script>
-  // $("#tt").duoshuo({name: "jokin"});
-  // $("#tt").duoshuo("comments", "评论 %s", "index", "data");
-  // console.log($.Duoshuo.options);
-  var countUrl = "http://api.duoshuo.com/threads/counts.json?short_name=jokin&threads=index&callback=?";
-  $.getJSON(countUrl , function(data) {
-    console.log(data);
-          //这里返回的json跟官方给出的可能不一致，debugger一下就行
-  });
+
+  $("#tt").duoshuo({name: "jokin"});
+  $("#tt").duoshuo("comments", "评论 %s", "index", "data");
+  console.log($.Duoshuo.options);
+
+  // $PC.Log.level = 5;
+  // $PC("http://api.duoshuo.com/threads/counts.jsonp?short_name=jokin&threads=index&callback=?", function(data, response, jsonp){
+  //   console.log(data);
+  //   console.log(response);
+  //   console.log(jsonp);
+  // });
+  // $PC("http://api.duoshuo.com/threads/counts.jsonp?short_name=jokin&threads=index&callback=?", function(){
+  //   console.log("2");
+  // });
+
+
 </script>
 </html>
