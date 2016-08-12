@@ -43,40 +43,46 @@
       },
       error: function(info, obj) {
         if (typeof(info) === 'string') {
-          Log._log(Log.ERROR, Log.owner + "[ERROR]>>" + info);
+          //none
         } else {
           obj = info;
           info = "";
         }
+        Log._log(Log.ERROR, Log.owner + "[ERROR]>>" + info);
         if (obj) {
           Log._log(Log.ERROR, obj);
         }
       },
       info: function(info, obj) {
         if (typeof(info) === 'string') {
-          Log._log(Log.INFO, Log.owner + "[INFO]>>" + info);
+          //none
         } else {
           obj = info;
           info = "";
         }
+        Log._log(Log.INFO, Log.owner + "[INFO]>>" + info);
         if (obj) {
           Log._log(Log.INFO, obj);
         }
       },
       debug: function(info, obj) {
         if (typeof(info) === 'string') {
-          Log._log(Log.DEBUG, Log.owner + "[DEBUG]>>" + info);
+          //none
         } else {
           obj = info;
           info = "";
         }
+        Log._log(Log.DEBUG, Log.owner + "[DEBUG]>>" + info);
         if (obj) {
           Log._log(Log.DEBUG, obj);
         }
       }
   };
 
-  //Object Init
+  // Copryright
+  Log.info("/* PageCache v0.01 Released under MIT license by JokinKuang @2016 */");
+
+  // Object Init
   var PageCache = function(url, isForce, callback, errCallback) {
     // $PC() or $PC("")
     if (! url) {
@@ -84,12 +90,11 @@
     }
 
     // $PC("url", callback) or $PC("url", callback, errCallback)
+    if (typeof(isForce) === 'function' && typeof(callback) === 'function') {
+        errCallback = callback;
+    }
     if (typeof(isForce) === 'function') {
         callback = isForce;
-    }
-    if (typeof(isForce) === 'function' && typeof(callback) === 'function') {
-        callback = isForce;
-        errCallback = callback;
     }
 
     // $PC("url") or $PC("url", false) or $PC("url", callback)
@@ -123,7 +128,11 @@
     PageCache.cache[url] = new CacheData(url, callback, errCallback);
 
     // Run
-    PageCache.fn.doAjax(url);
+    if (url.search('callback=?') < 0) {
+      PageCache.fn.doAjax(url);
+    } else {
+      PageCache.fn.doJsonp(url);
+    }
   }
 
   // Cache Structure
@@ -139,17 +148,85 @@
     if (errFunc) {
       this.errFuns.push(errFunc);
     }
+    this.type = "";
     this.state = 0;
     this.response = "";
     this.json = {};
+    this.xmlhttp = {};
+    this.jsonp = {};
+    this.update = function(options) {
+      if (options.type) { this.type = options.type; }
+      if (options.state) { this.state = options.state; }
+      if (options.response) { this.response = options.response; }
+      if (options.json) { this.json = options.json; }
+      if (options.xmlhttp) { this.xmlhttp = options.xmlhttp; }
+      if (options.jsonp) { this.jsonp = options.jsonp; }
+    };
+    this.successCall = function() {
+      Log.debug("successCall>>", this);
+      for (var i in this.funs) {
+        if (this.funs[i]) {
+          if (this.type === 'json') {
+            this.funs[i](this.json, this.state, this.xmlhttp);
+          } else if (this.type === 'jsonp') {
+            this.funs[i](this.json, this.state, this.jsonp);
+          }
+        }
+      }
+    };
+    this.errorCall = function() {
+      Log.debug("errorCall>>", this);
+      for (var i in this.errFuns) {
+        if (this.errFuns[i]) {
+          if (this.type === 'json') {
+            this.errFuns[i](this.state, this.xmlhttp);
+          } else if (this.type === 'jsonp') {
+            this.errFuns[i](this.state, this.jsonp);
+          }
+        }
+      }
+    };
   }
+
+  PageCache.jsonp = {timeout: 30 * 1000};
 
   // Functions
   PageCache.fn = PageCache.prototype = {
     _toJson: function(text) {
-      var json = eval('(' + text + ')');
-      Log.debug("toJson:", json);
-      return json;
+      try {
+        var json = eval('(' + text + ')');
+        return json;
+      } catch (e) {
+        Log.error(e);
+        return;
+      }
+    },
+    _getUrlParam: function(name) {
+      var re = /<meta.*charset=([^"]+).*?>/i;     // "/reg/i" i means ignore letter CASE
+      var charset = document.documentElement.innerHTML.match(re)[1];
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); // the same as /(^|&)XXXXX/i
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) {
+        Log.debug("document charset "+charset);
+        Log.debug("before decode:", r[2]);
+        Log.debug("unescape decode:", unescape(r[2]));
+        Log.debug("decodeURIComponent decode:", decodeURIComponent(r[2]));
+        if (charset == "utf-8") {
+          return decodeURIComponent(r[2]);
+        } else {
+          return unescape(r[2]);
+        }
+      }
+      return null;
+    },
+    _getJsonpParamName: function() {
+      var reg = new RegExp("([^|&]+)=jsonp", "ig");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) {
+        return r[1];
+      } else {
+        return null;
+      }
     },
     doAjax: function(url) {
       var _xmlhttp;
@@ -161,47 +238,71 @@
       _xmlhttp.onreadystatechange = function() {
           if (_xmlhttp.readyState == 4) {
             if (_xmlhttp.status == 200) {
-              var _cacheData = PageCache.cache[_xmlhttp.responseURL];
+              var _cacheData = PageCache.cache[url];
               if (! _cacheData) {
-                Log.error("Error Occur");
+                Log.error("Ajax>>PageCache Inner Error");
                 return;
               }
-              _cacheData.state = 1;
-              _cacheData.response = _xmlhttp.responseText;
-              _cacheData.json = PageCache.fn._toJson(_xmlhttp.responseText);
-
-              Log.debug(PageCache.cache);
-
-              for (var i in _cacheData.funs) {
-                if (_cacheData.funs[i]) {
-                  _cacheData.funs[i](_cacheData.json, _xmlhttp.status, _xmlhttp);
-                }
-              }
+              _cacheData.update({type: "json", state: 1, response: _xmlhttp.responseText,
+                                 json: PageCache.fn._toJson(_xmlhttp.responseText), xmlhttp: _xmlhttp});
+              _cacheData.successCall();
             } else {
               Log.debug(_xmlhttp);
-              var _cacheData = PageCache.cache[_xmlhttp.responseURL];
+              var _cacheData = PageCache.cache[url];
               if (! _cacheData) {
-                Log.error("Error Occur");
+                Log.error("Ajax>>PageCache Inner Error");
                 return;
               }
-              _cacheData.state = 0;
-              _cacheData.response = _xmlhttp.responseText;
-              _cacheData.json = {};
-
-              Log.error(_xmlhttp.status + "|" + _xmlhttp.responseText);
-
-              for (var i in _cacheData.errFuns) {
-                if (_cacheData.errFuns[i]) {
-                  _cacheData.errFuns[i](_xmlhttp.status, _xmlhttp);
-                }
-              }
+              _cacheData.update({type: "json", state: 0, response: _xmlhttp.responseText, json: {}, xmlhttp: _xmlhttp});
+              _cacheData.errorCall();
             }
           }
       }
       _xmlhttp.open("GET", url, true);
-      _xmlhttp.setRequestHeader("Origin","*");
-      Log.debug(_xmlhttp);
       _xmlhttp.send();
+    },
+    doJsonp: function(url) {
+      // random a function name
+      var _callbackName = ('jsonp_' + Math.random()).replace(".", "");
+      var _jsonpUrl = url.replace('callback=?', 'callback='+_callbackName)
+
+      // create a <script> tag and add into the window
+      var _tag = document.getElementsByTagName('head')[0];
+      var _script = document.createElement('script');
+      _tag.appendChild(_script);
+
+      // the jsonp callback function
+      window[_callbackName] = function (json) {
+          _tag.removeChild(_script);
+          clearTimeout(_script.timer);
+          window[_callbackName] = null;
+
+          var _cacheData = PageCache.cache[url];
+          if (! _cacheData) {
+            Log.error("Jsonp>>PageCache Inner Error");
+            return;
+          }
+          _cacheData.update({type: "jsonp", state: 1, response: json, json: json, jsonp: _script});
+          _cacheData.successCall();
+      };
+
+      // run
+      _script.src = _jsonpUrl;
+
+      // timeout
+      _script.timer = setTimeout(function () {
+        Log.error("Jsonp>>Timeout " + _jsonpUrl);
+        window[_callbackName] = null;
+        _tag.removeChild(_script);
+
+        var _cacheData = PageCache.cache[url];
+        if (! _cacheData) {
+          Log.error("Jsonp>>PageCache Inner Error");
+          return;
+        }
+        _cacheData.update({type: "jsonp", state: 0, jsonp: _script});
+        _cacheData.errorCall();
+      }, PageCache.jsonp.timeout);
     }
   };
 
