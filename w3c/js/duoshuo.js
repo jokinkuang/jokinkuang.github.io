@@ -13,50 +13,65 @@
     $.Duoshuo = function(options, element) {
         this.$el = $(element);
         this._init(options);
+        return this;
     };
 
     // Settings
     $.Duoshuo.defaults = {
-      text: {
-        views: "[views]",
-        comments: "[comments]",
-        likes: "[likes]",
-        dislikes: "[dislikes]",
-        shares: "[shares]"
-      },
+      defaultSymbol: "%s",
       domain: "http://api.duoshuo.com",
       name: "",
-      api: {
-        comments: function(threadKey) {
-          return this.options.domain+"/threads/counts.jsonp?short_name="+this.options.name+"&threads="+threadKey+"&callback=?";
-        },
-        likes: function(threadKey) {
-          return this.options.api.comments.call(this, threadKey);
+
+      comments: function(text, threadKey) {
+        if (! text || typeof(text) != 'string') {
+          // text is undefined or null or empty string(" "is not empty!) or even not a string
+          text = this.defaultSymbol;
         }
+        var ds = this;
+
+        var jsonpUrl = ds.domain+"/threads/counts.jsonp?short_name="+ds.name+"&threads="+threadKey+"&callback=?&callback=?&callback=?";
+        $PC(jsonpUrl, function(jsonObj){
+          console.log(jsonObj);
+          ds.$el.text(text.replace(new RegExp(ds.defaultSymbol,'ig'), jsonObj.response[threadKey].comments));
+        });
       },
-      cbs: {
-        comments: function(jsonObj) {
-          return this.$el.text(jsonObj.response[0].comments);
+
+      likes: function(text, threadKey) {
+        if (! text || typeof(text) != 'string') {
+          // text is undefined or null or empty string(" "is not empty!) or even not a string
+          text = this.defaultSymbol;
         }
+        var ds = this;
+
+        var jsonpUrl = ds.domain+"/threads/counts.jsonp?short_name="+ds.name+"&threads="+threadKey+"&callback=?&callback=?&callback=?";
+        $PC(jsonpUrl, function(jsonObj){
+          console.log(jsonObj);
+          ds.$el.text(text.replace(new RegExp(ds.defaultSymbol,'ig'), jsonObj.response[threadKey].likes));
+        });
+      },
+
+      views: function(text, threadKey) {
+        if (! text || typeof(text) != 'string') {
+          // text is undefined or null or empty string(" "is not empty!) or even not a string
+          text = this.defaultSymbol;
+        }
+        var ds = this;
+
+        var jsonpUrl = ds.domain+"/threads/counts.jsonp?short_name="+ds.name+"&threads="+threadKey+"&callback=?&callback=?&callback=?";
+        $PC(jsonpUrl, function(jsonObj){
+          console.log(jsonObj);
+          ds.$el.text(text.replace(new RegExp(ds.defaultSymbol,'ig'), jsonObj.response[threadKey].views));
+        });
       }
     };
-    $.Duoshuo.options = $.Duoshuo.defaults;
 
     // Functions
     $.Duoshuo.fn =
     $.Duoshuo.prototype = {
         _init: function(options) {
-          //save options
-          this.options = $.extend(true, {}, $.Duoshuo.defaults, options);
-        },
-        comments: function(text, threadKey) {
-          console.log("this");
-          console.log(this);
-          var self = this.$el;
-          $PC(this.options.api.comments.call(this, threadKey), function(jsonObj){
-            console.log(jsonObj);
-            self.text(jsonObj.response[threadKey].comments);
-          });
+          //extend "this"
+          this.__proto__ = $.extend(true, {}, this, $.Duoshuo.defaults, options);
+          return this;
         }
     };
 
@@ -200,4 +215,41 @@ this.options = $.extend(true, {}, $.Duoshuo.defaults, options);
 
 //$.extend( true, {}, defaults, options);   => Merge defaults and options recursively
 //合并defaults和options里面的对象，options的同名属性覆盖defaults的同名属性。
+
+4，更改函数内this指向的对象，一般来说，函数内部的this表示当前函数，但也可以更改！
+func_name.call(this, arg1, arg2 ...);
+func_name.apply(this, array);
+this参数为func_name函数内部this对象。
+$.Duoshuo = function(options){
+  this._init(options);
+};
+$.Duoshuo.defaults = {
+  api: {
+    comments: function(threadKey) {
+      return this.options.domain+"/threads/counts.jsonp?short_name="+this.options.name+"&threads="+threadKey+"&callback=?";
+    }
+  },
+  cbs: {
+    comments: function(jsonObj) {
+      return this.$el.text(jsonObj.response[this.threadKey].comments);
+    }
+  }
+};
+$.Duoshuo.prototype = {
+    _init: function(options) {
+      //save options
+      this.options = $.extend(true, {}, $.Duoshuo.defaults, options);
+    },
+    comments: function(text, threadKey) {
+      var self = this;
+      self.threadKey = threadKey;
+      $PC(this.options.api.comments.call(this, threadKey),  // api.comments函数内的this指代当前的this对象。
+      function(jsonObj){
+        $.Duoshuo.options.cbs.comments.call(self, jsonObj);   // cbs.coments函数里的this指代self对象。
+        // 这里为什么不能用this而使用self来代替，因为此回调函数在$PC内部执行，this指代的是$PC
+        // 另一个思路是，$PC调用的时候，将this传递进去，$PC回调的时候，再将this回传。这样这个回调里的this就指回原来发起请求的对象。
+      });
+    }
+};
+
 */

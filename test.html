@@ -1,15 +1,20 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 
-<div id="tt">评论 0</div>
+<div class="tt">评论 0</div>
+<div class="tt1">喜欢 0</div>
+<div class="tt">评论 0</div>
+<div class="tt">评论 0</div>
 <script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
 <script src="w3c/js/pagecache.js"></script>
 <script src="w3c/js/duoshuo.js"></script>
 <script>
 
-  $("#tt").duoshuo({name: "jokin"});
-  $("#tt").duoshuo("comments", "评论 %s", "index", "data");
-  console.log($.Duoshuo.options);
+  $("div").duoshuo({name: "jokin"});
+  // $(".tt").duoshuo("comments", "评论 %s", "index", "data");
+
+  $(".tt1").duoshuo("likes", "", "index", "data");
+  console.log($(".tt"));
 
   // $PC.Log.level = 5;
   // $PC("http://api.duoshuo.com/threads/counts.jsonp?short_name=jokin&threads=index&callback=?", function(data, response, jsonp){
