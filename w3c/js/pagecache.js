@@ -264,7 +264,7 @@
     doJsonp: function(url) {
       // random a function name
       var _callbackName = ('jsonp_' + Math.random()).replace(".", "");
-      var _jsonpUrl = url.replace('callback=?', 'callback='+_callbackName)
+      var _jsonpUrl = url.replace(/callback=\?/ig, 'callback='+_callbackName)
 
       // create a <script> tag and add into the window
       var _tag = document.getElementsByTagName('head')[0];
