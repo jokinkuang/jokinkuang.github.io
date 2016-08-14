@@ -10,74 +10,132 @@
  */
 (function($, undefined) {
     // Create Object
-    $.Duoshuo = function(options, element) {
-        this.$el = $(element);
-        this._init(options);
+    $.Duoshuo = function(settings, element) {
+        this.$tag = $(element);
+        this._init(settings);
         return this;
     };
 
-    // Settings
+    // custom attributes and functions Base On "The" Api
     $.Duoshuo.defaults = {
+      attrText: "data-text",
+      attrKey: "data-thread-key",
+      attrName: "data-short-name",
+
       defaultSymbol: "%s",
       domain: "http://api.duoshuo.com",
-      name: "",
+      shortName: "",
 
-      comments: function(text, threadKey) {
-        if (! text || typeof(text) != 'string') {
-          // text is undefined or null or empty string(" "is not empty!) or even not a string
-          text = this.defaultSymbol;
+      getArguments: function(args) {
+        if (! args || ! args.length) {
+          this.text = this.$tag.attr(this.attrText) || this.text || this.defaultSymbol;
+          this.threadKey = this.$tag.attr(this.attrKey) || this.threadKey;
+          this.shortName = this.$tag.attr(this.attrName) || this.shortName;
         }
-        var ds = this;
+        else {
+          this.text = args[0] || this.text || this.defaultSymbol;
+          this.threadKey = args[1] || this.threadKey;
+          this.shortName = args[2] || this.shortName;
+        }
 
-        var jsonpUrl = ds.domain+"/threads/counts.jsonp?short_name="+ds.name+"&threads="+threadKey+"&callback=?&callback=?&callback=?";
+        if (! this.text || typeof(this.text) != 'string') {
+          // text is undefined or null or empty string(" "is not empty!) or even not a string
+          logError("text error !");
+          return false;
+        }
+
+        if (! this.shortName || typeof(this.shortName) != 'string') {
+          logError("short-name error !");
+          return false;
+        }
+        if (! this.threadKey || typeof(this.threadKey) != 'string') {
+          logError("thread-key error !");
+          return false;
+        }
+
+        return true;
+      },
+
+      getResult: function(attrName) {
+        var ds = this;
+        var jsonpUrl = this.domain+"/threads/counts.jsonp?short_name="+this.shortName+"&threads="+this.threadKey+"&callback=?";
         $PC(jsonpUrl, function(jsonObj){
-          console.log(jsonObj);
-          ds.$el.text(text.replace(new RegExp(ds.defaultSymbol,'ig'), jsonObj.response[threadKey].comments));
+          ds.$tag.text(ds.text.replace(new RegExp(ds.defaultSymbol,'ig'), jsonObj.response[ds.threadKey][attrName]));
         });
       },
 
-      likes: function(text, threadKey) {
-        if (! text || typeof(text) != 'string') {
-          // text is undefined or null or empty string(" "is not empty!) or even not a string
-          text = this.defaultSymbol;
+      comments: function(text, threadKey, shortName) {
+        if (! this.getArguments(arguments)){
+          return false;
         }
-        var ds = this;
-
-        var jsonpUrl = ds.domain+"/threads/counts.jsonp?short_name="+ds.name+"&threads="+threadKey+"&callback=?&callback=?&callback=?";
-        $PC(jsonpUrl, function(jsonObj){
-          console.log(jsonObj);
-          ds.$el.text(text.replace(new RegExp(ds.defaultSymbol,'ig'), jsonObj.response[threadKey].likes));
-        });
+        this.getResult(this.calling);
       },
 
-      views: function(text, threadKey) {
-        if (! text || typeof(text) != 'string') {
-          // text is undefined or null or empty string(" "is not empty!) or even not a string
-          text = this.defaultSymbol;
+      likes: function(text, threadKey, shortName) {
+        if (! this.getArguments(arguments)){
+          return false;
         }
-        var ds = this;
+        this.getResult(this.calling);
+      },
 
-        var jsonpUrl = ds.domain+"/threads/counts.jsonp?short_name="+ds.name+"&threads="+threadKey+"&callback=?&callback=?&callback=?";
-        $PC(jsonpUrl, function(jsonObj){
-          console.log(jsonObj);
-          ds.$el.text(text.replace(new RegExp(ds.defaultSymbol,'ig'), jsonObj.response[threadKey].views));
-        });
+      dislikes: function(text, threadKey, shortName) {
+        if (! this.getArguments(arguments)){
+          return false;
+        }
+        this.getResult(this.calling);
+      },
+
+      views: function(text, threadKey, shortName) {
+        if (! this.getArguments(arguments)){
+          return false;
+        }
+        this.getResult(this.calling);
+      },
+
+      reposts: function(text, threadKey, shortName) {
+        if (! this.getArguments(arguments)){
+          return false;
+        }
+        this.getResult(this.calling);
       }
     };
+
+    // A Framework
+    // This Framework is used for dynamic function call base on jQuery
+    // Eg.
+    //    $("li").obj("method", args);
+    // it would just call
+    //    obj.method(args)
+    // and the inner-attributes
+    //    obj.calling = "method"
+    //    obj.$tag = current li tag jQuery object
+    //
+    // add or override the methods into the obj
+    //    $.Obj.options = {               // static
+    //      method1: function(){},
+    //      method2: function(){}
+    //    }
+    //    $("li").obj(options);           // init
+    //    $("li").obj("method1", args);   // call
 
     // Functions
     $.Duoshuo.fn =
     $.Duoshuo.prototype = {
-        _init: function(options) {
+        _init: function(settings) {
           //extend "this"
-          this.__proto__ = $.extend(true, {}, this, $.Duoshuo.defaults, options);
+          this.__proto__ = $.extend(true, {}, this, $.Duoshuo.defaults, settings);
           return this;
         }
     };
 
     var logError = function(message) {
         if (this.console) {
+          if (console.error) {
             console.error(message);
+          } else {
+            console.log("=== ERROR OCCUR ===");
+            console.log(message);
+          }
         }
     };
 
@@ -87,29 +145,23 @@
             var args = Array.prototype.slice.call(arguments, 1);
             this.each(function() {
                 var instance = $.data(this, 'duoshuo');
-                console.log("getout")
-                console.log(instance);
                 if (!instance) {
-                    logError("cannot call methods on duoshuo prior to initialization; " + "attempted to call method '" + options + "'");
-                    return;
+                  instance = new $.Duoshuo($.Duoshuo.settings, this);
+                  $.data(this, 'duoshuo', instance);
                 }
                 // You can call methods with "methodNameString" But not those start with "_"
                 if (!$.isFunction(instance[options]) || options.charAt(0) === "_") {
                     logError("no such method '" + options + "' for duoshuo instance");
                     return;
                 }
-                console.log(args);
+                instance.calling = options;
                 instance[options].apply(instance, args);
             });
         } else {
-            $.Duoshuo.options = $.extend(true, {}, $.Duoshuo.defaults, options);
-
             this.each(function() {
                 var instance = $.data(this, 'duoshuo');
                 if (!instance) {
                     $.data(this, 'duoshuo', new $.Duoshuo(options, this));
-                    console.log("new===");
-                    console.log(new $.Duoshuo(options, this));
                 }
             });
         }

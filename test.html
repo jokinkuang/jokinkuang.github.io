@@ -1,7 +1,7 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 
-<div class="tt">评论 0</div>
+<div class="tt" data-short-name='jokin' data-thread-key='index' data-text='评论数%s'>评论 0</div>
 <div class="tt1">喜欢 0</div>
 <div class="tt">评论 0</div>
 <div class="tt">评论 0</div>
@@ -11,10 +11,13 @@
 <script>
 
   $("div").duoshuo({name: "jokin"});
-  // $(".tt").duoshuo("comments", "评论 %s", "index", "data");
+  //$(".tt").duoshuo("comments", "评论 %s", "index", "data");
+  // $(".tt").duoshuo("comments");
 
   $(".tt1").duoshuo("likes", "", "index", "data");
-  console.log($(".tt"));
+  // console.log($(".tt"));
+
+  // $(".tt1").duoshuo("likes");
 
   // $PC.Log.level = 5;
   // $PC("http://api.duoshuo.com/threads/counts.jsonp?short_name=jokin&threads=index&callback=?", function(data, response, jsonp){
