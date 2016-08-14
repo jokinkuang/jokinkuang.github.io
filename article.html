@@ -226,21 +226,24 @@ a {
 			<script id="post-list" type="text/html">
 				<% for(var i = 0; i < posts.length; i++) { %>
 				<li class="has-img">
-					<a class="wrap-img" href="/p/fea813d5cb0d">
-						<img src="	" alt="300"></a>
+					<% if ( posts[i].image ) { %>
+						<a class="wrap-img" href="<%= posts[i].url %>">
+							<img src="<%= posts[i].image %>" alt="300">
+						</a>
+					<% } %>
 					<div>
 						<p class="list-top">
-							<a class="author-name blue-link" target="_parent" href=""><%=posts[i].author%></a>
+							<a class="author-name blue-link" target="_parent" href=""><%= posts[i].author %></a>
 							<em>·</em>
-							<span class="time" date-time="<%=posts[i].date%>"></span>
+							<span class="time" date-time="<%= posts[i].date %>"></span>
 						</p>
 						<h4 class="title">
-							<a target="_parent" href="<%=posts[i].url%>"><%=posts[i].title%></a>
+							<a target="_parent" href="<%= posts[i].url %>"><%= posts[i].title %></a>
 						</h4>
 						<div class="list-footer">
 							<!--<a class="grey-link" target="_parent" href="<%=posts[i].url%>">阅读 5915</a>-->
-							<a class="grey-link" target="_parent" href="">字数<%=posts[i].words%></a>
-							<a class="grey-link" target="_parent" href="<%=posts[i].url%>#comments">· 评论 76</a>
+							<a class="grey-link" target="_parent" href="">字数<%= posts[i].words %></a>
+							<a class="grey-link" target="_parent" href="<%= posts[i].url %>#comments">· 评论 76</a>
 							<span>· 喜欢 261</span>
 							<span>· 打赏 3</span>
 						</div>

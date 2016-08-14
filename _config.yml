@@ -13,6 +13,7 @@ domain: "http://yourdomain.com" # the base hostname & protocol for your site
 # Site URL NOTE: end with / cause it's [URL + FILE]
 base_url: "" # the subpath of your site, eg. "/blog/"
 w3c_url: "/w3c/"  # the base url of css js and images
+postImage_url: "/w3c/images/" # the base url of post images
 postfile: "/Postfile" # the Database
 
 # 3rd URL

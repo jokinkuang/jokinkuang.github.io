@@ -1,11 +1,13 @@
 ---
 layout: post
-title: how to do http & https request with openssl 
+title: how to do http & https request with openssl
 tags: [openssl]
 author: helloxk
 mail: 345106552@qq.com
 created: 2015-02-12 12:50:54
 modified: 2015-02-27 15:55:50
+pid: "20160723110500"
+image: "jekyll.jpg"
 ---
 
 1, do http request
@@ -88,7 +90,7 @@ int main(int argc, char *argv[])
     char * request = "GET / HTTP/1.1\x0D\x0AHost: www.verisign.com\x0D\x0A\x43onnection: Close\x0D\x0A\x0D\x0A";
     //char * request = "GET / HTTP/1.1\x0D\x0AHost: worktile.com\x0D\x0A\x43onnection: Close\x0D\x0A\x0D\x0A";
     //char * request = "GET /cas/login?service=https%3A%2F%2Fweb.corp.ema-tech.com%3A8888%2F HTTP/1.1\x0D\x0AHost: web.corp.ema-tech.com\x0D\x0A""Connection: Close\x0D\x0A\x0D\x0A";
-    
+
     /* Attention: "\x43" is "C", why is "\x43onnection" but not "Connection" ?
        because "\x0AC" in "\x0D\x0AConnection" is taken as a hex value, not the string "\nConnection"
        also, "\x0D""C" can avoid upper problem too.
@@ -151,7 +153,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Certificate verification error: %ld\n", SSL_get_verify_result(ssl));
         /*
           Error Tip "error : 19 self signed certificate in certificate chain" means:
-          This means the certificate chain returned by the server ends with a ‘self signed certificate’. 
+          This means the certificate chain returned by the server ends with a ‘self signed certificate’.
           Since the self-signed certificate is not a trusted certificate, it is reported as an error.
           You can make the problem go away by specifying a trusted root CA (certificate authority)
          */
@@ -185,7 +187,7 @@ int main(int argc, char *argv[])
     gcc -o nossl nossl.c -lssl  
     gcc -o withssl withssl.c -lssl
     ./nossl
-    ./withssl ./XXX.pem 
+    ./withssl ./XXX.pem
 
 4, got a certification verify failed  
 >
@@ -199,15 +201,15 @@ int main(int argc, char *argv[])
 **Following is about how to generate a pem file**
 
 1, what is pem ?  
-PEM (short for Privacy Enhanced Mail) is one of the storetypes of CAcerts, 
+PEM (short for Privacy Enhanced Mail) is one of the storetypes of CAcerts,
 the other one is called DER.
- 
+
 PEM always formated like:
 >
 -----BEGIN CERTIFICATE-----  
   Base64 data flow  
 -----END CERTIFICATE-----  
-> 
+>
 -----BEGIN CERTIFICATE-----  
   Base64 data flow  
 -----END CERTIFICATE-----  
@@ -227,12 +229,12 @@ binary... binary... binary...
 >   * then you got a pem formated Certificate file.
 >  
     ``@NOTE`` i use chromium-browser in ubuntu, but the pem files exported is not completed!
-     also i use it in windows, those exported is not completed too, But it's correct 
+     also i use it in windows, those exported is not completed too, But it's correct
      when use it to connect to website! You can merge them to get a completed pem file.
 
 
 2.2, use java tools.  
-    TOOLS: keytool InstallCert 
+    TOOLS: keytool InstallCert
 
 ```java
     java InstallCert host:port   
@@ -247,4 +249,3 @@ binary... binary... binary...
     openssl s_client -showcerts -connect host.host:9999 < /dev/null > XXX.pem
     // Also all the Certificates printout should add into the XXX.pem
 ```
-
