@@ -6,6 +6,7 @@ author: helloxk
 mail: 345106552@qq.com
 created: 2015-01-27 17:50:54
 modified: 2015-02-27 17:55:50
+pid: 20150127-175054
 ---
 
 Urls:  
@@ -29,11 +30,11 @@ if you have a domain, you can bind to the blog.
 4, bind a domain.
     NOTE: do not use *.XXX.com as the filter!
 
-    - set your domain DNS like below: 
-        www A 默认 192.30.252.153 - 600 删除    暂停 
-        www A 默认 192.30.252.154 - 600 删除    暂停 
+    - set your domain DNS like below:
+        www A 默认 192.30.252.153 - 600 删除    暂停
+        www A 默认 192.30.252.154 - 600 删除    暂停
         @ A 默认 192.30.252.153 - 600 删除    暂停
-        @ A 默认 192.30.252.154 - 600 删除    暂停 
+        @ A 默认 192.30.252.154 - 600 删除    暂停
 
     - set your domain in CNAME in your repository:
         www.XXX.com or XXX.com
@@ -46,4 +47,3 @@ if you have a domain, you can bind to the blog.
     - test the DNS:
         dig XXX.com +nostats +nocomments +nocmd
         # if the output route to 192.30.252.153/154, means it work!
-

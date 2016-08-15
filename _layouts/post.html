@@ -159,7 +159,14 @@ a {
 		<div class="post-footer">
 			<p>&copy; Step By Step</p>
 		</div>
-		<div class="ds-share flat" data-thread-key="此处请替换为当前文章的thread-key" data-title="此处请替换为分享时显示的标题" data-images="此处请替换为分享时显示的图片的链接地址" data-content="此处请替换为分享时显示的内容" data-url="此处请替换为分享时显示的链接地址">
+		{% if page.image and page.image != '' %}
+				{% if page.image contains 'http:' or page.image contains 'https:' %}
+				{% 		assign image = page.image  %}
+				{% else %}
+				{%		assign image = site.domain | append: site.postImage_url | append: page.image %}
+				{% endif %}
+		{% endif %}
+		<div class="ds-share flat" data-thread-key="{{ page.pid }}" data-title="{{ page.title }}" data-images="{{ image }}" data-content="{{ post.excerpt | strip | replace:'"', "'" | strip_newlines }}" data-url="{{ site.domain }}{{ page.url }}">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
@@ -172,7 +179,7 @@ a {
     </div>
  		</div>
 		<!-- duoshuo -->
-		<div class="ds-thread" data-thread-key="index" data-title="StepByStep" data-url="hello-xk.github.io"></div>
+		<div class="ds-thread" data-thread-key="{{ page.pid }}" data-title="{{ page.title }}" data-url="{{ site.domain }}{{ page.url }}"></div>
 	</div>
 </div>
 

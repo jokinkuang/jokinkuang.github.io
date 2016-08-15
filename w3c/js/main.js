@@ -62,6 +62,14 @@ $(document).ready(function(){
     }
   }
 
+  //Duoshuo
+  var showDuoshuoData = function() {
+    $.Duoshuo.settings = { shortName: "jokin" };
+    $(".ds-comments").duoshuo("comments");
+    $(".ds-likes").duoshuo("likes");
+    $(".ds-reposts").duoshuo("reposts");
+  }
+
   var getPostsWithCategory = function(data, category) {
     if (category == null || category == "" || category == "All") {
       return data;
@@ -83,6 +91,7 @@ $(document).ready(function(){
     $(".article-list").html(text);
     showTimeAgo();
     showActivedCategory(g_category);
+    showDuoshuoData();
   }
 
 /* Handle Window Scroll Event */

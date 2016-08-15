@@ -6,6 +6,7 @@ author: helloxk
 mail: 345106552@qq.com
 created: 2015-01-26 11:00:00
 modified: 2015-02-27 17:55:50
+pid: 20150227-175500
 ---
 
 url: http://tombuntu.com/index.php/2007/12/12/simple-file-encryption-with-openssl/
@@ -47,4 +48,3 @@ maybe you can use this way to pass your passwork
 
 4, notes
     AES-encrypt make different output encrypted strings every time, even with the same password. it means that, a password can descrypt a lot of strings.
-

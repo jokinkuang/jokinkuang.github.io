@@ -242,10 +242,10 @@ a {
 						</h4>
 						<div class="list-footer">
 							<!--<a class="grey-link" target="_parent" href="<%=posts[i].url%>">阅读 5915</a>-->
-							<a class="grey-link" target="_parent" href="">字数<%= posts[i].words %></a>
-							<a class="grey-link" target="_parent" href="<%= posts[i].url %>#comments">· 评论 76</a>
-							<span>· 喜欢 261</span>
-							<span>· 打赏 3</span>
+							<span>字数 <%= posts[i].words %></span>
+							<a class="grey-link ds-comments" target="_parent" href="<%= posts[i].url %>#comments" data-thread-key="<%= posts[i].pid %>" data-text=" · 评论 %s"> · 评论 0</a>
+							<span class="ds-likes" data-thread-key="<%= posts[i].pid %>" data-text=" · 喜欢 %s"> · 喜欢 0</span>
+							<span class="ds-reposts" data-thread-key="<%= posts[i].pid %>" data-text=" · 转发 %s"> · 转发 0</span>
 						</div>
 					</div>
 				</li>
@@ -271,6 +271,8 @@ a {
 </script>
 <script src="{{ site.jquery_url }}"></script>
 <script src="{{ site.w3c_url }}js/timeago.js"></script>
+<script src="{{ site.w3c_url }}js/pagecache.js"></script>
+<script src="{{ site.w3c_url }}js/duoshuo.js"></script>
 <script src="{{ site.w3c_url }}js/main.js"></script>
 
 <!-- duoshuo -->
