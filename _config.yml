@@ -15,7 +15,8 @@ domain: "http://hello-xk.github.io" # the base URL for your site
 # Source URL NOTE: end with / cause it's [URL + FILE]
 w3c_url: "/w3c/"  # the base url of css js and images
 postImage_url: "/w3c/images/" # the base url of post images
-postfile: "/Postfile" # the Database
+postfile: "/db/Postfile" # the Database
+sitefile: "/db/Sitefile" # the Database
 
 # 3rd URL
 duoshuo_user: "jokin" # the user of user.domain.com

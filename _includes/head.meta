@@ -6,4 +6,4 @@
 <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
 <link rel="canonical" href="{{ site.domain }}{{ page.url | replace:'index.html',''">
-<link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "{{ site.domain }}/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.domain }}/db/feed.xml">

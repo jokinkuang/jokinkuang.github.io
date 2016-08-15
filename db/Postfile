@@ -1,4 +1,5 @@
 ---
+# Posts List
 ---
 {% assign site.posts = result %}
 {
