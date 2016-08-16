@@ -40,16 +40,16 @@
 
         if (! this.text || typeof(this.text) != 'string') {
           // text is undefined or null or empty string(" "is not empty!) or even not a string
-          logError("text error !");
+          logError("text error ! text:" + this.text);
           return false;
         }
 
         if (! this.shortName || typeof(this.shortName) != 'string') {
-          logError("short-name error !");
+          logError("short-name error ! short-name:" + this.shortName);
           return false;
         }
         if (! this.threadKey || typeof(this.threadKey) != 'string') {
-          logError("thread-key error !");
+          logError("thread-key error ! thread-key:" + this.threadKey);
           return false;
         }
 

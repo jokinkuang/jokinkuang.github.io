@@ -18,5 +18,23 @@
   bottom: 5px;
   right: 5px;
 }
+#ds-thread #ds-reset a.ds-user-name[data-user-id='6310373106422645505']:after {
+	content: "博主";
+	margin-left: 6px;
+	font-size: 12px;
+	color: #ffffff;
+	background: rgba(62, 46, 46, 0.35);
+	border-radius: 4px;
+	padding: 1px 3px;
+}
+#ds-thread #ds-reset span.ds-user-name:after {
+  content: "游客";
+  margin-left: 6px;
+  font-size: 12px;
+  color: #bbb6ae;
+  /* background: rgba(62, 46, 46, 0.35); */
+  border-radius: 4px;
+  padding: 1px 3px;
+}
 </style>
 <!--多说的通知区域是从脚本插入的，要覆盖它的样式，也需要在脚本里覆盖，暂时不做 @2016-8-2-->
