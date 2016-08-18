@@ -40,16 +40,19 @@
 
         if (! this.text || typeof(this.text) != 'string') {
           // text is undefined or null or empty string(" "is not empty!) or even not a string
-          logError("text error ! text:" + this.text);
+          logError("text error ! text:" + this.text + " the element is:");
+          logError(this.$tag);
           return false;
         }
 
         if (! this.shortName || typeof(this.shortName) != 'string') {
-          logError("short-name error ! short-name:" + this.shortName);
+          logError("short-name error ! short-name:" + this.shortName + " the element is:");
+          logError(this.$tag);
           return false;
         }
         if (! this.threadKey || typeof(this.threadKey) != 'string') {
-          logError("thread-key error ! thread-key:" + this.threadKey);
+          logError("thread-key error ! thread-key:" + this.threadKey + " the element is:");
+          logError(this.$tag);
           return false;
         }
 

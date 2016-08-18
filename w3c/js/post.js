@@ -29,9 +29,9 @@ $(document).ready(function(){
       $("#totalComments").text(data.cursor.total);
     });
     $.Duoshuo.settings = { shortName: shortName };
-    $(".ds-comments").duoshuo("comments");
-    $(".ds-likes").duoshuo("likes");
-    $(".ds-reposts").duoshuo("reposts");
+    $(".post-comments").duoshuo("comments");
+    $(".post-likes").duoshuo("likes");
+    $(".post-reposts").duoshuo("reposts");
   }
 
   // Shuoshuo
