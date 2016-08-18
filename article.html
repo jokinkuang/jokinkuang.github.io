@@ -258,11 +258,14 @@ a:hover {
 	</div>
 	<div class="right-aside">
 		<!-- duoshuo -->
-		<div class="ds-thread" data-thread-key="index" data-title="StepByStep" data-url="hello-xk.github.io"></div>
+		<div class="ds-thread" data-thread-key="index" data-title="{{ site.title }}" data-url="{{ site.domain }}{{ page.url }}"></div>
 	</div>
 </div>
 <div class="talk">Don't be afraid, Step By Step</div>
 <div class="footer"></div>
+
+<!-- duoshuo -->
+{% include duoshuo.js %}
 
 <!-- baiduTemplate -->
 <script type="text/javascript" src="{{ site.baiduTemplate_url }}"></script>
@@ -275,10 +278,8 @@ a:hover {
 <script src="{{ site.w3c_url }}js/timeago.js"></script>
 <script src="{{ site.w3c_url }}js/pagecache.js"></script>
 <script src="{{ site.w3c_url }}js/duoshuo.js"></script>
-<script src="{{ site.w3c_url }}js/main.js"></script>
 
-<!-- duoshuo -->
-{% include duoshuo.js %}
+<script src="{{ site.w3c_url }}js/article.js"></script>
 
 </body>
 </html>

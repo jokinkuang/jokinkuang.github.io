@@ -142,7 +142,7 @@ a:hover {
 							<span class="label">
                 作者
             	</span>
-            	<a class="author-name blue-link" href="/users/9c498d030b34">
+            	<a class="author-name blue-link" href="/aboutme">
               	<span>{{ site.author }}</span>
 							</a>
 							<span>{{ page.date | date:"%Y-%m-%d %H:%M:%S" }}</span>
@@ -195,19 +195,20 @@ a:hover {
 	</div>
 </div>
 
+<!-- duoshuo -->
+{% include duoshuo.js %}
+
 <!-- jQuery -->
 <script type="text/javascript">
 	var sitefile = "{{ site.sitefile }}";
-	var shortName = "jokin";
+	var shortName = "{{ site.duoshuo_short_name }}";
 </script>
 <script src="{{ site.jquery_url }}"></script>
 <script src="{{ site.w3c_url }}js/timeago.js"></script>
 <script src="{{ site.w3c_url }}js/pagecache.js"></script>
 <script src="{{ site.w3c_url }}js/duoshuo.js"></script>
-<script src="{{ site.w3c_url }}js/post.js"></script>
 
-<!-- duoshuo -->
-{% include duoshuo.js %}
+<script src="{{ site.w3c_url }}js/post.js"></script>
 
 </body>
 </html>

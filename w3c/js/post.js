@@ -36,7 +36,7 @@ $(document).ready(function(){
 
   // Shuoshuo
   var loadShuoshuoData = function() {
-    $PC("http://jokin.duoshuo.com/api/threads/listPosts.json?thread_key=index", function(data){
+    $PC("http://jokin.duoshuo.com/api/threads/listPosts.json?thread_key=shuoshuo", function(data){
       try {
         var message = data.parentPosts[data.response[0]].message;
         $("#shuoshuo").html(message);

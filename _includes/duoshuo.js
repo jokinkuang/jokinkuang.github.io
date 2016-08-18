@@ -1,6 +1,8 @@
 <script type="text/javascript">
-  var duoshuoQuery = {short_name:"{{ site.duoshuo_user }}"};
+  var duoshuoQuery = {short_name:"{{ site.duoshuo_short_name }}"};
   var duoshuoDir = "{{ site.duoshuo_path }}";
+  var duoshuoShortName = "{{ site.duoshuo_short_name }}";
+  var duoshuoUserName = "{{ site.duoshuo_user_name }}";
 </script>
 <script src="{{ site.duoshuo_path }}embed.js"></script>
 <style type="text/css">
@@ -18,7 +20,7 @@
   bottom: 5px;
   right: 5px;
 }
-#ds-thread #ds-reset a.ds-user-name[data-user-id='6310373106422645505']:after {
+#ds-thread #ds-reset a.ds-user-name[data-user-id='{{ site.duoshuo_user_uid }}']:after {
 	content: "博主";
 	margin-left: 6px;
 	font-size: 12px;

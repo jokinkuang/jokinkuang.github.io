@@ -74,6 +74,10 @@ body {
 	margin: 0;
 	text-align: center;
 }
+.link {
+  text-decoration: none;
+  color: white;
+}
 </style>
 <style type="text/css">
 @media (max-width: 768px)
@@ -109,7 +113,7 @@ body {
 .fadein {
 	animation:fadein 6s;
 	-moz-animation:fadein 6s; /* Firefox */
-	-webkit-animation:fadein 6s; /* Safari and Chrome */
+	-webkit-animation:fadein 2s; /* Safari and Chrome */
 	-o-animation:fadein 6s; /* Opera */
 }
 }
@@ -118,27 +122,32 @@ body {
 
 <body>
 <div class="header">
-	<a class="menu" href="article.html">Enter</a>
+	<!-- <a class="menu" href="article.html">Enter</a> -->
 </div>
 <div class="header-bg fadein"></div>
 <div class="content">
 	<!-- duoshuo -->
   <div name="comments" id="comments">
-  <div class="ds-thread" data-thread-key="index" data-title="StepByStep" data-url="{{ site.domain }}"></div>
+  <div class="ds-thread" data-thread-key="shuoshuo" data-title="{{ site.title }}" data-url="{{ site.domain }}"></div>
   </div>
 </div>
-<div class="talk">Don't be afraid, Step By Step</div>
+<div class="talk">
+	<a class="link" href="article.html">StepIn -)</a>
+	<p>Don't be afraid, Step By Step</p>
+</div>
 <div class="footer"></div>
+
+<!-- duoshuo -->
+{% include duoshuo.js %}
 
 <!-- jQuery -->
 <script src="{{ site.jquery_url }}"></script>
-<!-- duoshuo -->
-{% include duoshuo.js %}
+
 <script>
 $(function(){
 
   var executeOnLoad = function(selector, loaded_callback) {
-    console.log("[executeOnLoad] running with selector: " + selector);
+    // console.log("[executeOnLoad] running with selector: " + selector);
     var $elements = $(selector);
     if($elements.length) {
       $elements.each(function(){
@@ -156,7 +165,7 @@ $(function(){
   executeOnLoad(".ds-comments-tab-duoshuo", function(){ this.text("博主的说说"); });
   executeOnLoad(".ds-replybox", function(){
     // Don't forget the length
-    if (this.find("img[alt='xk']").length) {
+    if (this.find("img[alt="+ duoshuoUserName +"]").length) {
       this.show();
     } else {
       this.remove();
