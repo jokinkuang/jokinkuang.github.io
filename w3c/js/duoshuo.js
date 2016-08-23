@@ -28,11 +28,13 @@
 
       getArguments: function(args) {
         if (! args || ! args.length) {
+          // no arguments
           this.text = this.$tag.attr(this.attrText) || this.text || this.defaultSymbol;
           this.threadKey = this.$tag.attr(this.attrKey) || this.threadKey;
           this.shortName = this.$tag.attr(this.attrName) || this.shortName;
         }
         else {
+          // have arguments > data-attr > default
           this.text = args[0] || this.text || this.defaultSymbol;
           this.threadKey = args[1] || this.threadKey;
           this.shortName = args[2] || this.shortName;
@@ -152,7 +154,7 @@
                   instance = new $.Duoshuo($.Duoshuo.settings, this);
                   $.data(this, 'duoshuo', instance);
                 }
-                options = $(this).attr('data-method') || options;
+                options = options || $(this).attr('data-method');
 
                 // You can call methods with "methodNameString" But not those start with "_"
                 if (!$.isFunction(instance[options]) || options.charAt(0) === "_") {
