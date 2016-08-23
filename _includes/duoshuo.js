@@ -1,10 +1,12 @@
 <script type="text/javascript">
   var duoshuoQuery = {short_name:"{{ site.duoshuo_short_name }}"};
-  var duoshuoDir = "{{ site.duoshuo_path }}";
+  var duoshuoDir = "{{ site.duoshuo_url }}";
+  duoshuoDir = duoshuoDir.substring(0, duoshuoDir.lastIndexOf("/")+1);
+  //console.log(duoshuoDir);
   var duoshuoShortName = "{{ site.duoshuo_short_name }}";
   var duoshuoUserName = "{{ site.duoshuo_user_name }}";
 </script>
-<script src="{{ site.duoshuo_path }}embed.js"></script>
+<script src="{{ site.duoshuo_url }}"></script>
 <style type="text/css">
 /**************override duoshuo css*************/
 #ds-share #ds-reset.ds-share-inline {
@@ -49,6 +51,18 @@
 /* comments */
 #ds-thread #ds-reset li.ds-tab a.ds-current {
   border: 0px;
+}
+/* smiles */
+#ds-smilies-tooltip {
+  width: initial;
+  max-width: 600px;
+  margin-right: 15px;
+}
+#ds-smilies-tooltip ul.ds-smilies-tabs {
+  width: 80px;
+}
+#ds-smilies-tooltip .ds-smilies-container {
+  margin-left: 80px;
 }
 </style>
 <!--多说的通知区域是从脚本插入的，要覆盖它的样式，也需要在脚本里覆盖，暂时不做 @2016-8-2-->
