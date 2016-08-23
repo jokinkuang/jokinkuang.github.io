@@ -5,9 +5,9 @@
 <div class="comments" data-short-name='jokin' data-thread-key='index' data-text='通过data-attr设置，评论数%s(Done)' >评论 0</div>
 <div class="likes" data-short-name='jokin' data-thread-key='index' data-text='通过data-attr设置，喜欢数%s(Done)' >喜欢 0</div>
 
-<div class="testByList" data-short-name='jokin' data-thread-key='index' data-text='集合处理，data-thread-key为index，喜欢数%s(Done)' >喜欢 0</div>
-<div class="testByList" data-short-name='jokin' data-thread-key='index1' data-text='集合处理，data-thread-key为index1，喜欢数%s(Done)' >喜欢 0</div>
-<div class="testByList" data-short-name='jokin' data-thread-key='index2' data-text='集合处理，data-thread-key为index2，喜欢数%s(Done)' >喜欢 0</div>
+<div class="testByList" data-method="comments" data-short-name='jokin' data-thread-key='index' data-text='集合处理，data-method为comments，data-thread-key为index，评论数%s(Done)' >喜欢 0</div>
+<div class="testByList" data-method="likes" data-short-name='jokin' data-thread-key='index' data-text='集合处理，data-method为likes，data-thread-key为index，喜欢数%s(Done)' >喜欢 0</div>
+<div class="testByList" data-method="likes" data-short-name='jokin' data-thread-key='index2' data-text='集合处理，data-method为likes，data-thread-key为index2，喜欢数%s(Done)' >喜欢 0</div>
 
 <br>
 <div> test function call init with settings or parameters </div>
@@ -31,7 +31,7 @@
 
   $(".comments").duoshuo("comments");
   $(".likes").duoshuo("likes");
-  $(".testByList").duoshuo("likes");
+  $(".testByList").duoshuo();
 
   $.Duoshuo.settings = {shortName: "jokin", text: "通过settings设定，喜欢数%s(Done)", threadKey: "index"};
   $(".testWithSettings").duoshuo("likes", "");

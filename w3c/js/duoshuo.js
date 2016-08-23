@@ -144,7 +144,7 @@
 
     // jQuery plugin common-code which supports $("selector").duoshuo("methodString") call
     $.fn.duoshuo = function(options) {
-        if (typeof options === 'string') {
+        if (typeof options === 'string' || typeof(options) === 'undefined') {
             var args = Array.prototype.slice.call(arguments, 1);
             this.each(function() {
                 var instance = $.data(this, 'duoshuo');
@@ -152,6 +152,8 @@
                   instance = new $.Duoshuo($.Duoshuo.settings, this);
                   $.data(this, 'duoshuo', instance);
                 }
+                options = $(this).attr('data-method') || options;
+
                 // You can call methods with "methodNameString" But not those start with "_"
                 if (!$.isFunction(instance[options]) || options.charAt(0) === "_") {
                     logError("no such method '" + options + "' for duoshuo instance");
