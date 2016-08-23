@@ -65,9 +65,7 @@ $(document).ready(function(){
   //Duoshuo
   var showDuoshuoData = function() {
     $.Duoshuo.settings = { shortName: "jokin" };
-    $(".post-comments").duoshuo("comments");
-    $(".post-likes").duoshuo("likes");
-    $(".post-reposts").duoshuo("reposts");
+    $(".post-data").duoshuo();
   }
 
   var getPostsWithCategory = function(data, category) {
@@ -89,6 +87,7 @@ $(document).ready(function(){
     var text = baidu.template('post-list', posts);
     //console.log(text);
     $(".article-list").html(text);
+    $("#middle-panel").css("margin-top", $("#top-menu").height()+20);
     showTimeAgo();
     showActivedCategory(g_category);
     showDuoshuoData();
