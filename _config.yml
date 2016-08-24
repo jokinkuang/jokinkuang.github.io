@@ -29,7 +29,7 @@ baiduTemplate_url: "/w3c/js/baiduTemplate.js" #use local
 # Build Settings
 permalink: /:year/:month/:day/:title.html
 highlighter: rouge
-github: [metadata]
+markdown: kramdown
 kramdown:
   input: GFM
   hard_wrap: true # a newline in markdown text would be changed to <br>

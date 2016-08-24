@@ -186,14 +186,12 @@ int main(int argc, char *argv[])
     ./nossl
     ./withssl ./XXX.pem
 
-4, got a certification verify failed  
->
-   if you got a certification verify failed, do  
+4, got a certification verify failed
+
+>   if you got a certification verify failed, do  
     - get the trust certification from the server  
     - tranform into pem format file  
     - run again  
->
-
 
 **Following is about how to generate a pem file**
 
@@ -202,6 +200,7 @@ PEM (short for Privacy Enhanced Mail) is one of the storetypes of CAcerts,
 the other one is called DER.
 
 PEM always formated like:
+
 >
 -----BEGIN CERTIFICATE-----  
   Base64 data flow  
@@ -212,7 +211,8 @@ PEM always formated like:
 -----END CERTIFICATE-----  
 >
 
-DER is another store type, formated like:  
+DER is another store type, formated like:
+
 >
 binary... binary... binary...
 >
@@ -220,7 +220,8 @@ binary... binary... binary...
 ``@NOTE`` *the Certificates in a pem is repeatable and not have to be in order*
 
 2, how to create a pem ?  
-2.1, use browser.  
+2.1, use browser.
+
 >   * open the https website with a browser, and click the menu to view Certificate.
 >   * then export the Certificate to afile use base64-encoded-x509.
 >   * then you got a pem formated Certificate file.
