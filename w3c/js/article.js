@@ -31,6 +31,7 @@ $(document).ready(function(){
   }
 
   var g_category = getUrlParam('category');
+  //console.log(g_category);
 
   $.ajax({
     type: "get",
@@ -57,8 +58,8 @@ $(document).ready(function(){
     if (category == null || category == "" || category == "All") {
       $("li[data='All']").addClass("active");
     } else {
-      console.log(category);
-      $("li[data=" + category + "]").addClass("active");
+      //console.log(category);
+      $("li[data='" + category + "']").addClass("active");
     }
   }
 
