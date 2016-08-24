@@ -76,21 +76,22 @@ int main() {
 }
 ```
 
-Task Lists
+## Task Lists
 
 - [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
 - [x] list syntax required (any unordered or ordered list supported)
 - [x] this is a complete item
 - [ ] this is an incomplete item
 
-Tables
+## Tables
 
 First Header | Second Header
 ------------ | -------------
 Content from cell 1 | Content from cell 2
 Content in the first column | Content in the second column
 
-SHA references
+
+## SHA references
 
 Any reference to a commit’s SHA-1 hash will be automatically converted into a link to that commit on GitHub.
 
@@ -108,15 +109,15 @@ Username @mentions
 
 Typing an @ symbol, followed by a username, will notify that person to come and view the comment. This is called an “@mention”, because you’re mentioning the individual. You can also @mention teams within an organization.
 
-Automatic linking for URLs
+## Automatic linking for URLs
 
 Any URL (like http://www.github.com/) will be automatically converted into a clickable link.
 
-Strikethrough
+## Strikethrough
 
 Any word wrapped with two tildes (like ~~this~~) will appear crossed out.
 
-Emoji
+## Emoji
 
 GitHub supports emoji! :sparkles: :camel: :boom:
 

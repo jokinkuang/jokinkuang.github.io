@@ -6,8 +6,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
-twitter_username: jekyllrb
-github_username:  jekyll
+
 
 # Site URL NOTE: if your site is base on subdir /blog you can change it to "www.XXX.com/blog"
 domain: "http://hello-xk.github.io" # the base URL for your site
@@ -29,7 +28,26 @@ baiduTemplate_url: "/w3c/js/baiduTemplate.js" #use local
 
 # Build Settings
 permalink: /:year/:month/:day/:title.html
-markdown: kramdown
-kramdown:
-  input: GFM
 highlighter: rouge
+github: [metadata]
+
+# Following is got in Github Help With Configuring Jekyll
+
+# Github Page Default Settings which you can override:
+# kramdown:
+#   input: GFM
+#   hard_wrap: false
+# gems:
+#   - jekyll-coffeescript
+#   - jekyll-paginate
+
+# Github Page override the following settings which you cannot change:
+# lsi: false
+# safe: true
+# source: [your repo's top level directory]
+# incremental: false
+# highlighter: rouge
+# gist:
+#  noscript: false
+# kramdown:
+#  math_engine: mathjax
