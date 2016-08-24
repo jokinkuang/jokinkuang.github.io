@@ -66,3 +66,7 @@ table tr {
 table tr:nth-child(2n) {
    background-color: #f8f8f8;
 }
+
+p {
+  word-break: break-word;
+}
