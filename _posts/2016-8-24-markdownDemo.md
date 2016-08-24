@@ -2,15 +2,45 @@
 layout: post
 title: Markdown Demo
 categories: markdown
-pid: 20160824-123800
+date: 2016-08-24 12:38:11
+pid: 20160824-123811
 ---
-# 1
+```
+Attentions (放在开头)：
 
-## 2
+1,markdown的解析遇到一个空行作为一次解析，所以上下两个语法需要有一个空行做间隔。
+  比如：
+  # H1
+  ## H2
+  只能解析H1，##H2被解析为<p>
+  比如：
+  texttext
+  > TEXT
+  都解析为<p>，texttext>TEXT
+
+  要正确被解析，应该在两个解析间插入空行
+
+2,markdown语法关键字与被修饰的`段`一般都要留个空格
+  比如： # 空格 H1
+
+3,代码块内不能再使用markdown关键字，因为代码块是<pre>，这个看当前块可知
+
+4,本demo开启了kramdown的hard_wrap: true自动将换行符转换为<br>
+```
+
+# H1
+
+## H2
+
 ### H3
+
 #### H4
 
 ###### H5
+> \# 空格 TEXT or
+> \- - - -
+> TEXT
+> \=====  or \-----
 
 > This is a blockquote.
 >
@@ -18,13 +48,23 @@ pid: 20160824-123800
 >
 > ## This is an H2 in a blockquote
 
+> \> 空格 TEXT
+> \> 空格 TEXT
+> \> 空格 TEXT
+
 Some of these words *are emphasized*.
 Some of these words _are emphasized also_.
+
+> \*TEXT\*  or \_TEXT\_
 
 Use two asterisks for **strong emphasis**.
 Or, if you prefer, __use two underscores instead__.
 
+> \**TEXT\**  or \__TEXT\__
+
 inline `code`
+
+> \`TEXT\`
 
 *   Candy.
 *   Gum.
@@ -38,15 +78,24 @@ inline `code`
 -   Gum.
 -   Booze.
 
+> \* 空格 TEXT  or
+> \- - - -
+> \+ 空格 TEXT  or
+> \- - - -
+> \- 空格 TEXT
+
 1.  Red
 2.  Green
 3.  Blue
 
-*   A list item.
+> 1. 空格 TEXT
 
+*   A list item.
     With multiple paragraphs.
 
 *   Another item in the list.
+
+> \* 空格 TEXT
 
 This is an [example link](http://example.com/).
 This is an [example link](http://example.com/ "With a Title").
@@ -62,10 +111,20 @@ I start my morning with a cup of coffee and
 
 [ny times]: http://www.nytimes.com/
 
+> \[example link](http://example.com/ "With a Title")  or
+> - - - -
+> \[example link]\[id]
+> 空行
+> \[id]: http://example.com/ "With a Title"
 
-![alt text](/path/to/img.jpg "Title")
+
+![alt text](/w3c/images/bg.jpg "Title")
 ![alt text][id]
-[id]: /path/to/img.jpg "Title"
+
+[id]: /w3c/images/bg.jpg "Title"
+
+> The same as Link
+> But start with  `!`
 
 
 ### GFM
@@ -75,6 +134,10 @@ int main() {
 	printf("hello world!");
 }
 ```
+
+> \`\`\`language
+>   // code here
+> \`\`\`
 
 ## Task Lists
 
@@ -111,7 +174,10 @@ Typing an @ symbol, followed by a username, will notify that person to come and 
 
 ## Automatic linking for URLs
 
-Any URL (like http://www.github.com/) will be automatically converted into a clickable link.
+Any URL (like <http://www.github.com/>) will be automatically converted into a clickable link.    
+
+> \<http://example.com>
+
 
 ## Strikethrough
 
