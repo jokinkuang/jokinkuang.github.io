@@ -1,11 +1,7 @@
 ---
 layout: post
 title: how to create blog with github
-tags: [github blog]
-author: helloxk
-mail: 345106552@qq.com
-created: 2015-01-27 17:50:54
-modified: 2015-02-27 17:55:50
+categories: github-page
 pid: 20150127-175054
 ---
 

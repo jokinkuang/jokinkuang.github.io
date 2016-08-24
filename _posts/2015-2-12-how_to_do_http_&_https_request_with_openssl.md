@@ -1,11 +1,7 @@
 ---
 layout: post
 title: how to do http & https request with openssl
-tags: [openssl]
-author: helloxk
-mail: 345106552@qq.com
-created: 2015-02-12 12:50:54
-modified: 2015-02-27 15:55:50
+categories: openssl
 pid: 20150227-125054
 image: jekyll.jpg
 ---
@@ -191,10 +187,10 @@ int main(int argc, char *argv[])
 
 4, got a certification verify failed  
 >
-   if you got a certification verify failed, do  
-    - get the trust certification from the server  
-    - tranform into pem format file  
-    - run again  
+>   if you got a certification verify failed, do  
+>    - get the trust certification from the server  
+>    - tranform into pem format file  
+>    - run again  
 >
 
 

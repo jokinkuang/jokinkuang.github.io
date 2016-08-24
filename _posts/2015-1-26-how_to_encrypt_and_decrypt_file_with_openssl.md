@@ -1,11 +1,7 @@
 ---
 layout: post
 title: how to encrypt and decrypt file with openssl
-tags: [openssl]
-author: helloxk
-mail: 345106552@qq.com
-created: 2015-01-26 11:00:00
-modified: 2015-02-27 17:55:50
+categories: openssl
 pid: 20150227-175500
 ---
 
