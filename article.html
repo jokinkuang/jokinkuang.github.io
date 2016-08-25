@@ -211,11 +211,13 @@ a:hover {
 		<div id="top-menu" class="top">
 			<ul class="nostyle category">
 						<li data="All"><a href="?category=">All</a></li>
-				{% for item in site.categories %}
+				{%comment%}通过liquid获取文件夹作为目录{%endcomment%}
+				{% include categories.liquid %}
+				{% for item in categories %}
 					{% if forloop.index0 == 0 %}
-      			<li data="{{ item[0] }}"><a href="?category={{ item[0] }}">{{ item[0] }}</a></li>
+      			<li data="{{ item }}"><a href="?category={{ item }}">{{ item }}</a></li>
 					{% else %}
-      			<li data="{{ item[0] }}"><a href="?category={{ item[0] }}">{{ item[0] }}</a></li>
+      			<li data="{{ item }}"><a href="?category={{ item }}">{{ item }}</a></li>
 					{% endif %}
 				{% endfor %}
 			</ul>

@@ -1,0 +1,42 @@
+{% comment %}因为遍历的前提是posts，所以空目录是不会被加入到categories里面！{% endcomment %}
+{% assign totalCategories = "" %}
+{% for post in site.posts %}
+  {% comment %}第一部分，获取文章的子目录+categories（优先级：目录 > categories变量）{% endcomment %}
+  {% assign list = post.path|split:"/"; %}
+  {% assign categories = post.categories|join:"," %}
+  {% assign subdirs = "" %}
+  {% for item in list %}
+    {% assign index = list.size|minus:1 %}
+    {% if forloop.index0 > 0 and forloop.index0 < index %}
+      {% if subdirs == "" %}
+        {% assign subdirs = item %}
+      {% else %}
+        {% assign subdirs = subdirs |append:"," |append:item %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% comment %}子目录优先级更高，放在前面{% endcomment %}
+  {% assign categories = categories |prepend:"," |prepend:subdirs %}
+
+  {% comment %}增加到"总目录"{% endcomment %}
+  {% if post == site.posts.first %}
+    {% assign totalCategories = totalCategories | append: categories %}
+  {% else %}
+    {% assign totalCategories = totalCategories | append:"," | append: categories %}
+  {% endif %}
+{% endfor %}
+
+{% comment %}"总目录"去重{% endcomment %}
+{% assign result = "" %}
+{% assign categories = totalCategories | split:"," %}
+{% for item in categories %}
+  {% if result contains item %}
+    {% continue %}
+  {% elsif result == "" %}
+    {% assign result = item %}
+  {% else %}
+    {% assign result = result | append:"," | append: item %}
+  {% endif %}
+{% endfor %}
+{% assign categories = result | split:"," %}
