@@ -44,3 +44,5 @@ if you have a domain, you can bind to the blog.
     - test the DNS:
         dig XXX.com +nostats +nocomments +nocmd
         # if the output route to 192.30.252.153/154, means it work!
+
+5，Wait a long time, about 2 hours
