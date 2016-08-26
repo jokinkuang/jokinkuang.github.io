@@ -169,6 +169,12 @@ $(function(){
     }
   });
 
+	// if found .ds-comments-info then consider comments has loaded
+	executeOnLoad(".ds-comments-info", function(){
+		$(window).scrollTop( $(window.location.hash).offset().top );
+	});
+
+
 });
 </script>
 </body>
