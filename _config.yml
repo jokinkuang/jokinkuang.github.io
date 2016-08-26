@@ -9,7 +9,7 @@ description: > # this means to ignore newlines until "baseurl:"
 
 
 # Site URL NOTE: if your site is base on subdir /blog you can change it to "www.XXX.com/blog"
-domain: "http://hello-xk.github.io" # the base URL for your site
+domain: "http://jokinkuang.github.io" # the base URL for your site
 
 # Source URL NOTE: end with / cause it's [URL + FILE]
 w3c_url: "/w3c/"  # the base url of css js and images
