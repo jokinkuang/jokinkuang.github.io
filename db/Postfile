@@ -1,12 +1,12 @@
 ---
 # Posts List
 ---
-{% assign site.posts = result %}
 {
   "posts":
   [
+  {% assign totalCategories = "" %}
   {% for post in site.posts %}
-    {% comment %}第一部分，获取子目录+categories（优先级：目录 > categories变量）{% endcomment %}
+    {% comment %}第一部分，获取文章的子目录+categories（优先级：目录 > categories变量）{% endcomment %}
     {% assign list = post.path|split:"/"; %}
     {% assign categories = post.categories|join:"," %}
     {% assign subdirs = "" %}
@@ -33,6 +33,13 @@
         {% assign result = result | append:"," | append: item %}
       {% endif %}
     {% endfor %}
+
+    {% comment %}增加到"总目录"{% endcomment %}
+    {% if post == site.posts.first %}
+      {% assign totalCategories = totalCategories | append: result %}
+    {% else %}
+      {% assign totalCategories = totalCategories | append:"," | append: result %}
+    {% endif %}
 
     {% comment %}第三部分，处理新的目录数组{% endcomment %}
     {% assign categories = result | split:"," %}
@@ -65,5 +72,26 @@
       ,
     {% endif %}
   {% endfor %}
+  ],
+
+  {% comment %}"总目录"去重{% endcomment %}
+  {% assign result = "" %}
+  {% assign categories = totalCategories | split:"," %}
+  {% for item in categories %}
+    {% if result contains item %}
+      {% continue %}
+    {% elsif result == "" %}
+      {% assign result = item %}
+    {% else %}
+      {% assign result = result | append:"," | append: item %}
+    {% endif %}
+  {% endfor %}
+  {% assign categories = result | split:"," %}
+
+  "categories":
+  [
+    {% if categories.size > 0 %}
+        "{{ categories | join: '","'}}"
+    {% endif %}
   ]
 }

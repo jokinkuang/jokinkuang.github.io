@@ -4,7 +4,7 @@ title: how to do http & https request with openssl
 categories: [openssl]
 date: 2015-02-27 15:55:50
 pid: 20150227-125054
-image: jekyll.jpg
+image:
 ---
 
 1, do http request
