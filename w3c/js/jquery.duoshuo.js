@@ -154,15 +154,15 @@
                   instance = new $.Duoshuo($.Duoshuo.settings, this);
                   $.data(this, 'duoshuo', instance);
                 }
-                options = options || $(this).attr('data-method');
+                var method = options || $(this).attr('data-method');
 
                 // You can call methods with "methodNameString" But not those start with "_"
-                if (!$.isFunction(instance[options]) || options.charAt(0) === "_") {
-                    logError("no such method '" + options + "' for duoshuo instance");
+                if (!$.isFunction(instance[method]) || method.charAt(0) === "_") {
+                    logError("no such method '" + method + "' for duoshuo instance");
                     return;
                 }
-                instance.calling = options;
-                instance[options].apply(instance, args);
+                instance.calling = method;
+                instance[method].apply(instance, args);
             });
         } else {
             this.each(function() {
