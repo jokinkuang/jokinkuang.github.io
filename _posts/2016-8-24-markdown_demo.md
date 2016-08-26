@@ -118,13 +118,20 @@ I start my morning with a cup of coffee and
 > \[id]: http://example.com/ "With a Title"
 
 
-![alt text](/w3c/images/bg.jpg "Title")
+![alt text](/w3c/images/avator.jpg "Title")
 ![alt text][id]
 
-[id]: /w3c/images/bg.jpg "Title"
+[id]: /w3c/images/avator.jpg "Title"
 
 > The same as Link
 > But start with  `!`
+
+How to make the image to show center？
+1.  CSS           cannot
+2.  javascript    can
+3.  use img in markdown text instead
+
+> NOTE kmarkdown 转换图片是直接转换成 \<p>\<img /></p>，因为css3也没有选择父的选择器（比如没有选择器可以选择含有\<img>的\<p>），所以从css角度无法实现图片居中。
 
 
 ### GFM
