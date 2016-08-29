@@ -119,8 +119,8 @@ body {
 	color: #717171;
 }
 .article-list .title {
-	margin-top: 30px;
-	margin-bottom: 10px;
+	margin-top: 20px;
+	margin-bottom: 0px;
 	margin-left: 0;
 	font-size: 18px;
 	font-weight: bold;
@@ -136,6 +136,9 @@ body {
 	font-weight: normal;
 	line-height: 20px;
 	color: #999999;
+}
+.article-list .excerpt {
+	margin-top: 10px;
 }
 .right-aside {
 	width: 20%;
@@ -249,6 +252,10 @@ a.dark-grey-link, a.dark-grey-link:hover, a.dark-grey-link:visited {
 							<a class="grey-link post-data" target="_parent" href="<%= posts[i].url %>#comments" data-method="comments" data-thread-key="<%= posts[i].pid %>" data-text=" · 评论 %s"> · 评论 0</a>
 							<span class="post-data" data-method="likes" data-thread-key="<%= posts[i].pid %>" data-text=" · 喜欢 %s"> · 喜欢 0</span>
 							<span class="post-data" data-method="reposts" data-thread-key="<%= posts[i].pid %>" data-text=" · 转发 %s"> · 转发 0</span>
+						</div>
+						<div class="excerpt">
+							{%comment%}:=表示HTML不转义，baiduTemplate默认的=是HTML转义的，转义后&gt;才会输出">"{%endcomment%}
+							<%:= posts[i].excerpt %>
 						</div>
 					</div>
 				</li>

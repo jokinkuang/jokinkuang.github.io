@@ -8,6 +8,7 @@ image: jekyll.jpg
 ---
 test
 
+
 Jekyll also offers powerful support for code snippets:
 
 ```ruby
