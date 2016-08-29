@@ -6,8 +6,8 @@ date: 2016-08-24 12:38:11
 pid: 20160824-123811
 # you can override the settings in _config.yml here !!
 ---
-  
-> 一个用来测试当前站点的markdown.css样式的Demo
+
+> 一个用来测试当前站点的Markdown样式的Demo
 
 ```
 Attentions (放在开头)：
