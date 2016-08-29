@@ -79,5 +79,9 @@
   background: none;
   border: none;
 }
+/* image */
+#ds-thread #ds-reset .ds-replybox .ds-avatar img {
+  margin-left: -7px;
+}
 </style>
 <!--多说的通知区域是从脚本插入的，要覆盖它的样式，也需要在脚本里覆盖，暂时不做 @2016-8-2-->
