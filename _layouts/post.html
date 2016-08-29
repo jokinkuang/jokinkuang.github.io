@@ -64,6 +64,7 @@ body {
 }
 .center-aside .author .info {
 	margin-top: 7px;
+	letter-spacing: 1px;
 }
 .center-aside .author .info .talk{
 	margin: 0;
@@ -167,7 +168,7 @@ a.grey-link, a.grey-link:hover, a.grey-link:visited {
             	<a class="author-name blue-link" href="/aboutme">
               	<span>{{ site.author }}</span>
 							</a>
-							<span>{{ page.date | date:"%Y-%m-%d %H:%M:%S" }}</span>
+							<span style="margin-left: 10px;">{{ page.date | date:"%Y-%m-%d %H:%M:%S" }}</span>
             	<div>
 								<span>写了<a class="blue-link" href="/article"><i style="font-style:normal;" id="totalPosts">0</i>篇</a>文章</span>，
               	<span>共<i style="font-style:normal;" id="totalWords">0</i>字</span>，
