@@ -253,10 +253,12 @@ a.dark-grey-link, a.dark-grey-link:hover, a.dark-grey-link:visited {
 							<span class="post-data" data-method="likes" data-thread-key="<%= posts[i].pid %>" data-text=" · 喜欢 %s"> · 喜欢 0</span>
 							<span class="post-data" data-method="reposts" data-thread-key="<%= posts[i].pid %>" data-text=" · 转发 %s"> · 转发 0</span>
 						</div>
+						<% if ( posts[i].excerpt ) { %>
 						<div class="excerpt">
 							{%comment%}:=表示HTML不转义，baiduTemplate默认的=是HTML转义的，转义后&gt;才会输出">"{%endcomment%}
 							<%:= posts[i].excerpt %>
 						</div>
+						<% } %>
 					</div>
 				</li>
 				<% } %>

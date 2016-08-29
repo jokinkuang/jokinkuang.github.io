@@ -4,6 +4,7 @@ title: how to create blog with github
 categories: [github page]
 date: 2015-01-27 17:50:54
 pid: 20150127-175054
+excerpt: ""
 ---
 
 Urls:  

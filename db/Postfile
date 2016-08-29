@@ -66,7 +66,13 @@
             "{{ categories | join: '","'}}"
         {% endif %}
       ],
-      "excerpt": "{{ post.excerpt | markdownify | strip | strip_newlines | strip_html | replace:"\", "\\\\" | replace:'"', '\"' | append:"..." | truncate:160 }}"    {% comment %}truncatewords不太识别中文，因为它是以空格为单词分割{% endcomment %}
+      "excerpt":
+      {% assign excerpt = post.excerpt | strip %}
+      {% if excerpt != "" %}
+        "{{ post.excerpt | markdownify | strip | strip_newlines | strip_html | replace:"\", "\\\\" | replace:'"', '\"' | append:"..." | truncate:160 }}"    {% comment %}truncatewords不太识别中文，因为它是以空格为单词分割{% endcomment %}
+      {% else %}
+        ""
+      {% endif %}
     }
     {% if post != site.posts.last %}
       ,
