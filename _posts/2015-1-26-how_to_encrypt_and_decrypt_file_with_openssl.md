@@ -4,6 +4,7 @@ title: how to encrypt and decrypt file with openssl
 categories: openssl
 date: 2015-02-27 17:55:50
 pid: 20150227-175500
+excerpt: ""
 ---
 
 url: http://tombuntu.com/index.php/2007/12/12/simple-file-encryption-with-openssl/
