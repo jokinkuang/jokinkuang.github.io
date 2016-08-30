@@ -179,54 +179,15 @@ a.grey-link, a.grey-link:hover, a.grey-link:visited {
 </head>
 
 <body>
-{% if page.image and page.image != '' %}
-		{% if page.image contains 'http:' or page.image contains 'https:' %}
-		{% 		assign image_url = page.image  %}
-		{% else %}
-		{%		assign image_url = site.domain | append: site.postImage_url | append: page.image %}
-		{% endif %}
-{% endif %}
-
-{% comment %}第一部分，获取文章的子目录+categories（优先级：目录 > categories变量）{% endcomment %}
-{% assign list = page.path|split:"/"; %}
-{% assign categories = page.categories|join:"," %}
-{% assign subdirs = "" %}
-{% for item in list %}
-	{% assign index = list.size|minus:1 %}
-	{% if forloop.index0 > 0 and forloop.index0 < index %}
-		{% if subdirs == "" %}
-			{% assign subdirs = item %}
-		{% else %}
-			{% assign subdirs = subdirs |append:"," |append:item %}
-		{% endif %}
-	{% endif %}
-{% endfor %}
-
-{% comment %}子目录优先级更高，放在前面{% endcomment %}
-{% if subdirs != "" %}
-	{% assign categories = categories |prepend:"," |prepend:subdirs %}
-{% endif %}
-{% assign categories = categories | split:"," %}
-
-{% comment %}第二部分，去重，因为uniq函数无法执行，因此写个函数去重{% endcomment %}
-{% assign result = "" %}
-{% for item in categories %}
-	{% if result contains item %}
-		{% continue %}
-	{% elsif result == "" %}
-		{% assign result = item %}
-	{% else %}
-		{% assign result = result | append:"," | append: item %}
-	{% endif %}
-{% endfor %}
-{% assign categories = result | split:"," %}
-
-<img src="{{ image_url }}" style="display:none;"/>
+	{% assign _post = page %}
+	{% include post-image.liquid %}
+<img src="{{ post-image }}" style="display:none;"/>
 <div class="content">
+	<div class="pin"><span><a href="">up</a></span>
+	</div>
 	<div class="top-aside">
 	</div>
 	<div class="center-aside">
-		<div class="pin"><span><a href="">up</a></span></div>
 		<div class="header-image">
 		</div>
 		<div class="author">
@@ -260,18 +221,24 @@ a.grey-link, a.grey-link:hover, a.grey-link:visited {
 						<span class="post-data" data-method="likes" data-thread-key="{{ page.pid }}" data-text="喜欢·%s">喜欢0</span>
             <span class="post-data" data-method="reposts" data-thread-key="{{ page.pid }}" data-text="转发·%s">转发0</span>
     </div>
+
 		<div class="post">
 			{{ content }}
 		</div>
+
 		<div class="post-footer">
 			<p>&copy; {{ site.title }}</p>
 		</div>
+
 		<div class="post-tags">
 			TAGS:
-			{% for tag in categories %}
+			{% assign _post = page %}
+			{% include post-categories.liquid %}
+			{% for tag in post-categories %}
 			<span class="tag"><a href="/article.html?category={{ tag }}">{{ tag }}</a></span>
 			{% endfor %}
 		</div>
+
 		<div class="PageNavigation">
 		  {% if page.previous.url %}
 		    <a class="prev" href="{{page.previous.url}}">&nbsp;&laquo; {{page.previous.title}}</a>
@@ -337,7 +304,6 @@ $(window).scroll(function(event){
 		}
 	}
 });
-
 </script>
 </body>
 </html>

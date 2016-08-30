@@ -236,8 +236,8 @@ a.light-white, a.light-white:hover, a.light-white:visited {
 			<ul class="nostyle category">
 						<li data="All"><a href="?category=">All</a></li>
 				{%comment%}通过liquid获取文件夹作为目录{%endcomment%}
-				{% include categories.liquid %}
-				{% for item in categories %}
+				{% include total-categories.liquid %}
+				{% for item in total-categories %}
 					{% if forloop.index0 == 0 %}
       			<li data="{{ item }}"><a href="?category={{ item }}">{{ item }}</a></li>
 					{% else %}
