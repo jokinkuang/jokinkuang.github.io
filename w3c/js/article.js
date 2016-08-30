@@ -65,7 +65,7 @@ $(document).ready(function(){
 
   //Duoshuo
   var showDuoshuoData = function() {
-    $.Duoshuo.settings = { shortName: "jokin" };
+    $.Duoshuo.settings = { shortName: duoshuoShortName };
     $(".post-data").duoshuo();
   }
 
