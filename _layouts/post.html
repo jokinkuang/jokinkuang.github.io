@@ -207,6 +207,19 @@ a.grey-link, a.grey-link:hover, a.grey-link:visited {
 {% endif %}
 {% assign categories = categories | split:"," %}
 
+{% comment %}第二部分，去重，因为uniq函数无法执行，因此写个函数去重{% endcomment %}
+{% assign result = "" %}
+{% for item in categories %}
+	{% if result contains item %}
+		{% continue %}
+	{% elsif result == "" %}
+		{% assign result = item %}
+	{% else %}
+		{% assign result = result | append:"," | append: item %}
+	{% endif %}
+{% endfor %}
+{% assign categories = result | split:"," %}
+
 <img src="{{ image_url }}" style="display:none;"/>
 <div class="content">
 	<div class="top-aside">
@@ -255,9 +268,6 @@ a.grey-link, a.grey-link:hover, a.grey-link:visited {
 		<div class="post-tags">
 			TAGS:
 			{% for tag in categories %}
-			<span class="tag"><a href="/article.html?category={{ tag }}">{{ tag }}</a></span>
-			<span class="tag"><a href="/article.html?category={{ tag }}">{{ tag }}</a></span>
-			<span class="tag"><a href="/article.html?category={{ tag }}">{{ tag }}</a></span>
 			<span class="tag"><a href="/article.html?category={{ tag }}">{{ tag }}</a></span>
 			{% endfor %}
 		</div>
