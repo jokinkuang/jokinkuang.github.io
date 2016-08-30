@@ -9,6 +9,9 @@ pid: 20160824-123811
 
 > 一个用来测试当前站点的Markdown样式的Demo
 
+* auto-gen TOC:
+{:toc}
+
 ```
 Attentions (放在开头)：
 
@@ -32,6 +35,8 @@ Attentions (放在开头)：
 4,本demo开启了kramdown的hard_wrap: true自动将换行符转换为<br>
 ```
 
+# Markdown
+
 # H1
 
 ## H2
@@ -46,30 +51,34 @@ Attentions (放在开头)：
 > TEXT
 > \=====  or \-----
 
+## blockquote
 > This is a blockquote.
 >
 > This is the second paragraph in the blockquote.
 >
-> ## This is an H2 in a blockquote
 
 > \> 空格 TEXT
 > \> 空格 TEXT
 > \> 空格 TEXT
 
+## italic
 Some of these words *are emphasized*.
 Some of these words _are emphasized also_.
 
 > \*TEXT\*  or \_TEXT\_
 
+## emphasis
 Use two asterisks for **strong emphasis**.
 Or, if you prefer, __use two underscores instead__.
 
 > \**TEXT\**  or \__TEXT\__
 
+## inline code
 inline `code`
 
 > \`TEXT\`
 
+## unordered list
 *   Candy.
 *   Gum.
 *   Booze.
@@ -88,6 +97,7 @@ inline `code`
 > \- - - -
 > \- 空格 TEXT
 
+## ordered list
 1.  Red
 2.  Green
 3.  Blue
@@ -101,6 +111,7 @@ inline `code`
 
 > \* 空格 TEXT
 
+## link
 This is an [example link](http://example.com/).
 This is an [example link](http://example.com/ "With a Title").
 I get 10 times more traffic from [Google][1] than from
@@ -121,7 +132,7 @@ I start my morning with a cup of coffee and
 > 空行
 > \[id]: http://example.com/ "With a Title"
 
-
+## image
 ![alt text](/w3c/images/avator.jpg "Title")
 ![alt text][id]
 
@@ -138,7 +149,7 @@ How to make the image to show center？
 > NOTE kmarkdown 转换图片是直接转换成 \<p>\<img /></p>，因为css3也没有选择父的选择器（比如没有选择器可以选择含有\<img>的\<p>），所以从css角度无法实现图片居中。
 
 
-### GFM
+# GFM
 
 ```c
 int main() {
