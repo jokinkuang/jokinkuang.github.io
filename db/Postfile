@@ -20,9 +20,12 @@
         {% endif %}
       {% endif %}
     {% endfor %}
+    {% if subdirs != "" %}
+      {% assign categories = categories |prepend:"," |prepend:subdirs %}
+    {% endif %}
+    {% assign categories = categories | split:"," %}
 
     {% comment %}第二部分，去重，因为uniq函数无法执行，因此写个函数去重{% endcomment %}
-    {% assign categories = categories |prepend:"," |prepend:subdirs | split:"," %}
     {% assign result = "" %}
     {% for item in categories %}
       {% if result contains item %}

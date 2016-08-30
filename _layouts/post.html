@@ -23,7 +23,18 @@ body {
 	line-height: 20px;
 	color: #413838;
 }
-
+.pin {
+	position: fixed;
+	right: 10px;
+	z-index: 100;
+	bottom: 30%;
+	display: none;
+}
+.pin span {
+	border: 1px solid #999999;
+  border-radius: 100%;
+  padding: 2px;
+}
 /****** post ******/
 .center-aside {
 	width: 60%;
@@ -93,13 +104,38 @@ body {
 }
 .center-aside .post {
 	padding: 0px 10px;
-	line-height: 1.5;
+	line-height: 1.5em;
 	color: #413838;
 }
 .post-footer {
 	text-align: center;
   margin-top: 50px;
-  padding-bottom: 50px
+  padding-bottom: 20px
+}
+.post-tags {
+	margin: 5px 10px;
+}
+.post-tags span.tag {
+	border: 1px solid #999999;
+  border-radius: 4px;
+  padding: 2px;
+	line-height: 1.8em;
+	margin-left: 5px;
+}
+.PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+.PageNavigation .next {
+  text-align: right;
 }
 .footer {
   text-align: center;
@@ -149,11 +185,34 @@ a.grey-link, a.grey-link:hover, a.grey-link:visited {
 		{%		assign image_url = site.domain | append: site.postImage_url | append: page.image %}
 		{% endif %}
 {% endif %}
+
+{% comment %}第一部分，获取文章的子目录+categories（优先级：目录 > categories变量）{% endcomment %}
+{% assign list = page.path|split:"/"; %}
+{% assign categories = page.categories|join:"," %}
+{% assign subdirs = "" %}
+{% for item in list %}
+	{% assign index = list.size|minus:1 %}
+	{% if forloop.index0 > 0 and forloop.index0 < index %}
+		{% if subdirs == "" %}
+			{% assign subdirs = item %}
+		{% else %}
+			{% assign subdirs = subdirs |append:"," |append:item %}
+		{% endif %}
+	{% endif %}
+{% endfor %}
+
+{% comment %}子目录优先级更高，放在前面{% endcomment %}
+{% if subdirs != "" %}
+	{% assign categories = categories |prepend:"," |prepend:subdirs %}
+{% endif %}
+{% assign categories = categories | split:"," %}
+
 <img src="{{ image_url }}" style="display:none;"/>
 <div class="content">
 	<div class="top-aside">
 	</div>
 	<div class="center-aside">
+		<div class="pin"><span><a href="">up</a></span></div>
 		<div class="header-image">
 		</div>
 		<div class="author">
@@ -193,7 +252,25 @@ a.grey-link, a.grey-link:hover, a.grey-link:visited {
 		<div class="post-footer">
 			<p>&copy; {{ site.title }}</p>
 		</div>
+		<div class="post-tags">
+			TAGS:
+			{% for tag in categories %}
+			<span class="tag"><a href="/article.html?category={{ tag }}">{{ tag }}</a></span>
+			<span class="tag"><a href="/article.html?category={{ tag }}">{{ tag }}</a></span>
+			<span class="tag"><a href="/article.html?category={{ tag }}">{{ tag }}</a></span>
+			<span class="tag"><a href="/article.html?category={{ tag }}">{{ tag }}</a></span>
+			{% endfor %}
+		</div>
+		<div class="PageNavigation">
+		  {% if page.previous.url %}
+		    <a class="prev" href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a>
+		  {% endif %}
+		  {% if page.next.url %}
+		    <a class="next" href="{{page.next.url}}">{{page.next.title}} &raquo;</a>
+		  {% endif %}
+		</div>
 
+		<div style="height: 20px;"></div>
 		<div class="ds-share flat" data-thread-key="{{ page.pid }}" data-title="{{ page.title }}" data-images="{{ image_url }}" data-content="{{ post.excerpt | strip | replace:'"', "'" | strip_newlines }}" data-url="{{ site.domain }}{{ page.url }}">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
@@ -228,6 +305,28 @@ a.grey-link, a.grey-link:hover, a.grey-link:visited {
 <script src="{{ site.w3c_url }}js/jquery.duoshuo.js"></script>
 
 <script src="{{ site.w3c_url }}js/post.js"></script>
+<script>
+$(".pin").on("click", function(event) {
+    var target = $("html, body");
+    if( target.length ) {
+        event.preventDefault();
+        $("html, body").stop().animate({
+            scrollTop: target.offset().top
+        }, 1000);
+    }
+});
+$(window).scroll(function(event){
+	var top = $(window).scrollTop();
+	var target = $("body");
+	if ( target.length ) {
+		if ( target.scrollTop() > 2000 ) {
+			$(".pin").show();
+		} else {
+			$(".pin").hide();
+		}
+	}
+});
 
+</script>
 </body>
 </html>

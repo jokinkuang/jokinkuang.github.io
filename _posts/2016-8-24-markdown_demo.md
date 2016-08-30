@@ -9,6 +9,7 @@ pid: 20160824-123811
 
 > 一个用来测试当前站点的Markdown样式的Demo
 
+{:use_numbered_headers => true}
 * auto-gen TOC:
 {:toc}
 
@@ -35,7 +36,7 @@ Attentions (放在开头)：
 4,本demo开启了kramdown的hard_wrap: true自动将换行符转换为<br>
 ```
 
-# Markdown
+# Kramdown Markdown Syntax
 
 # H1
 
@@ -50,6 +51,15 @@ Attentions (放在开头)：
 > \- - - -
 > TEXT
 > \=====  or \-----
+
+## TOC
+If you create a list, and then set the toc attribute, when rendering Maruku will create an auto-generated table of contents(TOC). TOC was supported by Maruku, and Kramdown implements the Maruku so it also support TOC!
+
+> add following to the post
+>
+> \* 空格(or 1. 空格) This is a list and would become a table of contents(TOC) and this text will be scraped that you cannot see(it doesn't matter what you write here)!
+> \{:toc\}
+>
 
 ## blockquote
 > This is a blockquote.
@@ -103,6 +113,7 @@ inline `code`
 3.  Blue
 
 > 1. 空格 TEXT
+> 数字有没有序是没关系的
 
 *   A list item.
     With multiple paragraphs.
@@ -149,7 +160,7 @@ How to make the image to show center？
 > NOTE kmarkdown 转换图片是直接转换成 \<p>\<img /></p>，因为css3也没有选择父的选择器（比如没有选择器可以选择含有\<img>的\<p>），所以从css角度无法实现图片居中。
 
 
-# GFM
+# GFM Syntax
 
 ```c
 int main() {

@@ -17,7 +17,9 @@
   {% endfor %}
 
   {% comment %}子目录优先级更高，放在前面{% endcomment %}
-  {% assign categories = categories |prepend:"," |prepend:subdirs %}
+  {% if subdirs != "" %}
+    {% assign categories = categories |prepend:"," |prepend:subdirs %}
+  {% endif %}
 
   {% comment %}增加到"总目录"{% endcomment %}
   {% if post == site.posts.first %}
