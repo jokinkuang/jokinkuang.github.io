@@ -4,9 +4,8 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-83197743-1', 'auto');
+  ga('create', '{{ site.google_analytics_id }}', 'auto');
   ga('send', 'pageview');
-
 </script>
 <script type="text/javascript">
   var duoshuoQuery = {short_name:"{{ site.duoshuo_short_name }}"};
