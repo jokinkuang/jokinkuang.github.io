@@ -18,21 +18,10 @@ excerpt: ""
 
 ## 终端快捷键
 
-### 新终端窗口  
-    
-    cmd + n       (command + new)
-
-### 新建终端标签页  
-    
-    cmd + t       (command + tab)
-
-### 终端标签页切换  
-    
-    cmd + shift + <- or ->
-
-### 退出当前终端  
-    
-    cmd + w       (command + window)(关闭当前窗口)
+    Command + N 新建终端窗口（New）
+    Command + T 新建终端标签页（Tab）
+    Command + Shift + <- or -> 终端标签页左右切换（Shift-Left or Shift-Right）
+    Command + W 退出当前终端标签页或窗口
 
 ## 文档快捷键
     Windows下对应的文档快捷键中将Ctrl键改为Command键
