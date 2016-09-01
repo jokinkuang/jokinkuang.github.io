@@ -19,4 +19,9 @@ pid: 20160824-123811
 # excerpt: ""
 # you can override the settings in _config.yml here !!
 ---
+The first paragraph would be the post excerpt
+or you can override it with excerpt: "your excerpt"
+if you donot want any excerpt override with excerpt: ""
+
+{% include toc %}
 ```
