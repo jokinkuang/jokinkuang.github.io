@@ -8,6 +8,7 @@ pid: 20160901-162310
 excerpt: ""
 # you can override the settings in _config.yml here !!
 ---
+## 目录
 
 {% include toc %}
 
@@ -17,7 +18,7 @@ excerpt: ""
     
     cmd + n       (command + new)
 
-### 新终端标签页  
+### 新建终端标签页  
     
     cmd + t       (command + tab)
 
