@@ -12,6 +12,10 @@ excerpt: ""
 
 {% include toc %}
 
+## command键是哪个键？
+
+    如果使用的是普通键盘，那么“田”字键即是“command”键
+
 ## 终端快捷键
 
 ### 新终端窗口  
@@ -29,3 +33,15 @@ excerpt: ""
 ### 退出当前终端  
     
     cmd + w       (command + window)(关闭当前窗口)
+
+## 文档快捷键
+    Windows下对应的文档快捷键中将Ctrl键改为Command键
+    
+    Command + Z 撤销　
+    Command + X 剪切　　
+    Command + C 拷贝（Copy）　　
+    Command + V 粘贴　　
+    Command + A 全选（All）　　
+    Command + S 保存（Save)　　
+    Command + F 查找（Find）
+    
