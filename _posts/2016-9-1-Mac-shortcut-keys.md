@@ -5,9 +5,11 @@ categories: Mac
 image: ""
 date: 2016-9-1 16:23:10
 pid: 20160901-162310
-excerpt: ""
+# excerpt: ""
 # you can override the settings in _config.yml here !!
 ---
+`常用且有用的Mac快捷键小记`
+
 ## 目录
 
 {% include toc %}
