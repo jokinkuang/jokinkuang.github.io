@@ -24,6 +24,10 @@ pid: 20160901-162310
     Command + T 新建终端标签页（Tab）
     Command + Shift + <- or -> 终端标签页左右切换（Shift-Left or Shift-Right）
     Command + W 退出当前终端标签页或窗口
+    
+    新建终端窗口前提是已经选中了终端，凭空创建一个终端窗口，需要自定义快捷键，或借助第三方
+    或者：Command + Shift + U 打开实用工具，然后上下键选择终端 Command + O 打开
+    打开文件夹或应用程序不是选中图标然后回车，而是选中图标按 Comman + O 快捷键
 
 ## 文档快捷键
     Windows下对应的文档快捷键中将Ctrl键改为Command键
