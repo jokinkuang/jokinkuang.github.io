@@ -20,16 +20,20 @@ pid: 20160901-162310
 ## 终端快捷键
 以下操作是在终端接受输入时才生效
 
-    Command + N 新建终端窗口（New）
-    Command + T 新建终端标签页（Tab）
-    Command + Shift + <- or -> 终端标签页左右切换（Shift-Left or Shift-Right）
-    Command + W 退出当前终端标签页或窗口
-    Ctrl + A 光标跳到行首
-    Alt + <- or -> 光标跳过一个单词
+    Command + N  新建窗口（New）
+    Command + T  新建标签页（Tab）
+    Command + Shift + <- or ->  标签页左右切换（Shift-Left or Shift-Right）
+    Command + W  退出当前终端标签页或窗口
+    
+    Ctrl + A        光标跳到行首
+    Ctrl + E        光标跳到行尾
+    Alt + <- or ->  光标跳过一个单词
+    
+    Command + Shift + A     选择内容
     
 直接创建一个终端窗口，可以自定义快捷键，或借助第三方工具，不过个人更喜欢下面的方式：
 
-    Command + Tab 选中Finder， Command + Shift + U 打开实用工具，上下键选择终端 Command + O 打开
+    Command + Tab 选中Finder，Command + Shift + U 打开实用工具，上下键选择终端 Command + O 打开
     或
     Command + 空格 弹出Spotlight搜索，输入terminal.app来打开
 
