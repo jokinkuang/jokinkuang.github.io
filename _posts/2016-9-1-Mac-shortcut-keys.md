@@ -27,11 +27,14 @@ pid: 20160901-162310
     Ctrl + A 光标跳到行首
     Alt + <- or -> 光标跳过一个单词
     
-凭空创建一个终端窗口，需要自定义快捷键，或借助第三方工具；
-个人比较喜欢：Command + Tab 选中Finder， Command + Shift + U 打开实用工具，上下键选择终端 Command + O 打开
+直接创建一个终端窗口，可以自定义快捷键，或借助第三方工具，不过个人更喜欢下面的方式：
+
+    Command + Tab 选中Finder， Command + Shift + U 打开实用工具，上下键选择终端 Command + O 打开
+    或
+    Command + 空格 弹出Spotlight搜索，输入terminal.app来打开
 
 ## 文档快捷键
-    Windows下对应的文档快捷键中将Ctrl键改为Command键
+Windows下对应的文档快捷键中将Ctrl键改为Command键
     
     Command + Z 撤销　
     Command + X 剪切　　
