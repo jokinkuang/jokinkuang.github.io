@@ -17,18 +17,15 @@ pid: 20160903-154705
 因为图方便所以个人直接在Ubuntu下搭建了环境，Windows平台可以网上搜索教程，个人推荐Windows安装虚拟机然后安装Ubuntu。
 
 1. 安装ruby环境
-  sudo apt-get install ruby
+  `sudo apt-get install ruby`
 2. 安装Jekyll
-  sudo gem install jekyll
+  `sudo gem install jekyll`
 3. 安装kramdown
-  sudo gem install kramdown
+  `sudo gem install kramdown`
 4. 安装rouge
-
-  > sudo gem install rouge
-
+  `sudo gem install rouge`
 5. 测试Jekyll是否安装完成
-
-  > jekyll --version
+  `jekyll --version`
 
 > 从上面可以看出，这是一套基于Ruby语言的工具集。
 `题外话：gem install是ruby的东西-用来管理ruby工具，而npm install是nodejs的东西-用来管理js工具`
