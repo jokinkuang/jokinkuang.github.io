@@ -47,7 +47,7 @@ blockquote > :last-child { margin-bottom: 0; }
 /** Code formatting */
 pre, code { font-size: 16px; border: 1px solid #e8e8e8; border-radius: 3px; background-color: rgba(255, 239, 239, 0.65); }
 
-code { padding: 2px 5px; background: #FFC8C8; }
+code { padding: 2px 5px; background: rgb(247, 247, 247); }
 
 pre { padding: 8px 12px; overflow-x: auto; }
 pre > code { border: 0; padding-right: 0; padding-left: 0; background: none;}
