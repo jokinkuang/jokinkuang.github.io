@@ -28,6 +28,9 @@ ul, ol { margin-left: 30px; }
 
 li > ul, li > ol { margin-bottom: 0; }
 
+li { margin-bottom: 8px; }
+#markdown-toc li { margin-bottom: 0px; }
+
 /** Headings */
 h1, h2 { padding-top: 0.6em; padding-bottom: 0.3em; border-bottom: 1px solid #eee; }
 h1, h2, h3, h4, h5, h6 { font-weight: 400; }
