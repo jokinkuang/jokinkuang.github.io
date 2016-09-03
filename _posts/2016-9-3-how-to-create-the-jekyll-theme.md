@@ -28,17 +28,15 @@ pid: 20160903-154705
   `jekyll --version`
 
 > 从上面可以看出，这是一套基于Ruby语言的工具集。
-`题外话：gem install是ruby的东西-用来管理ruby工具，而npm install是nodejs的东西-用来管理js工具`
+> **题外话：**gem install是ruby的东西-用来管理ruby工具，而npm install是nodejs的东西-用来管理js工具
 
 ## 本地跑起来
-
 ```
 jekyll new mytheme
 cd mytheme
 jekyll server
 ```
-
-运行上面的命令，然后访问127.0.0.1:4000，就能看到一个由Jekyll搭建的博客了。
+运行上面的命令，然后访问[127.0.0.1:4000](127.0.0.1:4000)，就能看到一个由Jekyll搭建的博客了。
 
 ## Github Page环境本地化
 
@@ -51,7 +49,7 @@ jekyll server
 3. 创建Gemfile
   在上面的mytheme根目录下创建一个Gemfile文件，内容为：
   `source 'https://rubygems.org'`
-  `gem 'github-pages', group: :jekyll_plugins`
+  `gem 'github-pages', group::jekyll_plugins`
 4. 安装Github Page的工具集
   在Gemfile所在的目录，即Jekyll主题的根目录，执行下面的命令：
   `bundle install`
@@ -59,13 +57,16 @@ jekyll server
   `bundle exec jekyll serve`
 
 如果出现`bundle exec jekyll serve`能启动，而`jekyll serve`不能启动，则删除Gemfile和Gemfile.lock重新运行`jekyll serve`即可。
-更多Github Page本地化环境搭建，可参考[github -helper-setting-up-your-github-pages-site-locally-with-jekyll](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll)
+更多Github Page本地化环境搭建，可参考[github-helper-setting-up-your-github-pages-site-locally-with-jekyll](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll)
 
 ## 需要一个网页原型
 
-Github Page和Jekyll本地环境已经搭建完成，访问127.0.0.1:4000也能够看到一个简单的博客。
+Github Page和Jekyll本地环境已经搭建完成，访问[127.0.0.1:4000](127.0.0.1:4000)也能够看到一个简单的博客，接下来就是思考自己的博客应该长哪样。一般来说，要定制自己的博客，最好先设计出博客的网页原型，所谓网页原型即是使用html、css甚至js来完成静态的网页效果。当前博客的原型只有三个页面：index.html、article.html和post.html。
+网页原型的设计是完全独立的，和这里重点要讲述的Jekyll的运作其实没有任何关系，之所以放在这里，仅仅是想表达：Jekyll模板已经跑起来了，自己的网页原型也有了，那么怎么将两者结合起来呢？下面将一一解答。
 
 ## 理解Jekyll是如何工作的
+
+
 
 ## 理解Markdown是如何工作的
 
