@@ -32,9 +32,11 @@ pid: 20160903-154705
 
 ## 本地跑起来
 
-    jekyll new mytheme
-    cd mytheme
-    jekyll server
+```
+jekyll new mytheme
+cd mytheme
+jekyll server
+```
 
 运行上面的命令，然后访问127.0.0.1:4000，就能看到一个由Jekyll搭建的博客了。
 
@@ -45,18 +47,18 @@ pid: 20160903-154705
 1. 升级ruby到2.0.0以上
   如果ruby --version查看版本低于2.0.0，那么需要升级ruby。
 2. 安装ruby工具集管理工具Bundler
-  sudo gem install bundler
+  `sudo gem install bundler`
 3. 创建Gemfile
   在上面的mytheme根目录下创建一个Gemfile文件，内容为：
-  source 'https://rubygems.org'
-  gem 'github-pages', group: :jekyll_plugins
+  `source 'https://rubygems.org'`
+  `gem 'github-pages', group: :jekyll_plugins`
 4. 安装Github Page的工具集
   在Gemfile所在的目录，即Jekyll主题的根目录，执行下面的命令：
-  bundle install
+  `bundle install`
 5. 跑起来
-  bundle exec jekyll serve
+  `bundle exec jekyll serve`
 
-如果出现bundle exec jekyll serve能启动，而jekyll serve不能启动，则删除Gemfile和Gemfile.lock重新运行jekyll serve即可。
+如果出现`bundle exec jekyll serve`能启动，而`jekyll serve`不能启动，则删除Gemfile和Gemfile.lock重新运行`jekyll serve`即可。
 更多Github Page本地化环境搭建，可参考[github -helper-setting-up-your-github-pages-site-locally-with-jekyll](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll)
 
 ## 需要一个网页原型
