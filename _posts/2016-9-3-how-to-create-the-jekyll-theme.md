@@ -23,8 +23,11 @@ pid: 20160903-154705
 3. 安装kramdown
   sudo gem install kramdown
 4. 安装rouge
+
   > sudo gem install rouge
+
 5. 测试Jekyll是否安装完成
+
   > jekyll --version
 
 > 从上面可以看出，这是一套基于Ruby语言的工具集。
