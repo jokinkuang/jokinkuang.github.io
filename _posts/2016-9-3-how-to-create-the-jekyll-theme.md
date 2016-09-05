@@ -100,7 +100,27 @@ Jekyll的数据都是静态的，只读的，而评论是要求写入的，所�
 
 ## 理解Markdown是如何工作的
 
+### markdown是什么
+
+markdown其实只是一种文本格式，只要按照这种格式，就可以通过转换器将markdown文本转换为html内容。
+markdown转换器有很多种，能用在Jekyll模板的就有`maruku`和`kramdown`，还有其它语言实现的，比如javascript版、php版等等。甚至可以自己开发一个转换器。
+
+> 就像json一样，markdown只是一种格式;json通过转换器可以转换为对象，markdown通过转换器可以转换为html格式
+
+### 为什么我转换后的页面很苍白而Github上看到的却那么漂亮
+
+![markdown-parser][markdown-parser]
+markdown转换器将普通文本转换为html格式的内容
+
+markdown文本转换后，我们得到的只是一个html格式的内容，要看起来漂亮，还需要css装饰。这就是为什么转换后得到的页面很苍白的原因。
+
+### 如何为markdown添加css
+
+markdown转换后得到的是html，为markdown添加css其实是为这段html添加css样式。
+
+
 ## 理解Highlight语法高亮是如何实现的
 
 ## 开始制作自己的Jekyll主题
 
+[markdown-parser]: {{ site.w3c_url }}/markdown/markdown-parser.jpg "转换例子"
