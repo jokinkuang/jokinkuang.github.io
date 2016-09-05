@@ -33,6 +33,7 @@ li { margin-bottom: 8px; }
 
 /** Headings */
 h1, h2 { padding-top: 0.6em; padding-bottom: 0.3em; border-bottom: 1px solid #eee; }
+h3::before { content: "• "; font-weight: bold; }
 h1, h2, h3, h4, h5, h6 { font-weight: 400; }
 
 /** Links jokin@2016*/
