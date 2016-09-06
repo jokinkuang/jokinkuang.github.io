@@ -137,7 +137,7 @@ blockquote {
 ### 如何为markdown添加css
 
 为markdown添加css即是为转换得到的html添加css，这是css的内容了。
-**注意，不同的markdown转换器得到的html标签的属性可能不一样。有的转换器可能会在标签中加入转换器名称做标识，具体要以转换后结果为准。**
+**不过注意，不同的markdown转换器得到的html标签的属性可能不一样。有的转换器可能会在标签中加入转换器名称做标识，具体要以转换后的结果为准。**
 
 > 比如，TOC得到的列表是这样的
 > \<ul id="markdown-toc"\>
@@ -146,6 +146,47 @@ blockquote {
 
 
 ## 理解Highlight语法高亮是如何实现的
+
+markdown里代码块是这样的：
+
+```
+ ```css
+ <style>
+ </style>
+ ```
+```
+
+通过rouge语法高亮引擎，得到的html内容是这样的：
+
+```html
+<div class="language-css highlighter-rouge">
+  <pre class="highlight">
+    <code>
+      <span class="o">&lt;</span>
+      <span class="nt">style</span>
+      <span class="o">&gt;</span>>
+    </code>
+  </pre>
+</div>
+```
+
+rouge语法高亮引擎附带了对应的rouge.css：
+
+```css
+.highlight {
+  color: #D53FB7;
+}
+.highlight .o {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+```
+
+**于是，页面的代码块就根据关键字、变量、字符串等有了不一样的颜色**
+
+> 总结，语法高亮引擎的作用，只是根据代码的语言，分割出与之对应的关键字、变量、字符串等，并赋予对应的css样式，最后调整css的颜色就形成了代码高亮的效果。
 
 ## 开始制作自己的Jekyll主题
 
