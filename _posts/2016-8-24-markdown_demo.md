@@ -9,7 +9,8 @@ pid: 20160824-123811
 
 > 一个用来测试当前站点的Markdown样式的Demo
 
-{:use_numbered_headers => true}
+## 目录
+
 * auto-gen TOC:
 {:toc}
 
