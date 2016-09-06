@@ -215,7 +215,7 @@ rouge语法高亮引擎附带了对应的rouge.css：
 
 `jekyll new mytheme`
 
-### Jekyll模板结构
+### 认识Jekyll模板的结构
 下面是用`tree`命令输出的目录结构，只是位置进行了调整
 
 ```
@@ -262,42 +262,104 @@ rouge语法高亮引擎附带了对应的rouge.css：
                         └── welcome-to-jekyll.html
 ```
 
-#### `_layouts目录`
-  该目录下的页面是”包含”其它内容的关系
+#### `_layouts`目录
+该目录下的页面是”包含”其它内容的关系，一般是页面框架
 
-  比如：index.html
+#### `_includes`目录
+该目录下的片段是“被包含”的关系，可以是任何格式的文件，片段也可以include片段。
+include的语法：{% raw %}  `{% include head.html %}` {% endraw %}
+
+_layouts和_includes与普通页面的关系图：
+![jekyll-layout-include][jekyll-layout-include]
+
+> 注意：default.html里访问index.html生成的内容是直接访问`content`，而不是`page.content`或`post.content`，这两者的关系大概是前者才是经过处理后的html片段，而后者是原始的文本，包含未解析的liquid语法。
+
+#### `_config.yml`配置文件
+Jekyll站点的配置文件，可以存储数据，用于配置Jekyll的插件和运行环境
 
 ```
----
-layout: default
----
+# 自定义变量
+domain: "http://jokinkuang.info" # the domain URL for your site
+base: ""  # the relative path that different with domain so you can test locally
+postfile: "/db/Postfile" # the Database
+sitefile: "/db/Sitefile" # the Database
+
+# 配置
+excerpt_separator: "\n\n" # you can specify your own separator here, default is "\n\n" String
+permalink: /:year/:month/:day/:title.html
+highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: true # a newline in markdown text would be changed to <br>
+gems:
+  - jemoji # 要站点支持Github表情，必须添加
+
+# 上传到Github Pages时Github会进行的配置项
+# 详见：Github Help With Configuring Jekyll
+
+# Github Pages默认配置项，Jekyll的配置可以覆盖
+# kramdown:
+#   input: GFM
+#   hard_wrap: false
+# gems:
+#   - jekyll-coffeescript
+#   - jekyll-paginate
+
+# Github Pages不可改变项，会覆盖Jekyll的配置
+# lsi: false
+# safe: true
+# source: [your repo's top level directory]
+# incremental: false
+# highlighter: rouge
+# gist:
+#  noscript: false
+# kramdown:
+#  math_engine: mathjax
 ```
-  表示index.html的内容被包含到_layouts/default.html里面
 
-#### `_includes目录`
-  该目录下的片段是“被包含”的关系
+### 简化模板
+去掉不必要的文件，简化当前模板，得到结构：
 
-  比如：head.html
-
-```html
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 ```
-  default.html:
+├── index.html
+├── _config.yml       # Jekyll核心配置文件
+├── feed.xml
+├── Gemfile           # Github Pages本地化的文件
+├── Gemfile.lock      # Github Pages本地化的文件
+├── css
+│   └── markdown.css    # 提取上面_site/css/main.css中设置html部分
+│   └── highlight.css   # 提取上面_site/css/main.css中语法高亮部分
+├── _includes
+├── _layouts
+│   └── post.html       # 文章页框架
+├── _posts
+│   └── 2016-08-24-welcome-to-jekyll.markdown
 
-{% raw %}  
 ```
-  {% include head.html %}
-```
-{% endraw %}
 
-  表示head.html的内容被包含到default.html里面
+### 将网页原型加入模板
+Jekyll模板的基本结构已经完成，可以加入网页原型进行融合。
 
-### 重要的信息
+1. 可以提取相同的内容到`_includes`目录
+2. 需要复用的页面框架，比如post文章页，则要放到`_layouts`目录
+3. 一些配置字符串，最好放在`_config.yml`配置内
+4. 可能还需要阅读文章尾部列出的参考文档
 
-### 将原型加入模板
+
 ### 修改原型
 ###
 
-[markdown-parser]: {{ site.w3c_url }}images/markdown/markdown-parser.jpg "转换例子"
+## 参考文档
+
+阅读·[Jekyll的中文文档](http://jekyll.bootcss.com/) | [英文文档](http://jekyllrb.com/)
+阅读·[Liquid的文档1](https://help.shopify.com/themes/liquid) | [文档2](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) | [文档3](https://shopify.github.io/liquid/)
+阅读·[语法高亮引擎rouge的文档](https://github.com/jneen/rouge) |
+阅读·[Markdown转换器kramdown的文档（支持maruku语法）](http://kramdown.gettalong.org/) |
+阅读·[Markdown转换器maruku的文档（支持TOC语法）](http://maruku.rubyforge.org/maruku.html) |
+
+
+[markdown-parser]: {{ site.w3c_url }}images/markdown/markdown-parser.jpg "markdown转换例子"
 [markdown-plain]: {{ site.w3c_url }}images/markdown/markdown-plain.jpg "html效果"
 [markdown-css]: {{ site.w3c_url }}images/markdown/markdown-css.jpg "添加css后html效果"
+[jekyll-layout-include]: {{ site.w3c_url }}images/jekyll/jekyll-layout-include.jpg "layout与include关系图"
