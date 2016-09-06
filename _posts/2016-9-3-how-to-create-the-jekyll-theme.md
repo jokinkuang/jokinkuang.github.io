@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 一步一步构建Jekyll主题
-categories: jekyll
+categories: jekyll github markdown rouge
 image: jekyll.jpg
 date: 2016-9-3 15:47:05
 pid: 20160903-154705
@@ -38,9 +38,9 @@ jekyll server
 ```
 运行上面的命令，然后访问[127.0.0.1:4000](http://127.0.0.1:4000)，就能看到一个由Jekyll搭建的博客了。
 
-## Github Page环境本地化
+## Github Pages环境本地化
 
-上面构建的只是Jekyll的本地环境，当push到Github Page后环境会有所变化，为了本地看到的效果和托管在Github Page看到的效果一致，我们最好搭建本地的Github Page环境。
+上面构建的只是Jekyll的本地环境，当push到Github Pages后环境会有所变化，为了本地看到的效果和托管在Github Pages看到的效果一致，我们最好搭建本地的Github Pages环境。
 
 1. 升级ruby到2.0.0以上
   如果`ruby --version`查看版本低于2.0.0，那么需要升级ruby。
@@ -50,18 +50,18 @@ jekyll server
   在上面的mytheme根目录下创建一个Gemfile文件，内容为：
   `source 'https://rubygems.org'`
   `gem 'github-pages', group::jekyll_plugins`
-4. 安装Github Page的工具集
+4. 安装Github Pages的工具集
   在Gemfile所在的目录，即Jekyll主题的根目录，执行下面的命令：
   `bundle install`
 5. 跑起来
   `bundle exec jekyll serve`
 
 如果出现`bundle exec jekyll serve`能启动，而`jekyll serve`不能启动，则删除Gemfile和Gemfile.lock重新运行`jekyll serve`即可。
-更多Github Page本地化环境搭建，可参考[github-helper-setting-up-your-github-pages-site-locally-with-jekyll](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll)
+更多Github Pages本地化环境搭建，可参考[github-helper-setting-up-your-github-pages-site-locally-with-jekyll](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll)
 
 ## 需要一个网页原型
 
-Github Page和Jekyll本地环境已经搭建完成，访问[127.0.0.1:4000](http://127.0.0.1:4000)也能够看到一个简单的博客，接下来就是思考自己的博客应该长哪样。
+Github Pages和Jekyll本地环境已经搭建完成，访问[127.0.0.1:4000](http://127.0.0.1:4000)也能够看到一个简单的博客，接下来就是思考自己的博客应该长哪样。
 
 一般来说，要定制自己的博客，最好先设计出博客的网页原型，所谓网页原型即是使用html、css甚至js来完成静态的网页效果。当前博客的原型只有三个页面：`index.html`、`article.html`和`post.html`。
 
@@ -99,6 +99,10 @@ Jekyll内的`_config.yml`配置、各种内置对象(`site`、`post`、`categori
 ### 没有评论功能
 
 Jekyll是无法写入的，所以无法支持评论功能。任何写入操作都只能借助第三方服务。
+
+### 如何使用
+
+具体用法请参考[Jekyll文档](http://jekyllcn.com/)，或继续往下看。
 
 ## 理解Markdown是如何工作的
 
@@ -205,6 +209,94 @@ rouge语法高亮引擎附带了对应的rouge.css：
 > 语法高亮引擎的作用，只是根据代码的语言，分割出与之对应的关键字、变量、字符串等，并赋予对应的css样式，最后调整css的颜色就形成了代码高亮的效果。
 
 ## 开始制作自己的Jekyll主题
+
+### 新建Jekyll模板
+**按照上面的指引，新建一个模板，并搭建好Github Pages的本地环境：**
+
+`jekyll new mytheme`
+
+### Jekyll模板结构
+下面是用`tree`命令输出的目录结构，只是位置进行了调整
+
+```
+├── index.html
+├── about.md
+├── _config.yml       # Jekyll核心配置文件
+├── feed.xml
+├── Gemfile           # Github Pages本地化的文件
+├── Gemfile.lock      # Github Pages本地化的文件
+├── _sass
+│   ├── _base.scss                  # markdown对应的css
+│   ├── _layout.scss
+│   └── _syntax-highlighting.scss   # 语法高亮对应的css
+├── css
+│   └── main.scss           # 其实就是css
+├── _includes
+│   ├── footer.html         # 页脚html片段
+│   ├── header.html         # 页头html片段
+│   ├── head.html           # html片段
+│   ├── icon-github.html    # html片段
+│   ├── icon-github.svg     # github图标
+│   ├── icon-twitter.html   # html片段
+│   └── icon-twitter.svg    # twitter图标
+├── _layouts
+│   ├── default.html        # default页面
+│   ├── page.html           # page页面
+│   └── post.html           # post页面
+├── _posts
+│   └── 2016-08-24-welcome-to-jekyll.markdown
+└── _site             # Jekyll最终生成的静态网站
+    ├── about
+    │   └── index.html
+    ├── css
+    │   └── main.css  # 如果不喜欢上面的那堆scss，那么复制这个过去就够了
+    ├── feed.xml
+    ├── Gemfile
+    ├── Gemfile.lock
+    ├── index.html
+    └── jekyll
+        └── update
+            └── 2016
+                └── 08
+                    └── 24
+                        └── welcome-to-jekyll.html
+```
+
+#### `_layouts目录`
+  该目录下的页面是”包含”其它内容的关系
+
+  比如：index.html
+
+```
+---
+layout: default
+---
+```
+  表示index.html的内容被包含到_layouts/default.html里面
+
+#### `_includes目录`
+  该目录下的片段是“被包含”的关系
+
+  比如：head.html
+
+```html
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+```
+  default.html:
+
+{% raw %}  
+```
+  {% include head.html %}
+```
+{% endraw %}
+
+  表示head.html的内容被包含到default.html里面
+
+### 重要的信息
+
+### 将原型加入模板
+### 修改原型
+###
 
 [markdown-parser]: {{ site.w3c_url }}images/markdown/markdown-parser.jpg "转换例子"
 [markdown-plain]: {{ site.w3c_url }}images/markdown/markdown-plain.jpg "html效果"
