@@ -46,6 +46,7 @@ Windows下对应的文档快捷键中将Ctrl键改为Command键
     Command + S 保存（Save)　　
     Command + F 查找（Find）
     Command + G 查找下一个
+    Command + Shift + F 全文查找
 
 ## 输入法（输入源）
 切换输入法的快捷键与Spotlight的Command+空格冲突，所以需要手动设置：
