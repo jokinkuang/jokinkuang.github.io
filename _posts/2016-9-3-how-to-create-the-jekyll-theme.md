@@ -80,43 +80,54 @@ Jekyll的描述是，将纯文本转化为静态博客网站，不需要数据�
 
 静态网页和动态网页的区别是，静态网页无论是否访问，它就已经存在那里，并且内容已经固定不可改。所以Jekyll在每次增加文章时就已经生成对应的静态网页，而不是每次访问时动态生成的。
 
-> 举个例子
+举个例子
+
+> 当前Jekyll模板有一个页面：categories.html（目录和对应的文章列表页）
 >
-> 当前Jekyll模板有一个页面：categories.html（categories.html是目录和对应的文章列表）
-当新增一篇new.md文章后，Jekyll会重新生成新的博客站点，new.md会被转化为new.html，而categories.html会被重新生成，内容是包含new.md这篇新文章的列表。
+> 当新增一篇demo.md文章后，Jekyll会重新生成新的博客站点，demo.md会被转化为demo.html，而categories.html会被重新生成，内容是包含demo这篇新文章的列表。
 >
-> **所以**，Jekyll的页面都是在访问前就已经生成的，这就是静态。
+> **所以**，Jekyll的页面都是在访问前就已经重新生成了，这就是静态。
 
 ### 没有数据库
 
 如果`数据库`指的是像MySQL那种可读写的数据库，Jekyll确实没有。但是如果`数据库`指的只是存储数据的地方，Jekyll其实是有的，只不过是`只读`的。
 
-Jekyll内的`_config.yml`配置、各种内置对象(`site`、`post`、`categories`等)、用户自定义的内容（变量、集合、结构、文本、网页等），都可以看做是Jekyll的数据库，开发者可以访问这个数据库组织自己的页面内容，**除了可以在Jekyll构建站点时直接访问，还可以写到json格式的文件暴露出来在网页初始化时访问**。
+Jekyll内的`_config.yml`配置、各种内置对象(`site`、`post`、`categories`等)、用户自定义的内容（变量、集合、文本、网页等），都可以看做是Jekyll的数据库，开发者可以访问这个数据库组织自己的页面内容，**除了可以在Jekyll构建站点时直接访问，还可以写到json格式的文件暴露出来在网页初始化时访问**。
 
 > 但有一点要注意：Jekyll内所有可访问的变量都是`静态`的，也即是`只读`的，所以不可以重新赋值！
 
 ### 没有评论功能
 
-Jekyll的数据都是静态的，只读的，而评论是要求写入的，所以无法支持评论功能。任何写入操作都只能借助第三方服务。
-
+Jekyll是无法写入的，所以无法支持评论功能。任何写入操作都只能借助第三方服务。
 
 ## 理解Markdown是如何工作的
 
-### markdown是什么
+这是一段markdown文本：
 
-markdown只是一种文本格式，只要按照这种格式，就可以通过转换器将markdown文本转换为html内容。markdown的转换器有很多种，能用在Jekyll模板的就有`maruku`和`kramdown`，还有其它语言的实现，比如javascript版、php版等等，甚至开发者可以自己开发一个转换器。
+```markdown
+## Markdown Demo
 
-> 就像json一样，json通过转换器可以转换为对象，markdown通过转换器可以转换为html格式
+This is a `markdown` demo
 
-![markdown-parser][markdown-parser]
-(图)markdown转换器将普通文本转换为html格式的内容
+> try it
+```
 
-### 为什么转换后得到的页面没有色彩
+使用markdown转换器转换后得到的html是这样的：
+
+```html
+<h2>Markdown Demo</h2>
+<p>This is a <code>markdown</code> demo</p>
+<blockquote>
+    <p>try it</p>
+</blockquote>
+```
+
+直接使用浏览器打开是这样的：
 
 ![markdown-plain][markdown-plain]
-(图)上面的markdown转换为html后页面效果
 
 **Markdown转换结果只是单纯的html页面，关于页面的样式，需要我们自己提供css**
+添加下面的css
 
 ```css
 <style>
@@ -131,19 +142,22 @@ blockquote {
 </style>
 ```
 
+为页面添加css后html是这样的：
+
 ![markdown-css][markdown-css]
-(图)添加css后效果
 
-### 如何为markdown添加css
+总结
 
-为markdown添加css即是为转换得到的html添加css，这是css的内容了。
-**不过注意，不同的markdown转换器得到的html标签的属性可能不一样。有的转换器可能会在标签中加入转换器名称做标识，具体要以转换后的结果为准。**
+> markdown解析器只是将文本转换为html，并不会为html添加默认的css样式。
+> **另外注意，不同的markdown转换器得到的html标签的属性可能不一样，有的转换器可能会在标签中加入转换器名称做标识，具体要以转换后的结果为准。**
 
-> 比如，TOC得到的列表是这样的
-> \<ul id="markdown-toc"\>
->  \<li\>目录</li\>
-> \</ul\>
+比如，Markdown的TOC功能得到的列表是这样的
 
+```html
+<ul id="markdown-toc">
+<li>目录</li>
+</ul>
+```
 
 ## 理解Highlight语法高亮是如何实现的
 
@@ -186,7 +200,9 @@ rouge语法高亮引擎附带了对应的rouge.css：
 
 **于是，页面的代码块就根据关键字、变量、字符串等有了不一样的颜色**
 
-> 总结，语法高亮引擎的作用，只是根据代码的语言，分割出与之对应的关键字、变量、字符串等，并赋予对应的css样式，最后调整css的颜色就形成了代码高亮的效果。
+总结
+
+> 语法高亮引擎的作用，只是根据代码的语言，分割出与之对应的关键字、变量、字符串等，并赋予对应的css样式，最后调整css的颜色就形成了代码高亮的效果。
 
 ## 开始制作自己的Jekyll主题
 
