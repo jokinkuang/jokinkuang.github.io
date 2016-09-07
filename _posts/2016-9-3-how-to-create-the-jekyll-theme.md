@@ -65,9 +65,9 @@ Github Pages和Jekyll本地环境已经搭建完成，访问[127.0.0.1:4000](htt
 
 一般来说，要定制自己的博客，最好先设计出博客的网页原型，所谓网页原型即是使用html、css甚至js来完成静态的网页效果。当前博客的原型只有三个页面：`index.html`、`article.html`和`post.html`。
 
-网页原型的设计是完全独立的，和这里重点要讲述的Jekyll的运作其实没有任何关系，之所以放在这里，仅仅是想表达：**Jekyll模板已经跑起来了，自己的网页原型也有了，那么怎么将两者结合起来呢？**下面将一一解答。
+最后，**Jekyll模板已经跑起来了，网页原型也有了，怎么将两者结合起来呢？**在整合之前，我们需要先了解Jekyll博客系统。
 
-## 理解Jekyll是如何工作的
+## 初步认识Jekyll
 
 ### Jekyll是什么
 
@@ -92,17 +92,13 @@ Jekyll的描述是，将纯文本转化为静态博客网站，不需要数据�
 
 如果`数据库`指的是像MySQL那种可读写的数据库，Jekyll确实没有。但是如果`数据库`指的只是存储数据的地方，Jekyll其实是有的，只不过是`只读`的。
 
-Jekyll内的`_config.yml`配置、各种内置对象(`site`、`post`、`categories`等)、用户自定义的内容（变量、集合、文本、网页等），都可以看做是Jekyll的数据库，开发者可以访问这个数据库组织自己的页面内容，**除了可以在Jekyll构建站点时直接访问，还可以写到json格式的文件暴露出来在网页初始化时访问**。
+Jekyll内的`_config.yml`配置、各种内置对象(`site`、`page`、`categories`等)、用户自定义的内容（变量、集合、文本、网页等），都可以看做是Jekyll的数据库，开发者可以访问这个数据库组织自己的页面内容，**除了可以在Jekyll构建站点时直接访问，还可以写到json格式的文件暴露出来在网页初始化时访问**。
 
 > 但有一点要注意：Jekyll内所有可访问的变量都是`静态`的，也即是`只读`的，所以不可以重新赋值！
 
 ### 没有评论功能
 
 Jekyll是无法写入的，所以无法支持评论功能。任何写入操作都只能借助第三方服务。
-
-### 如何使用
-
-具体用法请参考[Jekyll文档](http://jekyllcn.com/)，或继续往下看。
 
 ## 理解Markdown是如何工作的
 
@@ -169,8 +165,7 @@ markdown里代码块是这样的：
 
 ```
  ```css
- <style>
- </style>
+  <style>
  ```
 ```
 
@@ -207,6 +202,16 @@ rouge语法高亮引擎附带了对应的rouge.css：
 总结
 
 > 语法高亮引擎的作用，只是根据代码的语言，分割出与之对应的关键字、变量、字符串等，并赋予对应的css样式，最后调整css的颜色就形成了代码高亮的效果。
+
+Tips
+
+rouge.css导出需要执行命令，可以参考[rouge文档](https://github.com/jneen/rouge)
+
+```shell
+$ rougify foo.rb
+$ rougify style monokai.sublime > rouge.css
+```
+
 
 ## 开始制作自己的Jekyll主题
 
@@ -338,14 +343,72 @@ gems:
 
 ```
 
+### 深入理解Jekyll
+
+#### 两种方式创建页面
+
+方式一 | **任何路径**下添加`xxx.html`，访问地址为`该路径/xxx.html`
+方式二 | **任何路径**下添加`xxx/index.html`，访问地址为`该路径/xxx`，无需后缀
+
+#### `site`变量
+来自`_config.yml`配置文件和Jekyll内置变量，下面是常用的属性：
+
+site.posts | 从新到旧排序的posts文章列表集合
+site.categories | 文章头部`categories: [cate1 cate2]`的所有cate值的集合
+site.tags | 同上，文章头部`tags: [tag1 tag2]`的所有tag值的集合
+site.XXX | `_config.yml`配置文件中`XXX: val`的val值，val可以是字符串/数组/集合
+
+#### `page`变量
+指代当前页面的变量，在index.html里使用page，page指的就是index.html这个页面，常用属性：
+
+page.content | 页面**源码**(含有markdown/liquid等语句)
+page.title | 页面标题
+page.excerpt | 页面摘要**源码**，可通过_config.yml配置摘要算法
+page.url | 页面的**相对路径**
+page.date | 页面的时间和日期
+page.categories | 页面的categories数组，`linux/ruby/_posts/ruby.md`文章会把linux和ruby加入categories
+page.tags | 页面的tags数组
+page.path | 页面的实际路径(源码路径)
+
+> 注意：当前页面的Front Matter中设置的xxx: val可以通过page.xxx访问val值
+
+#### `Front Matter`(Yaml头信息)
+每个页面都可以有自己的头信息，可以自定义值，覆盖Jekyll的值，和覆盖_config.yml里面的值
+
+```ruby
+---
+layout: post
+title: 一步一步构建Jekyll主题
+categories: [jekyll github markdown rouge]
+date: 2016-9-3 15:47:05
+excerpt: ""   # 覆盖清掉文章的摘要
+---
+```
+
+#### `Liquid`语法
+Jekyll内变量操作是使用[Liquid语法](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)
+主要有两种：
+
+1. 显示变量的值
+  {% raw %}`{{ 变量名 }}`{% endraw %}
+  如果要组成字符串，可以这样：{% raw %}`"字符串头部{{ 变量名 }}字符串尾部"`{% endraw %}
+  也可以使用Filter：{% raw %}`{{ "字符串头部" | append : 变量名 | append : "字符串尾部" }}`{% endraw %}
+  显示文章的标题 {% raw %}{{ page.title }}{% endraw %}
+
+2. 使用变量的值进行计算
+  文章的标题计算 {% raw %}{% assign titleAndDate = page.title | append: page.date %}{% endraw %}
+  `assign x = y`是声明一个变量并赋值，**声明必须赋值！**
+  `xxx | append: "str"`是Liquid语法中的Filter，可以理解为管道，也可以简单理解为`对象|方法:参数`
+  Filter可以连续执行：`xxx | append: "str1" | append: "str2"`
+
 ### 将网页原型加入模板
-Jekyll模板的基本结构已经完成，可以加入网页原型进行融合。
+Jekyll模板的基本结构已经完成，可以加入网页原型进行结合。
 
-1. 可以提取相同的内容到`_includes`目录
-2. 需要复用的页面框架，比如post文章页，则要放到`_layouts`目录
-3. 一些配置字符串，最好放在`_config.yml`配置内
-4. 可能还需要阅读文章尾部列出的参考文档
-
+1. 提取相同的内容到`_includes`目录
+2. 需要复用的页面框架，比如post文章页，放到`_layouts`目录
+3. 一些配置字符串，放在`_config.yml`文件内
+4. 使用**Liquid语法**在页面中访问`site`，`page`等信息组织内容
+5. 剩下的就是`html`/`css`/`js`的内容了
 
 ### 修改原型
 ###
