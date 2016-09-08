@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 一步一步构建Jekyll主题
+title: 一步一步创建Jekyll主题
 categories: jekyll github markdown rouge
 image: jekyll.jpg
 date: 2016-9-3 15:47:05
@@ -40,7 +40,7 @@ jekyll server
 
 ## Github Pages环境本地化
 
-上面构建的只是Jekyll的本地环境，当push到Github Pages后环境会有所变化，为了本地看到的效果和托管在Github Pages看到的效果一致，我们最好搭建本地的Github Pages环境。
+上面搭建的只是Jekyll的本地环境，当push到Github Pages后环境会有所变化，为了本地看到的效果和托管在Github Pages看到的效果一致，我们最好搭建本地的Github Pages环境。
 
 1. 升级ruby到2.0.0以上
   如果`ruby --version`查看版本低于2.0.0，那么需要升级ruby。
@@ -203,7 +203,7 @@ rouge语法高亮引擎附带了对应的rouge.css：
 
 > 语法高亮引擎的作用，只是根据代码的语言，分割出与之对应的关键字、变量、字符串等，并赋予对应的css样式，最后调整css的颜色就形成了代码高亮的效果。
 
-Tips
+`Tips`
 
 rouge.css导出需要执行命令，可以参考[rouge文档](https://github.com/jneen/rouge)
 
@@ -223,7 +223,7 @@ $ rougify style monokai.sublime > rouge.css
 ### 认识Jekyll模板的结构
 下面是用`tree`命令输出的目录结构，只是位置进行了调整
 
-```
+```ruby
 ├── index.html
 ├── about.md
 ├── _config.yml       # Jekyll核心配置文件
@@ -267,6 +267,33 @@ $ rougify style monokai.sublime > rouge.css
                         └── welcome-to-jekyll.html
 ```
 
+### 简化模板
+去掉不必要的文件，简化当前模板，得到结构：
+
+```ruby
+├── index.html
+├── _config.yml       # Jekyll核心配置文件
+├── feed.xml
+├── Gemfile           # Github Pages本地化的文件
+├── Gemfile.lock      # Github Pages本地化的文件
+├── css
+│   └── markdown.css    # 提取上面_site/css/main.css中设置html部分
+│   └── highlight.css   # 提取上面_site/css/main.css中语法高亮部分
+├── _includes
+├── _layouts
+│   └── post.html       # 文章页框架
+├── _posts
+│   └── 2016-08-24-welcome-to-jekyll.markdown
+
+```
+
+> 如果不知道如何动手，删除多余文件保留上面的结构即可
+
+### 将网页原型加入模板
+把设计好的html、javascript、css复制到模板开始改造，在改造前需要**深入理解Jekyll**
+
+### 深入理解Jekyll
+
 #### `_layouts`目录
 该目录下的页面是”包含”其它内容的关系，一般是页面框架
 
@@ -282,26 +309,22 @@ _layouts和_includes与普通页面的关系图：
 #### `_config.yml`配置文件
 Jekyll站点的配置文件，可以存储数据，用于配置Jekyll的插件和运行环境
 
-```
+```ruby
 # 自定义变量
 domain: "http://jokinkuang.info" # the domain URL for your site
-base: ""  # the relative path that different with domain so you can test locally
-postfile: "/db/Postfile" # the Database
-sitefile: "/db/Sitefile" # the Database
 
 # 配置
 excerpt_separator: "\n\n" # you can specify your own separator here, default is "\n\n" String
 permalink: /:year/:month/:day/:title.html
-highlighter: rouge
-markdown: kramdown
+highlighter: rouge  # 使用rouge作为语法高亮引擎
+markdown: kramdown  # 使用kramdown作为markdown的转换器
 kramdown:
   input: GFM
   hard_wrap: true # a newline in markdown text would be changed to <br>
 gems:
   - jemoji # 要站点支持Github表情，必须添加
 
-# 上传到Github Pages时Github会进行的配置项
-# 详见：Github Help With Configuring Jekyll
+# 上传到Github Pages时Github会进行配置的项，详见：Github Help With Configuring Jekyll
 
 # Github Pages默认配置项，Jekyll的配置可以覆盖
 # kramdown:
@@ -323,39 +346,31 @@ gems:
 #  math_engine: mathjax
 ```
 
-### 简化模板
-去掉不必要的文件，简化当前模板，得到结构：
+#### 创建页面
 
+方式一 | **某路径**下添加`xxx.html`，访问地址为`该路径/xxx.html`
+方式二 | **某路径**下添加`xxx/index.html`，访问地址为`该路径/xxx`，无需后缀
+
+#### `front matter`(Yaml头信息)
+每个页面都可以有自己的头信息，可以覆盖Jekyll和_config.yml里面的值
+
+```ruby
+---
+layout: post
+title: 一步一步创建Jekyll主题
+categories: [jekyll github markdown rouge]
+date: 2016-9-3 15:47:05
+excerpt: ""   # 覆盖清掉文章的摘要
+pid: ""       # 新建一个pid的字符串变量
+---
 ```
-├── index.html
-├── _config.yml       # Jekyll核心配置文件
-├── feed.xml
-├── Gemfile           # Github Pages本地化的文件
-├── Gemfile.lock      # Github Pages本地化的文件
-├── css
-│   └── markdown.css    # 提取上面_site/css/main.css中设置html部分
-│   └── highlight.css   # 提取上面_site/css/main.css中语法高亮部分
-├── _includes
-├── _layouts
-│   └── post.html       # 文章页框架
-├── _posts
-│   └── 2016-08-24-welcome-to-jekyll.markdown
-
-```
-
-### 深入理解Jekyll
-
-#### 两种方式创建页面
-
-方式一 | **任何路径**下添加`xxx.html`，访问地址为`该路径/xxx.html`
-方式二 | **任何路径**下添加`xxx/index.html`，访问地址为`该路径/xxx`，无需后缀
 
 #### `site`变量
 来自`_config.yml`配置文件和Jekyll内置变量，下面是常用的属性：
 
 site.posts | 从新到旧排序的posts文章列表集合
-site.categories | 文章头部`categories: [cate1 cate2]`的所有cate值的集合
-site.tags | 同上，文章头部`tags: [tag1 tag2]`的所有tag值的集合
+site.categories | 以目录分类的文章列表Map`{cate1:[post1, post2], cate2:[post3, post4]}`
+site.tags | 同上，以tags分类的文章列表Map`{tag1:[post1, post2], tag2:[post3, post4]}`
 site.XXX | `_config.yml`配置文件中`XXX: val`的val值，val可以是字符串/数组/集合
 
 #### `page`变量
@@ -366,52 +381,94 @@ page.title | 页面标题
 page.excerpt | 页面摘要**源码**，可通过_config.yml配置摘要算法
 page.url | 页面的**相对路径**
 page.date | 页面的时间和日期
-page.categories | 页面的categories数组，`linux/ruby/_posts/ruby.md`文章会把linux和ruby加入categories
+page.categories | 页面的categories数组，`linux/ruby/_posts/ruby.md`文章会把linux和ruby加入categories，和上面的site.categories不同！
 page.tags | 页面的tags数组
 page.path | 页面的实际路径(源码路径)
 
 > 注意：当前页面的Front Matter中设置的xxx: val可以通过page.xxx访问val值
+> 另外：site.posts数组的元素post和page具有几乎一样的属性
 
-#### `Front Matter`(Yaml头信息)
-每个页面都可以有自己的头信息，可以自定义值，覆盖Jekyll的值，和覆盖_config.yml里面的值
-
-```ruby
----
-layout: post
-title: 一步一步构建Jekyll主题
-categories: [jekyll github markdown rouge]
-date: 2016-9-3 15:47:05
-excerpt: ""   # 覆盖清掉文章的摘要
----
-```
-
-#### `Liquid`语法
+#### `liquid`语法
 Jekyll内变量操作是使用[Liquid语法](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)
-主要有两种：
+
+主要有：
 
 1. 显示变量的值
-  {% raw %}`{{ 变量名 }}`{% endraw %}
-  如果要组成字符串，可以这样：{% raw %}`"字符串头部{{ 变量名 }}字符串尾部"`{% endraw %}
-  也可以使用Filter：{% raw %}`{{ "字符串头部" | append : 变量名 | append : "字符串尾部" }}`{% endraw %}
-  显示文章的标题 {% raw %}{{ page.title }}{% endraw %}
+    {% raw %}`{{ 变量名 }}`{% endraw %}
+
+    如果要组成字符串，可以这样：{% raw %}`"字符串头部{{ 变量名 }}字符串尾部"`{% endraw %}    
+
+    也可以使用Filter：{% raw %}`{{ "字符串头部" | append : 变量名 | append : "字符串尾部" }}`{% endraw %}
+
+    如，显示文章的标题：{% raw %}`{{ page.title }}`{% endraw %}
 
 2. 使用变量的值进行计算
-  文章的标题计算 {% raw %}{% assign titleAndDate = page.title | append: page.date %}{% endraw %}
-  `assign x = y`是声明一个变量并赋值，**声明必须赋值！**
-  `xxx | append: "str"`是Liquid语法中的Filter，可以理解为管道，也可以简单理解为`对象|方法:参数`
-  Filter可以连续执行：`xxx | append: "str1" | append: "str2"`
+    文章的标题计算 {% raw %}`{% assign titleAndDate = page.title | append: page.date %}`{% endraw %}
 
-### 将网页原型加入模板
-Jekyll模板的基本结构已经完成，可以加入网页原型进行结合。
+    `assign x = y`是声明一个变量并赋值，**声明必须赋值！**
 
-1. 提取相同的内容到`_includes`目录
-2. 需要复用的页面框架，比如post文章页，放到`_layouts`目录
-3. 一些配置字符串，放在`_config.yml`文件内
-4. 使用**Liquid语法**在页面中访问`site`，`page`等信息组织内容
-5. 剩下的就是`html`/`css`/`js`的内容了
+    `xxx | append: "str"`是Liquid语法中的Filter，可以理解为管道，也可以简单理解为`对象|方法:参数`
 
-### 修改原型
-###
+    Filter可以连续执行：`xxx | append: "str1" | append: "str2"`
+
+3. if语句
+  {% raw %}
+   ```liquid
+   {% if site.title == "" %}
+   {% assign title = "A" %}
+   {% elsif site.title == "stepbystep" %}
+   {% assign title = "B" %}
+   {% else %}
+   {% assign title = "C" %}
+   {% endif %}
+   ```
+   {% endraw %}
+
+4. for语句
+   {% raw %}
+
+   ```liquid
+   {% for post in site.posts %}
+    {% assign title = post.title %}
+    The post title is {{ title }}
+   {% endfor %}
+   ```
+   {% endraw %}
+
+5. 访问map的key和value
+    像`site.categories`其实是一个map，访问分类是linux的文章集合有两种方式：
+    方式一: `site.categories.linux`即是分类为linux的posts列表
+    方式二: `for cate in site.categories`，`cate[0]`是linux，`cate[1]`是posts列表
+
+> 注意：如果{% raw %}{% %}{% endraw %}里面的是语句，**一行只能有一个而不能有多个**
+
+### 改造自己的主题
+至此，Jekyll的使用、Liquid的语法、Markdown的样式、语法高亮的配色都已经讲述，接下来就是动手完成自己的主题，以下是一些点：
+
+- 加入`html`、`css`、`js`等需要的文件
+- 提取相同的内容到`_includes`目录
+- 需要复用的页面框架，比如post文章页，放到`_layouts`目录
+- 一些配置字符串，放在`_config.yml`文件内
+- 使用**Liquid语法**在页面中访问`site`，`page`等信息组织内容
+- 调整html页面标签的css定制自己的Markdown样式
+- 调整语法高亮的css定制自己的语法高亮颜色值
+- 你可能需要一个MarkdownDemo来测试站点的样式
+
+## 上传自己的主题到JekyllThemes
+如果希望自己的主题可以让更多人看到或使用，可以上传到[JekyllThemes](http://jekyllthemes.org/)这个站点
+
+1. 准备一张250x200的预览图
+2. `fork`这个[JekyllThemes](https://github.com/mattvh/jekyllthemes/fork)项目源码到自己的Github仓库
+3. 找到自己的Github仓库中fork的这个JekyllThemes项目
+4. `clone`自己仓库的JekyllThemes项目到本地
+5. 将预览图放到`thumbnails`目录，在`_posts`下复制一篇文章，替换为自己的主题信息
+6. 执行`bundle exec jekyll server`本地预览效果
+7. 本地调试直到网站已经添加了自己的主题
+8. `commit`并且`push`添加的代码(此时代码只是提交到自己仓库的JekyllThemes项目)
+9. 网页访问自己仓库的JekyllThemes项目，点击`New pull request`发起一个合并请求
+10. 此时提交已经发送给JekyllThemes项目的管理员，等待管理员合并提交
+
+> 注意：图片的规格最好一致，并且进行本地测试，否则即使提交了也很可能会被管理员拒绝合并代码
 
 ## 参考文档
 
