@@ -6,11 +6,11 @@ description: > # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
-twitter_username: jekyllrb
-github_username:  jekyll
+
 
 # Site URL NOTE: if your site is base on subdir /blog you can change it to "www.XXX.com/blog"
-domain: "http://hello-xk.github.io" # the base URL for your site
+domain: "http://jokinkuang.github.io" # the domain URL for your site
+base: ""  # the relative path that different with domain so you can test locally
 
 # Source URL NOTE: end with / cause it's [URL + FILE]
 w3c_url: "/w3c/"  # the base url of css js and images
@@ -21,14 +21,41 @@ sitefile: "/db/Sitefile" # the Database
 # 3rd URL
 duoshuo_short_name: "jokin" # the user of user.domain.com
 duoshuo_user_uid: "6310373106422645505" # the admin user uid
-duoshuo_user_name: "xk" # the admin user name
-duoshuo_path: "/w3c/duoshuo/" # the local duoshuo comment plugin, you can change it to remote "http://static.duoshuo.com/"
-jquery_url: "//cdn.bootcss.com/jquery/3.1.0/jquery.min.js" # use cdn
+duoshuo_user_name: "jokin" # the admin user name
+duoshuo_max_depth: "2"  # the max_depth setting in duoshuo comments
+duoshuo_url: "/w3c/duoshuo/embed.min.js" # the local duoshuo comment plugin, you can change it to remote "http://static.duoshuo.com/"
+jquery_url: "http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js" # use cdn
 baiduTemplate_url: "/w3c/js/baiduTemplate.js" #use local
+google_analytics_id: "UA-83197743-1"
 
 # Build Settings
+excerpt_separator: "\n\n" # you can specify your own separator here, default is "\n\n" String
 permalink: /:year/:month/:day/:title.html
+highlighter: rouge
 markdown: kramdown
 kramdown:
   input: GFM
-highlighter: rouge
+  hard_wrap: true # a newline in markdown text would be changed to <br>
+gems:
+  - jemoji # install the emoji plugin
+
+# Following is got in Github Help With Configuring Jekyll
+
+# Github Page Default Settings which you can override:
+# kramdown:
+#   input: GFM
+#   hard_wrap: false
+# gems:
+#   - jekyll-coffeescript
+#   - jekyll-paginate
+
+# Github Page override the following settings which you cannot change:
+# lsi: false
+# safe: true
+# source: [your repo's top level directory]
+# incremental: false
+# highlighter: rouge
+# gist:
+#  noscript: false
+# kramdown:
+#  math_engine: mathjax

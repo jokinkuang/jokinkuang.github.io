@@ -1,17 +1,17 @@
 ---
 layout: post
 title: how to encrypt and decrypt file with openssl
-tags: [openssl]
-author: helloxk
-mail: 345106552@qq.com
-created: 2015-01-26 11:00:00
-modified: 2015-02-27 17:55:50
+categories: openssl
+date: 2015-02-27 17:55:50
 pid: 20150227-175500
+excerpt: ""
 ---
+
+{% include toc %}
 
 url: http://tombuntu.com/index.php/2007/12/12/simple-file-encryption-with-openssl/
 
-1, encrypt file
+### 1, encrypt file
 
     openssl aes-256-cbc -a -salt -in secrets.txt -out secrets.txt.enc
 
@@ -23,7 +23,7 @@ url: http://tombuntu.com/index.php/2007/12/12/simple-file-encryption-with-openss
 
 You will be prompted for a password.
 
-2, decrypt file
+### 2, decrypt file
 
     openssl aes-256-cbc -d -a -in secrets.txt.enc -out secrets.txt.dec
 
@@ -41,10 +41,10 @@ maybe you can use this way to pass your passwork
     openssl aes-256-cbc -d -a XXX -k 123456
     -k the next argument is the passphrase
 
-3, get helps  
+### 3, get helps  
 
     openssl -h
     openssl aes-256-cbc -h
 
-4, notes
+### 4, notes
     AES-encrypt make different output encrypted strings every time, even with the same password. it means that, a password can descrypt a lot of strings.

@@ -31,6 +31,7 @@ $(document).ready(function(){
   }
 
   var g_category = getUrlParam('category');
+  //console.log(g_category);
 
   $.ajax({
     type: "get",
@@ -57,17 +58,15 @@ $(document).ready(function(){
     if (category == null || category == "" || category == "All") {
       $("li[data='All']").addClass("active");
     } else {
-      console.log(category);
-      $("li[data=" + category + "]").addClass("active");
+      //console.log(category);
+      $("li[data='" + category + "']").addClass("active");
     }
   }
 
   //Duoshuo
   var showDuoshuoData = function() {
-    $.Duoshuo.settings = { shortName: "jokin" };
-    $(".ds-comments").duoshuo("comments");
-    $(".ds-likes").duoshuo("likes");
-    $(".ds-reposts").duoshuo("reposts");
+    $.Duoshuo.settings = { shortName: duoshuoShortName };
+    $(".post-data").duoshuo();
   }
 
   var getPostsWithCategory = function(data, category) {
@@ -89,6 +88,7 @@ $(document).ready(function(){
     var text = baidu.template('post-list', posts);
     //console.log(text);
     $(".article-list").html(text);
+    $("#middle-panel").css("margin-top", $("#top-menu").height()+20);
     showTimeAgo();
     showActivedCategory(g_category);
     showDuoshuoData();

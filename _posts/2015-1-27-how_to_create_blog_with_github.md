@@ -1,12 +1,10 @@
 ---
 layout: post
 title: how to create blog with github
-tags: [github blog]
-author: helloxk
-mail: 345106552@qq.com
-created: 2015-01-27 17:50:54
-modified: 2015-02-27 17:55:50
+categories: [github page]
+date: 2015-01-27 17:50:54
 pid: 20150127-175054
+excerpt: ""
 ---
 
 Urls:  
@@ -47,3 +45,5 @@ if you have a domain, you can bind to the blog.
     - test the DNS:
         dig XXX.com +nostats +nocomments +nocmd
         # if the output route to 192.30.252.153/154, means it work!
+
+5，Wait a long time, about 2 hours

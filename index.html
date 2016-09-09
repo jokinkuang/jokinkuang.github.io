@@ -3,10 +3,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>{{ site.title }}</title>
+<title>index — {{ site.title }}</title>
+{% include head.meta %}
 
 <style type="text/css">
 html {
@@ -18,6 +16,7 @@ body {
 	display: block;
 	height: 100%;
 	margin: 0 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .header {
@@ -121,17 +120,17 @@ body {
 
 <body>
 <div class="header">
-	<!-- <a class="menu" href="article.html">Enter</a> -->
+	<!-- <a class="menu" href="{{ site.base }}/article.html">Enter</a> -->
 </div>
 <div class="header-bg fadein"></div>
 <div class="content">
 	<!-- duoshuo -->
   <div name="comments" id="comments">
-  <div class="ds-thread" data-thread-key="shuoshuo" data-title="{{ site.title }}" data-url="{{ site.domain }}"></div>
+  <div class="ds-thread" data-thread-key="shuoshuo" data-max-depth="{{ site.duoshuo_max_depth }}" data-title="{{ site.title }}" data-url="{{ site.domain }}"></div>
   </div>
 </div>
 <div class="talk">
-	<a class="link" href="article.html">StepIn -)</a>
+	<a class="link" href="{{ site.base }}/article.html">StepIn :)</a>
 	<p>Don't be afraid, Step By Step</p>
 </div>
 <div class="footer"></div>
@@ -170,6 +169,14 @@ $(function(){
       this.remove();
     }
   });
+
+	// if found .ds-comments-info then consider comments has loaded
+	executeOnLoad(".ds-comments-info", function(){
+		if ( $(window.location.hash).length > 0 ) {
+			$(window).scrollTop( $(window.location.hash).offset().top );
+		}
+	});
+
 
 });
 </script>

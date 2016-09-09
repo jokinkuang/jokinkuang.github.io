@@ -25,18 +25,16 @@ $(document).ready(function(){
 
   //Duoshuo
   var loadDuoshuoData = function() {
-    $PC("http://jokin.duoshuo.com/api/posts/list.json", function(data){
+    $PC("http://"+duoshuoShortName+".duoshuo.com/api/posts/list.json", function(data){
       $("#totalComments").text(data.cursor.total);
     });
-    $.Duoshuo.settings = { shortName: shortName };
-    $(".post-comments").duoshuo("comments");
-    $(".post-likes").duoshuo("likes");
-    $(".post-reposts").duoshuo("reposts");
+    $.Duoshuo.settings = { shortName: duoshuoShortName };
+    $(".post-data").duoshuo();
   }
 
   // Shuoshuo
   var loadShuoshuoData = function() {
-    $PC("http://jokin.duoshuo.com/api/threads/listPosts.json?thread_key=shuoshuo", function(data){
+    $PC("http://"+duoshuoShortName+".duoshuo.com/api/threads/listPosts.json?thread_key=shuoshuo", function(data){
       try {
         var message = data.parentPosts[data.response[0]].message;
         $("#shuoshuo").html(message);

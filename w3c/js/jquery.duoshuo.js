@@ -28,11 +28,13 @@
 
       getArguments: function(args) {
         if (! args || ! args.length) {
+          // no arguments
           this.text = this.$tag.attr(this.attrText) || this.text || this.defaultSymbol;
           this.threadKey = this.$tag.attr(this.attrKey) || this.threadKey;
           this.shortName = this.$tag.attr(this.attrName) || this.shortName;
         }
         else {
+          // have arguments > data-attr > default
           this.text = args[0] || this.text || this.defaultSymbol;
           this.threadKey = args[1] || this.threadKey;
           this.shortName = args[2] || this.shortName;
@@ -144,7 +146,7 @@
 
     // jQuery plugin common-code which supports $("selector").duoshuo("methodString") call
     $.fn.duoshuo = function(options) {
-        if (typeof options === 'string') {
+        if (typeof options === 'string' || typeof(options) === 'undefined') {
             var args = Array.prototype.slice.call(arguments, 1);
             this.each(function() {
                 var instance = $.data(this, 'duoshuo');
@@ -152,13 +154,15 @@
                   instance = new $.Duoshuo($.Duoshuo.settings, this);
                   $.data(this, 'duoshuo', instance);
                 }
+                var method = options || $(this).attr('data-method');
+
                 // You can call methods with "methodNameString" But not those start with "_"
-                if (!$.isFunction(instance[options]) || options.charAt(0) === "_") {
-                    logError("no such method '" + options + "' for duoshuo instance");
+                if (!$.isFunction(instance[method]) || method.charAt(0) === "_") {
+                    logError("no such method '" + method + "' for duoshuo instance");
                     return;
                 }
-                instance.calling = options;
-                instance[options].apply(instance, args);
+                instance.calling = method;
+                instance[method].apply(instance, args);
             });
         } else {
             this.each(function() {
