@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Object-C基础教程
+title: Objective-C基础教程
 categories: ios
 date: 2016-9-9 16:08:30
 pid: 20160909-160830
 # you can override the settings in _config.yml here !!
 ---
-学习object-c的笔记，提取于object-c基础教程第二版
+学习Objective-C的笔记，提取于Objective-C基础教程第二版
 
 {% include toc %}
 
@@ -654,10 +654,10 @@ Cocoa采用引用计数(reference counting)的技术，也叫做保留计数(ret
   self.engine = engine;
 }
 // B
-- (void) setEngine: (Engine *)engine
+- (void) setEngine: (Engine *)aEngine
 {
-  self.engine = engine;
-  [engine retain];  // 增加计数
+  self.engine = aEngine;
+  [aEngine retain];  // 增加计数
 }
 ```
 [Engine new]：创建一个Engine副本，计数器被设置为1
@@ -672,11 +672,11 @@ B看似有效，但其实是非常糟糕的，B在修改自己的engine对象的
 所以，应该改为：
 
 ```objective_c
-- (void) setEngine: (Engine *)engine
+- (void) setEngine: (Engine *)aEngine
 {
   [self.engine release];  // 释放掉旧的
-  self.engine = engine; // 替换为新的
-  [engine retain];  // 新的增加计数
+  self.engine = aEngine; // 替换为新的
+  [aEngine retain];  // 新的增加计数
 }
 
 ```
@@ -686,11 +686,11 @@ B看似有效，但其实是非常糟糕的，B在修改自己的engine对象的
 所以，改为：
 
 ```objective_c
-- (void) setEngine: (Engine *)engine
+- (void) setEngine: (Engine *)aEngine
 {
-  [engine retain];  // 先加
+  [aEngine retain];  // 先加
   [self.engine release];  // 后减
-  self.engine = engine; // 替换为新的
+  self.engine = aEngine; // 替换为新的
 }
 
 ```
@@ -714,9 +714,9 @@ B看似有效，但其实是非常糟糕的，B在修改自己的engine对象的
 }
 
 // Car
-- (void) setEngine: (Engine *)engine
+- (void) setEngine: (Engine *)aEngine
 {
-  self.engine = engine;
+  self.engine = aEngine;
 }
 - (void) dealloc
 {
@@ -1002,23 +1002,192 @@ NSException *theException = [NSException exceptonWithName: ...];
 重写dealloc函数时，super dealloc必须最后执行！
 
 ## 属性
-Objective-C 2.0引入属性
+Objective-C 2.0引入属性。
+
+### 属性与变量关系
+对象的变量是真正存储数据的地方。
+对象的属性只是提供setter与getter的快捷访问方式。
+
+也即是说，变量是变量，属性是方法。
+比如：
+
+```objective_c
+@interface Test: NSObject
+{
+  NSString *id;
+}
+@property NSString *id;
+@end
+```
+在__init__方法中`id = @"hello";`与`self.id = @"hello";`是不一样的。
+
+前者表示，直接访问id变量，后者等价于`[self setId: @"hello"]`是调用setter方法。如果你假想在setter方法中做了额外的操作，很显然这两者是不等价的。
+
 
 ### @property
-```Objective-C
+
+```objective_c
 @interface Test: NSObject
 {
   int value;
 }
-@property int value;`
+@property int value;
 @end
 ```
-编译后，将得到：
-`- (int) value;`
-`- (void) setValue: (int)val;`
+编译后，将得到以下三个声明：
 
-但这只是声明，实现部分还是要自己实现。
+1. 属性`int value;`的声明
+2. setter方法`- (void) setValue: (int)value;`的声明
+3. getter方法`- (int) value;`的声明
 
+换言之，即使你不声明value变量，使用属性时，编译器也会自动创建属性对应的value变量。**但这只是声明，实现部分还是要自己实现。**
 
 ### @synthesize
-`@synthesize value`
+
+```Objective-C
+@implementation Test
+@synthesize value;
+@end
+```
+编译后，将得到以下实现代码：
+
+1. setter方法`- (void) setValue: (int)value;{ ... };`的定义（实现）
+2. getter方法`- (int) value; { ... };`的定义（实现）
+
+> @synthesize预编译指令不同于代码生成，你永远不会看到实现的代码，但是这些方法确实存在并且可以调用！
+> 在Xcode4.5以后，可以不必使用@synthesize了
+
+### 改变setter与getter的名称
+变量名与属性名称可以不同，下面是设置的例子：
+
+```objective_c
+@interface Test: NSObject
+{
+  NSString *application;
+}
+@propery (copy) NSString *name;
+@end
+
+// 在实现时指明属性name与变量application关联
+@implementation Test
+@synthesize name = application;
+@end
+```
+
+或者这样做：
+
+```objective_c
+@interface Test: NSObject
+@propery (getter=isHidden) BOOL hidden; // 生成默认的setHidden和isHidden方法
+@end
+```
+但尽量不要这样做，这样会破坏键/值规则。
+
+### 禁用属性自动生成功能
+如果不希望编译器自动生成变量、getter和setter，可以使用关键字@dynamic来禁用。
+
+例如，对象的id是根据对象的数据进行md5生成的，所以对象不用存储这个id，只是在访问id的getter时计算生成。
+所以，我们不需要编译器提供id变量、id的setter和id的getter。
+
+```objective_c
+@propery (readonly) int id;   // 声明一个id只读属性，这样就可以使用点运算操作
+
+@dynamic id;  // 禁用编译器的自动生成
+- (int) id    // 提供自定义getter方法，确保点运算操作时不报错。
+{
+  // 计算得到id
+}
+```
+既然编译器不会自动生成，所以我们得自己添加getter或setter，以此提供对象的**点**运算操作。
+同样，如果使用点操作访问不存在的getter或setter，将会出错！
+
+### 属性的设置
+
+#### 默认值
+默认情况下，属性是这种配置：
+`@propery (readwrite, assign) NSString *name;`
+只读、普通赋值
+
+#### readonly/readywrite
+默认情况下，属性是可读写的，但是如果要表明自己的意图，可以添加读写属性。
+`@propery (readwrite, copy) NSString *name;`
+`@propery (readwrite, retain) Engine *engine;`
+
+`@propery (readonly) NSSTring *id;`
+如果是只读属性，编译器只生成对应的get方法，而不会生成set方法，所以对只读属性调用set方法会**编译失败**。
+
+#### assign
+对基础数据类型(NSInteger，CGFloat)和C数据类型(int, float, double, char)等等。
+此标记说明设置器直接进行赋值，这也是默认值。在使用垃圾收集的应用程序中，如果你要一个属性使用assign，且这个类符合NSCopying协议，你就要明确指出这个标记，而不是简单地使用默认值，否则的话，你将得到一个编译警告。这再次向编译器说明你确实需要赋值，即使它是可拷贝的。
+
+#### atomic
+默认为atomic，提供多线程安全，setter函数会加锁处理。
+如果你已经定义了自己的setter方法，则不能再使用atomic或nonatomic修饰。
+
+#### nonatomic
+禁止多线程，变量保护，提高性能。如果没有使用跨线程访问资源，设置nonatomic会提高性能，像手机设备，一般都是使用nonatomic。
+如果你已经定义了自己的setter方法，则不能再使用atomic或nonatomic修饰。
+
+#### copy
+默认情况下，变量是直接赋值(assign)，如果需要保存一个副本，则需要进行copy，还记得吗，使用了new、alloc、copy操作符就需要考虑内存管理。
+
+变量copy相当于以下语句：
+
+```objective_c
+@property (copy) NSString *name;
+
+// 相当于以下的代码，set方法复制对象，销毁时负责销毁
+- (void) setName: (NSString *)aName
+{
+  [self.name release];
+  self.name = [aName copy];
+}
+- (void) dealloc
+{
+  [self.name release];  // 没有开启ARC需要自行添加，开启ARC预编译器自动添加
+}
+```
+**注意：**
+
+如果没有启用ARC功能，则需要手动在dealloc释放name，而如果开启了ARC功能，则不需要担心这个问题，因为编译器会自动添加，这也是ARC的优点。
+(怎么感觉这里是个坑~)
+
+#### retain
+默认情况下，变量是直接赋值(assign)，如果需要保存一个强引用，则需要使用retain增加计数，同样，使用了retain就要配套一个release。
+
+retain相当于以下语句：
+
+```objective_c
+@property (retain) Engine *engine;
+
+// 相当于以下的代码，set方法时保持强引用，销毁时负责销毁
+- (void) setName: (Engine *)aEngine
+{
+  [aEngine retain]; // 先加后减
+  [self.engine release];
+  self.engine = aEngine;
+}
+- (void) dealloc
+{
+  [self.engine release];  // 没有开启ARC需要自行添加，开启ARC预编译器自动添加
+}
+```
+**注意：**
+
+理由同上。
+
+### 改变属性的名称
+
+
+### 点表达式(.)
+`对象.属性名 = xxx`在等号左边，表示对象的属性的set方法被调用。
+`xxx = 对象.属性名`在等号右边，表示对象的属性的get方法被调用。
+
+### 属性声明的位置与效果
+声明属性，我们可以在`头文件h`、`实现文件m`、甚至`一部分在头文件另一部分在实现文件里`，但是位置不同，效果也不同。
+
+#### 在头文件声明
+在头文件中声明，表示属性是公开的，可以通过`对象.属性名`访问。
+
+#### 在实现文件声明
+在实现文件中声明，表示属性是私有的，
