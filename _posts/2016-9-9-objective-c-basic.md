@@ -43,7 +43,7 @@ NSLog(@"%d %@", 5, @"helloworld");
 %d：整数
 %s: 字符串
 %lu：long
-%@：NSString对象__指针__
+%@：NSString对象_指针_
 
 尽量使用NSLog来输出日志，而不再使用printf
 
@@ -532,7 +532,7 @@ Cocoa许多类以类簇(class clusters)实现，即接口一样的多个类。�
 可变集合与不可变集合区别：
 - 没有`Mutable`的都是不可改变的，而包含`Mutable`的才可以改变。
 - 不可变的集合只能重新赋值，而可变集合可以直接增删修改。
-- 不可变的集合才有__字面值初始化__，可改变的集合只能使用方法进行初始化。
+- 不可变的集合才有_字面值初始化_，可改变的集合只能使用方法进行初始化。
 - 可改变的集合都有对应的WithCapacity方法，用来预设集合容量，可提供效率。
 
 集合都是Objective-C的对象，所以不能存储C语言的基本数据结构，如int、float、struct等，同时也不能存储nil值。
@@ -852,7 +852,7 @@ ARC只对以下对象指针有效：
 
 1. 代码块指针
 2. Objective-C对象指针
-3. 通过__attribute__((NSObject))类型定义的指针
+3. 通过_attribute_((NSObject))类型定义的指针
 
 char *和CF对象都不支持ARC特性，这些需要自己管理内存，和ARC并不冲突。
 
@@ -893,7 +893,7 @@ char *和CF对象都不支持ARC特性，这些需要自己管理内存，和ARC
 ##### 归零弱引用
 声明归零弱引用的两种方式：
 
-1. __weak NSString *myString;
+1. \_\_weak NSString *myString;
 2. @property(weak) NSString *myString;
 
 使用ARC命名规范需要注意：
@@ -1019,7 +1019,7 @@ Objective-C 2.0引入属性。
 @property NSString *id;
 @end
 ```
-在__init__方法中`id = @"hello";`与`self.id = @"hello";`是不一样的。
+在_init_方法中`id = @"hello";`与`self.id = @"hello";`是不一样的。
 
 前者表示，直接访问id变量，后者等价于`[self setId: @"hello"]`是调用setter方法。如果你假想在setter方法中做了额外的操作，很显然这两者是不等价的。
 
