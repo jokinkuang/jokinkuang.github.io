@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Objective-C基础教程
-categories: ios
+categories: Mac ios
 date: 2016-9-9 16:08:30
 pid: 20160909-160830
 # you can override the settings in _config.yml here !!
