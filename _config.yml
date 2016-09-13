@@ -2,10 +2,8 @@
 title: Step By Step
 author: jokin
 email: 345106552@qq.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+description: > # this means to ignore newlines until next "tag"
+  Step By Step, a blog of jokinkuang.
 
 
 # Site URL NOTE: if your site is base on subdir /blog you can change it to "www.XXX.com/blog"
