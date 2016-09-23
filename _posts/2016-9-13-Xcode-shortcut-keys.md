@@ -80,8 +80,17 @@ Option + 点击 获取快速帮助
 ### 代码自动补全
 Control + 空格/.
 
+### 代码格式化
+Control + i
+
+### 代码注释
+Command + /
+
 ### 代码缩进
 Command + [/]
+
+### 上下行交换
+Command + option + [/]
 
 ### 全文查找
 Command + Shift + F
@@ -105,6 +114,12 @@ control-E: 到行尾（end）
 control-T: 调换光标两边的字符（transpose）
 control-D: 删除光标右侧字符（delete）
 control-K: 删除本行剩余的字符（kill）
+
+### 复制一行
+Xcode没有提供这样的快捷键，只能组合
+Command + Shift + 向左/向右 全选
+Command + C/X 复制/剪切
+Command + V   粘贴
 
 ## 调试
 
