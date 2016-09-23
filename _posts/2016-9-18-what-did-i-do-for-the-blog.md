@@ -28,7 +28,7 @@ windows
     windows API入门教程
 ```
 之所以分类页显示成这样，是因为大部分Jekyll站点都只能这样遍历：
-
+<% raw %>
 ```liquid
 <% for cates in site.categories %>
 {{ cates[0] }}
@@ -37,6 +37,7 @@ windows
   <% endfor %>
 <% endfor %>
 ```
+<% endraw %>
 
 -为什么只能这样遍历呢？
 -因为你无法预知新文章的分类名叫什么。
@@ -65,25 +66,27 @@ mac.html
 **思路2**
 新分类自己动手添加，就像添加新文章一样。
 如果有一个新分类叫windows，则在Jekyll根目录创建一个windows文件夹，并加入index.html页面，内容为：
-
+<% raw %>
 ```liquid
 当前分类：windows分类
 <% for post in site.categories.windows %>
   {{ post.title }}
 <% endfor %>
 ```
+<% endraw %>
 这是另一种访问目录文章的方式，不过这种方式目录不能为中文！但是既然整个页面都有了，页面里做什么都可以了，当然也可以写上对应的中文名。
 
 于是，我们可以通过www.xxx.com/windows访问分类为windows的文章列表了。
 
-对应的分类列表为：
-
+对应的分类列表为
+<% raw %>
 ```liquid
 当前文章分类有：
 <% for cate in site.categories %>
    <a href="/{{ cate[0] }}">{{ cate[0] }}</a>
 <% endfor %>
 ```
+<% endraw %>
 于是，点击分类名就会跳转到对应的分类页面了。
 
 之前见过的一个分类对应一个页面的实现思路和这里的差不多。因为都是复制粘贴，所以还算能够接受。
@@ -103,6 +106,7 @@ mac.html
 
 于是，一个json格式的数据文件postfile就这样诞生了：
 
+<% raw %>
 ```
 {
   "posts":
@@ -126,6 +130,7 @@ mac.html
   ]
 }
 ```
+<% endraw %>
 
 数据文件有了，剩下的就是在页面访问这些数据组织页面，想做什么都可以了。
 [下载postfile文件](https://raw.githubusercontent.com/jokinkuang/stepbystep/master/db/Postfile)
