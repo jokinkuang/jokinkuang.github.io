@@ -69,7 +69,7 @@ mac.html
 
 新分类自己动手添加，就像添加新文章一样。
 如果有一个新分类叫windows，则在Jekyll根目录创建一个windows文件夹，并加入index.html页面，内容为：
-<% raw %>
+{% raw %}
 
 ```liquid
 当前分类：windows分类
@@ -77,13 +77,13 @@ mac.html
   {{ post.title }}
 <% endfor %>
 ```
-<% endraw %>
+{% endraw %}
 这是另一种访问目录文章的方式，不过这种方式目录不能为中文！但是既然整个页面都有了，页面里做什么都可以了，当然也可以写上对应的中文名。
 
 于是，我们可以通过www.xxx.com/windows访问分类为windows的文章列表了。
 
 对应的分类列表为
-<% raw %>
+{% raw %}
 
 ```liquid
 当前文章分类有：
@@ -91,7 +91,7 @@ mac.html
    <a href="/{{ cate[0] }}">{{ cate[0] }}</a>
 <% endfor %>
 ```
-<% endraw %>
+{% endraw %}
 于是，点击分类名就会跳转到对应的分类页面了。
 
 之前见过的一个分类对应一个页面的实现思路和这里的差不多。因为都是复制粘贴，所以还算能够接受。
@@ -112,7 +112,7 @@ mac.html
 
 于是，一个json格式的数据文件postfile就这样诞生了：
 
-<% raw %>
+{% raw %}
 
 ```
 {
@@ -137,7 +137,7 @@ mac.html
   ]
 }
 ```
-<% endraw %>
+{% endraw %}
 
 数据文件有了，剩下的就是在页面访问这些数据组织页面，想做什么都可以了。
 [下载postfile文件](https://raw.githubusercontent.com/jokinkuang/stepbystep/master/db/Postfile)
@@ -153,6 +153,7 @@ Jekyll中，文章路径为`/windows/api/_posts/2016-9-22-category.md`的文章�
 
 既然Jekyll不支持这种方式，只好尝试自己实现了。
 
+使用
 
 ## 站点数据库
 正如上面所说，postfile就像站点的数据库。
