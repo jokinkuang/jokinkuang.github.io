@@ -29,6 +29,7 @@ windows
 ```
 之所以分类页显示成这样，是因为大部分Jekyll站点都只能这样遍历：
 <% raw %>
+
 ```liquid
 <% for cates in site.categories %>
 {{ cates[0] }}
@@ -61,12 +62,15 @@ mac.html
 好了，回到正题，既然如此如何实现每个目录一个页面展示呢？
 
 **思路1**
+
 写一个Jekyll模板的插件实现从代码里生成页面的功能，如果这样做，使用github托管时需要将生成的整个站点push上去，因为github pages不能运行第三方插件。
 
 **思路2**
+
 新分类自己动手添加，就像添加新文章一样。
 如果有一个新分类叫windows，则在Jekyll根目录创建一个windows文件夹，并加入index.html页面，内容为：
 <% raw %>
+
 ```liquid
 当前分类：windows分类
 <% for post in site.categories.windows %>
@@ -80,6 +84,7 @@ mac.html
 
 对应的分类列表为
 <% raw %>
+
 ```liquid
 当前文章分类有：
 <% for cate in site.categories %>
@@ -92,6 +97,7 @@ mac.html
 之前见过的一个分类对应一个页面的实现思路和这里的差不多。因为都是复制粘贴，所以还算能够接受。
 
 **思路3**
+
 个人比较不喜欢重复做同样的事情，所以就使用另外的方式。
 
 从上面分析可知，要实现一个分类一个页面，仅仅靠静态网页是无法实现的。正如上面所说，你无法预知下一篇文章的分类。
@@ -107,6 +113,7 @@ mac.html
 于是，一个json格式的数据文件postfile就这样诞生了：
 
 <% raw %>
+
 ```
 {
   "posts":
