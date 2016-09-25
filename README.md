@@ -26,5 +26,5 @@ if you donot want any excerpt override with excerpt: ""
 {% include toc %}
 ```
 
-VISIT IT
-[jokinkuang.github.io](jokinkuang.github.io)
+## VISIT IT
+[jokinkuang.github.io](http://jokinkuang.github.io)
