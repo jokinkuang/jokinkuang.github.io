@@ -27,6 +27,7 @@ baiduTemplate_url: "/w3c/js/baiduTemplate.js" #use local
 google_analytics_id: "UA-83197743-1"
 
 # Build Settings
+future: true
 excerpt_separator: "\n\n" # you can specify your own separator here, default is "\n\n" String
 permalink: /:year/:month/:day/:title.html
 highlighter: rouge
