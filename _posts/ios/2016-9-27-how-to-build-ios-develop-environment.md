@@ -4,6 +4,7 @@ title: 如何搭建ios的开发环境
 categories:
 date: 2016-9-27 15:30:35
 pid: 20160927-153035
+image: ios/ios.png
 # you can override the settings in _config.yml here !!
 ---
 空白的电脑下搭建ios的开发环境
@@ -106,7 +107,7 @@ make install
 - 在执行时，切换到~/.cocoapods，然后不定时的查看文件夹的容量`du -sh`，如果容量在变大说明正在工作中，整个大概300M。
 
 如果真的卡住了，可能是下载太慢。
-前往<https://github.com/CocoaPods/Specs>，下载所有文件，然后拷进~/.cocoapods/repos/master/里面。据说都是第三方插件的索引文件。
+可以前往<https://github.com/CocoaPods/Specs>，下载所有文件，然后拷进~/.cocoapods/repos/master/里面。据说都是第三方插件的索引文件。
 
 ### pod install
 在Xcode项目内找到Podfile所在，然后执行`pod install`即能进行第三方插件的安装和配置。
@@ -118,3 +119,37 @@ pod install过程也会有各种坑。
         postBuffer = 1648576000
         maxRequestBuffer = 884857600000000
 2. curl进行http下载时超时失败。这个没办法，网络问题，只有不断重试。
+
+
+
+## Protobuf的安装
+Mac下安装protobuf的简单教程，不同时期，安装方式可能不一样，现在的已经非常简单
+
+### 下载源码
+`git clone [https://github.com/google/protobuf.git](https://github.com/google/protobuf.git)`
+
+### 编译
+`cd protobuf`
+`./autogen.sh`
+`./configure`
+`make`
+
+### 安装
+`make install`
+
+### 查看
+`protoc --version`
+
+> 一如既往的configure、make、make install。
+
+### 旧版本
+[github-protobuf](https://github.com/google/protobuf) - [commit/branches/releases/contributors] - 点击[releases](https://github.com/google/protobuf/releases) - 点击[tags](https://github.com/google/protobuf/tags) - 找到需要的旧版本即可
+
+### Points
+
+1. ./autogen.sh是获取GoogleMock，并生成对应的configure脚本
+2. ./configure是进行环境检测，并生成对应的makefile或Makefile
+    `--prefix=/usr/local`可以指定安装路径
+3. make，按照makefile编译工程
+4. make install，执行makefile里面的install部分，进行安装
+    `--prefix=/usr/local`可以指定安装路径

@@ -8,4 +8,10 @@ pid: 20160927-152020
 ---
 凌乱的桌面
 
-{% include toc %}
+![桌面]({{ site.images_url }}me/desktop.jpg)
+
+第一次桌面上摆了这么多东西，记录下~
+
+![部门]({{ site.images_url }}me/photo1.jpg)
+
+![小组]({{ site.images_url }}me/photo2.jpg)
