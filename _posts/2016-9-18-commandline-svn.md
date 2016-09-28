@@ -10,7 +10,7 @@ pid: 20160918-145310
 
 {% include toc %}
 
-## Mac下提示不存在SVN_EDITOR错误
+### Mac下提示不存在SVN_EDITOR错误
 设置命令行环境变量`export SVN_EDITOR=vim`即可。
 
 ```
@@ -20,7 +20,7 @@ vim ~/.bash_profile
 export SVN_EDITOR=vim
 ```
 
-## 具体命令
+### 具体命令
 svn [命令] --help   // 查看具体命令的帮助文档
 svn checkout [path] [--username UserName]   // checkout仓库
 svn info            // 查看当前仓库路径

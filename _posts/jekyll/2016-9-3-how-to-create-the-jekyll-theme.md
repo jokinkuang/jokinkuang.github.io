@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 一步一步创建Jekyll主题
-categories: jekyll github markdown rouge
+categories: jekyll
 image: jekyll.jpg
 date: 2016-9-3 15:47:05
 pid: 20160903-154705

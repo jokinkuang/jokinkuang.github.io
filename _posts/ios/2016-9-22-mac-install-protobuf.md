@@ -8,7 +8,7 @@ pid: 20160922-120230
 # excerpt: ""
 # you can override the settings in _config.yml here !!
 ---
-Mac下安装protobuf的简单教程，不同时期，安装方式不一样，今天的已经非常简单
+Mac下安装protobuf的简单教程，不同时期，安装方式可能不一样，现在的已经非常简单
 
 {% include toc %}
 
@@ -27,7 +27,7 @@ Mac下安装protobuf的简单教程，不同时期，安装方式不一样，今
 ## 查看
 `protoc --version`
 
-一如既往的configure、make、make install。
+> 一如既往的configure、make、make install。
 
 ## 旧版本
 [github-protobuf](https://github.com/google/protobuf) - [commit/branches/releases/contributors] - 点击[releases](https://github.com/google/protobuf/releases) - 点击[tags](https://github.com/google/protobuf/tags) - 找到需要的旧版本即可

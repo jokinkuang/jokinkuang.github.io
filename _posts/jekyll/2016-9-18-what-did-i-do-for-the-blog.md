@@ -28,17 +28,17 @@ windows
     windows API入门教程
 ```
 之所以分类页显示成这样，是因为大部分Jekyll站点都只能这样遍历：
-<% raw %>
 
+{% raw %}
 ```liquid
-<% for cates in site.categories %>
+{% for cates in site.categories %}
 {{ cates[0] }}
-  <% for post in cates[1] %>
+  {% for post in cates[1] %}
     {{ post.title }}
-  <% endfor %>
-<% endfor %>
+  {% endfor %}
+{% endfor %}
 ```
-<% endraw %>
+{% endraw %}
 
 -为什么只能这样遍历呢？
 -因为你无法预知新文章的分类名叫什么。
@@ -73,9 +73,9 @@ mac.html
 
 ```liquid
 当前分类：windows分类
-<% for post in site.categories.windows %>
+{% for post in site.categories.windows %}
   {{ post.title }}
-<% endfor %>
+{% endfor %}
 ```
 {% endraw %}
 这是另一种访问目录文章的方式，不过这种方式目录不能为中文！但是既然整个页面都有了，页面里做什么都可以了，当然也可以写上对应的中文名。
@@ -87,9 +87,9 @@ mac.html
 
 ```liquid
 当前文章分类有：
-<% for cate in site.categories %>
+{% for cate in site.categories %}
    <a href="/{{ cate[0] }}">{{ cate[0] }}</a>
-<% endfor %>
+{% endfor %}
 ```
 {% endraw %}
 于是，点击分类名就会跳转到对应的分类页面了。
@@ -127,9 +127,9 @@ mac.html
       "url": "{{ post.url }}",
       "pid": "{{ post.pid }}",
       "categories": [
-        <% for cate in post.categories %>
+        {% for cate in post.categories %}
           "{{ cate }}"
-        <% endfor %>
+        {% endfor %}
       ]
       ......
     }
