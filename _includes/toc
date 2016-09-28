@@ -1,7 +1,9 @@
-## 目录
-<h3 style="display:none;"> 防止文章内容以h3开头而并入目录被隐藏</h3>
-<h4 style="display:none;"> 防止文章内容以h4开头而并入目录被隐藏</h4>
-<h5 style="display:none;"> 防止文章内容以h5开头而并入目录被隐藏</h5>
+{% comment %}
+使用markdown语法会被添加到TOC里面，所以不能使用##
+而使用html语法则不会被添加到TOC里面，所以使用了<h2>
+{% endcomment %}
+
+<h2>目录</h2>
 
 * it doesn't matter what you write here, it would not show
 {:toc}

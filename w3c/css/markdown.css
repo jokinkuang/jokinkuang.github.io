@@ -30,14 +30,14 @@ li > ul, li > ol { margin-bottom: 0; }
 
 li { margin-bottom: 8px; }
 #markdown-toc li { margin-bottom: 0px; }
-#markdown-toc>li:nth-child(1) { display: none; }
+/*#markdown-toc>li:nth-child(1) { display: none; }*/
 
 /** Headings */
 h1, h2, h3, h4, h5, h6 { font-weight: 400; }
-h1, h2 { padding-top: 0.6em; padding-bottom: 0.3em; border-bottom: 1px solid #eee; }
+h1, h2 { padding-top: 1em; padding-bottom: 0.3em; border-bottom: 1px solid #eee; }
 h3, h4, h5, h6 { padding-top: 0.6em; }
-h3::before { content: "\2023\00A0"; font-weight: bold; }
-h4::before { content: "\26AC\00A0"; font-weight: bold; }
+h3::before { content: "\25b6\00A0"; font-weight: bold; }
+h4::before { content: "\25b6\00A0"; font-weight: 100; }
 
 /** Links jokin@2016*/
 /*a { color: #2a7ae2; text-decoration: none; }

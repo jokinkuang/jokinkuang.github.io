@@ -10,15 +10,19 @@ pid: 20160927-153035
 
 {% include toc %}
 
+
+
 ## 安装Xcode
 在appStore里搜索Xcode然后安装即可
 
+
+
 ## 安装CocoaPods工具
-[CocoaPods](https://cocoapods.org/)是第三方插件管理工具
+[CocoaPods](https://cocoapods.org/)是第三方插件管理工具，安装很简单：
 
-`gem install cocoapods`
+`sudo gem install cocoapods`
 
-下面是官网提供的针对不同的Xcode版本的安装命令
+下面是官网提供的针对不同的Xcode版本的安装命令：
 
 ```
 # Xcode 7 + 8
@@ -33,25 +37,25 @@ sudo gem install cocoapods
 ### 更新ruby
 上面安装cocoapods错误，提示activesupport要求的ruby版本不能低于2.2.2。
 
-mac系统自带的ruby很可能不到2.2.2，而且由于ruby所在的/usr/bin/开启了写保护(EI Capitan)，即使root权限也无法修改，所以需要安装在/usr/local/bin下，这样会优先加载/usr/local/bin下面的程序。而用户对于/usr/local/bin是有写权限的。
+mac系统自带的ruby很可能不到2.2.2，而且由于ruby所在的/usr/bin/开启了写保护(EI Capitan)，即使root权限也无法修改，所以需要安装在/usr/local/bin下，这样会优先加载/usr/local/bin下面的程序，而用户对于/usr/local/bin是有写权限的。
 
-要程序能在/usr/local/bin下，只需要创建一个软链接(windows下的快捷方式):
+要程序能在/usr/local/bin下，只需要创建一个软链接(windows下的快捷方式)：
 
 `ln -s /the-absolute-path /usr/local/bin/your-shell`
 
-因为网上的教程实在是有点摸不着头，所以重新整理了一下。
+因为网上的教程实在是有点摸不着头（只有命令没有解释），所以重新整理了一下。
 
 **思路一**
 
-直接安装ruby的更高版本，然后链接到/usr/local/bin下面。使用github最方便：
+直接安装ruby的更高版本，然后链接到/usr/local/bin下面。可以使用github下载源码：
 
 `git clone git://github.com/ruby/ruby.git 或 https://github.com/ruby/ruby.git`
 
-然后发现要使用autoconf和automake，就放弃了。
+本地编译时发现要使用autoconf和automake，就放弃了。
 
-你也可以安装[Homebrew](http://brew.sh)，Homebrew相当于Ubuntu下的apt-get工具，安装的时候会安装autoconf、automake等源码编译工具，然后通过`brew install ruby`安装。
+你也可以安装[Homebrew](http://brew.sh)，Homebrew相当于ubuntu下的apt-get工具，安装的时候会安装autoconf、automake等源码编译工具，然后通过`brew install ruby`安装最新版的ruby。
 
-安装Homebrew也很简单：
+安装Homebrew也很简单，官网也有教程：
 
 `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
@@ -70,7 +74,7 @@ make install
 
 **思路二**
 
-通过rvm对ruby版本进行管理，可以使多个ruby版本共存。rvm的安装在官网[rvm.io](http://rvm.io/)有
+通过rvm对ruby版本进行管理，可以使多个ruby版本共存。rvm的安装在官网[rvm.io](http://rvm.io/)也有教程：
 
 `\curl -sSL https://get.rvm.io | bash -s stable`
 
@@ -78,7 +82,7 @@ make install
 
 `rvm install ruby`
 
-没想到找不到二进制格式，rvm需要下载源码本地编译，于是rvm自动提示安装Homebrew。安装Homebrew时会安装autoconf、automake等一系列源码编译工具。Homebrew安装完后就开始自动编译ruby2.3.0，但最后由于ruby2.3.0版本还不兼容当前的mac版本，所以编译失败而导致安装ruby2.3.0失败。
+没想到找不到二进制格式，rvm需要下载源码本地编译，于是rvm自动提示安装Homebrew。Homebrew安装完后就开始自动编译ruby2.3.0，但最后由于ruby2.3.0版本还不兼容当前的mac版本，所以编译失败而导致安装ruby2.3.0失败。
 
 虽然高版本的ruby安装失败，但是我们可以试着安装它提示的版本2.2.2：
 
@@ -87,6 +91,8 @@ make install
 安装成功！
 
 > 关于上面的rvm命令，可以使用rvm help install命令查看帮助，很详细！
+
+
 
 ## CocoaPods的使用
 
