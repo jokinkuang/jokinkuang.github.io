@@ -509,7 +509,7 @@ Jekyll内变量操作是使用[Liquid语法](https://github.com/Shopify/liquid/w
 阅读·[Markdown转换器maruku的文档（支持TOC语法）](http://maruku.rubyforge.org/maruku.html) |
 
 
-[markdown-parser]: {{ site.w3c_url }}images/markdown/markdown-parser.jpg "markdown转换例子"
-[markdown-plain]: {{ site.w3c_url }}images/markdown/markdown-plain.jpg "html效果"
-[markdown-css]: {{ site.w3c_url }}images/markdown/markdown-css.jpg "添加css后html效果"
-[jekyll-layout-include]: {{ site.w3c_url }}images/jekyll/jekyll-layout-include.jpg "layout与include关系图"
+[markdown-parser]: {{ site.images_url }}markdown/markdown-parser.jpg "markdown转换例子"
+[markdown-plain]: {{ site.images_url }}markdown/markdown-plain.jpg "html效果"
+[markdown-css]: {{ site.images_url }}markdown/markdown-css.jpg "添加css后html效果"
+[jekyll-layout-include]: {{ site.images_url }}jekyll/jekyll-layout-include.jpg "layout与include关系图"
