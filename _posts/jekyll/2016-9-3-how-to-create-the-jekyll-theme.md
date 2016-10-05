@@ -504,6 +504,9 @@ Jekyll内变量操作是使用[Liquid语法](https://github.com/Shopify/liquid/w
 - 调整语法高亮的css定制自己的语法高亮颜色值
 - 你可能需要一个MarkdownDemo来测试站点的样式
 
+## 除此之外我做了什么
+请参考[我做了什么](http://www.jokinkuang.info/2016/09/18/what-did-i-do-for-the-blog.html)
+
 ## 上传自己的主题到JekyllThemes
 如果希望自己的主题可以让更多人看到或使用，可以上传到[JekyllThemes](http://jekyllthemes.org/)这个站点
 
