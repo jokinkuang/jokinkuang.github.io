@@ -20,6 +20,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.9.14)
     ffi (1.9.14-x64-mingw32)
+    ffi (1.9.14-x86-mingw32)
     gemoji (2.1.0)
     github-pages (89)
       activesupport (= 4.2.7)
@@ -104,6 +105,9 @@ GEM
     nokogiri (1.6.8-x64-mingw32)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
+    nokogiri (1.6.8-x86-mingw32)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     octokit (4.3.0)
       sawyer (~> 0.7.0, >= 0.5.3)
     pkg-config (1.1.7)
@@ -127,6 +131,7 @@ GEM
 PLATFORMS
   ruby
   x64-mingw32
+  x86-mingw32
 
 DEPENDENCIES
   github-pages

@@ -65,7 +65,7 @@ jekyll server
 1. 安装ruby环境
   下载[ruby for windows](http://rubyinstaller.org/downloads)，随便搜索即可，建议安装ruby2.0以上。
 2. 安装完毕，设置Windows环境变量
-  在我的电脑 - 属性 - 高级 - 环境变量 - 系统 - path字段，添加ruby的安装路径。比如`C:\Ruby22\bin;`
+  在我的电脑 - 属性 - 高级 - 环境变量 - 系统 - path字段，添加ruby的安装路径。比如`C:\Ruby22\bin;`，安装包有提供选项可以在安装时自动添加到path。
 3. 安装Jekyll
     打开命令行，输入gem.bat (Ruby22/bin/gem.bat)，如果没有找到该命令，说明环境变量还没有生效。在命令行输入`set a = b`，然后重启命令行即可(运行set只是让命令行重新加载环境变量)。
     执行`gem install jekyll`
@@ -73,21 +73,39 @@ jekyll server
     `gem install bundler`
 5. 使用bundler安装github pages的依赖
     `bundle install`
-
-    > 出现了错误:
-    > Please update your PATH to include build tools or download the DevKit
-    > from 'http://rubyinstaller.org/downloads' and follow the instructions
-    > at 'http://github.com/oneclick/rubyinstaller/wiki/Development-Kit'
-    > 大致意思是插件需要编译安装，而系统没有安装编译环境，只有运行环境，请按照wiki里面的步骤安装。
-
 6. 跑起来
     `bundle exec jekyll server`
 
-> ruby/bin下面的bundle与bundle.bat区别
->
-> bundle是ruby脚本而bundle.bat是windows批处理文件
-> 在windows命令行下，bundle其实执行的是bundle.bat，所以不会报错。bundle文件不会被识别为可执行文件。
-> 在mingw命令行下(mingw/msys.bat)，bundle可以成功执行，而bundle.bat则会因为使用了windows命令而报错。
+### bundle install失败
+bundle install出现了以下错误:
+
+Please update your PATH to include build tools or download the DevKit
+from 'http://rubyinstaller.org/downloads' and follow the instructions
+at 'http://github.com/oneclick/rubyinstaller/wiki/Development-Kit'
+大致意思是插件需要编译安装，而系统没有安装编译环境，只有运行环境，请按照wiki里面的步骤安装。
+
+修复：
+下载[ruby-devkit](http://rubyinstaller.org/downloads)，如果ruby是32位则下载32位的devkit，否则下载64位的。
+
+> ruby --version可以看到是32位还是64位
+
+安装：
+详细说明在[github wiki](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit)里
+
+1. 解压devkit到目录A
+2. 进入目录A
+3. 命令行下运行`ruby dk.rb init`
+4. 运行`ruby dk.rb review`
+5. 运行`ruby dk.rb install`
+6. 如果上述步骤只有info输出而没有warning输出，则应该安装成功了
+7. 测试`gem install json --platform=ruby`如果安装成功，则表示devkit安装成功
+8. 如果失败，可以重装ruby和ruby-devkit，或者选择更低的ruby版本
+
+### ruby/bin下面的bundle与bundle.bat区别
+
+bundle是ruby脚本而bundle.bat是windows批处理文件
+在windows命令行下，bundle其实执行的是bundle.bat，所以不会报错。bundle文件不会被识别为可执行文件。
+在mingw命令行下(mingw/msys.bat)，bundle可以成功执行，而bundle.bat则会因为使用了windows命令而报错。
 
 ## 需要一个网页原型
 
