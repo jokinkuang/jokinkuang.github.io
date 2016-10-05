@@ -36,7 +36,7 @@ In this post you can learn how to create your own jekyll theme
   `jekyll server`
 3. visit [127.0.0.1:4000](http://127.0.0.1:4000)
 
-## Github pages localization
+## Github Pages localization
 
 After Pushing the jekyll theme to github pages, the site would run on the github server which is different with the local environment. It may cause some display problems. So it's recommended to set up the github pages environment locally.
 
@@ -407,6 +407,108 @@ if you want to do some logic operation, you need to learn the [Liquid language](
     Way 2: `for cate in site.categories`，`cate[0]` is linux，`cate[1]` is the posts list
 
 > NOTE：{% raw %}{% %}{% endraw %} **can not break line**
+
+## What else did I do
+
+### Database File
+Jekyll dose not has database, but just like most `feed.xml` in jekyll themes, it just like a database file. Therefore, we can create a `postfile` to load all data we need and then get it by javascript when requesting the html page.
+
+A Postfile formatted with json:
+
+```json
+{
+  "posts":
+  [
+  {
+     "title": "step by step to create a Jekyll theme",
+     "words": "1932",
+     "author": "jokin",
+     "date": "2016-09-03 23:47:05",
+     "url": "/2016/09/03/how-to-create-the-jekyll-theme.html",
+     "pid": "20160903-154705",
+     "image": "/w3c/images/jekyll.jpg",
+     "categories": ["jekyll"],
+     "excerpt": "learn how to create the jekyll theme..."
+   }
+   , {... ...}
+  ]
+}
+```
+
+Liquid Syntax：
+
+{% raw %}
+
+```
+{
+  "posts":
+  [
+  {% for post in site.posts %}
+    {
+      "title": "{{ post.title }}",
+      "words": "{{ post.content | number_of_words }}",
+      "author": "{{ site.author }}",
+      "date": "{{ post.date | date:"%Y-%m-%d %H:%M:%S" }}",
+      "url": "{{ post.url }}",
+      "pid": "{{ post.pid }}",
+      "categories": [
+        {% for cate in post.categories %}
+          "{{ cate }}"
+        {% endfor %}
+      ]
+      ......
+    }
+  {% endfor %}
+  ]
+}
+```
+{% endraw %}
+
+[Download the Postfile](https://raw.githubusercontent.com/jokinkuang/stepbystep/master/db/Postfile)
+
+### A category a page
+Usually the categories html page in jekyll theme is one page:
+
+```
+linux
+    - shell
+mac
+    - ios
+    - xcode
+windows
+    - windows API
+```
+
+Because we only can loop it like this:
+
+{% raw %}
+```liquid
+{% for cates in site.categories %}
+{{ cates[0] }}
+  {% for post in cates[1] %}
+    {{ post.title }}
+  {% endfor %}
+{% endfor %}
+```
+{% endraw %}
+
+If we want a category a page, we can not loop. we have to add the new category page hand by hand.
+But with upper `postfile` we can do that with javascript at the fore-end in browser.
+
+We can loop it in browser to show the posts of the selected category.
+
+### Subdirs as Categories
+Jekyll default supports that `/windows/api/_posts/2016-9-22-category.md`, the `windows` and `api` would be merged into the post categories.
+
+But why not `_posts/windows/api/2016-9-22-category.md`.
+
+We can use Liquid script to implement this feature. In `page` variable, `page.path` refers to the source path string `_posts/windows/api/2016-9-22-category.md`, we can split it to get the subdirs we want.
+
+But note that, after that we can not access the `post.categories` or `site.categories` directly, cause the subdirs are not include.
+
+[Liquid script to get the post's categories](https://raw.githubusercontent.com/jokinkuang/stepbystep/master/_includes/post-categories.liquid)
+[Liquid script to get the site's categories](https://raw.githubusercontent.com/jokinkuang/stepbystep/master/_includes/total-categories.liquid)
+
 
 ## Upload your theme to JekyllThemes
 [JekyllThemes](http://jekyllthemes.org/)
