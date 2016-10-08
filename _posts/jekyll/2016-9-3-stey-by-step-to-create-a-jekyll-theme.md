@@ -86,6 +86,7 @@ If you already had the web prototype, you can merge into the jekyll theme now.
 ## What is Jekyll
 
 Jekyll is a static blog system, it dose not has the database and comment modules.
+
 > jekyll is writable before run and is read-only when running.
 
 ## How markdown Works in Jekyll
