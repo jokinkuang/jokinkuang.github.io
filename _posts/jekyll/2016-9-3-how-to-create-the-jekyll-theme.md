@@ -14,7 +14,7 @@ pid: 20160903-154705
 
 ## 搭建本地的Jekyll环境
 
-因为图方便所以个人直接在Ubuntu下搭建了环境，Windows平台可以网上搜索教程，个人推荐Windows安装虚拟机然后安装Ubuntu。
+因为图方便所以个人直接在Ubuntu下搭建了环境，在Mac下也几乎一样。
 
 1. 安装ruby环境
   `sudo apt-get install ruby`
@@ -75,6 +75,8 @@ jekyll server
     `bundle install`
 6. 跑起来
     `bundle exec jekyll server`
+7. 如果端口被占用
+    `bundle exec jekyll server --port 5000`
 
 ### bundle install失败
 bundle install出现了以下错误:
@@ -106,6 +108,17 @@ at 'http://github.com/oneclick/rubyinstaller/wiki/Development-Kit'
 bundle是ruby脚本而bundle.bat是windows批处理文件
 在windows命令行下，bundle其实执行的是bundle.bat，所以不会报错。bundle文件不会被识别为可执行文件。
 在mingw命令行下(mingw/msys.bat)，bundle可以成功执行，而bundle.bat则会因为使用了windows命令而报错。
+
+## 环境配置总结
+环境的配置，简而言之，只有以下的步骤：
+
+1. 安装ruby
+2. gem install jekyll
+3. gem install bundle
+4. git clone https://github.com/jokinkuang/stepbystep.git
+5. cd stepbystep
+6. bundle install
+7. bundle exec jekyll server
 
 ## 需要一个网页原型
 
