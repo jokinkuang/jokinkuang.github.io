@@ -126,7 +126,7 @@ pod install过程也会有各种坑。
 Mac下安装protobuf的简单教程，不同时期，安装方式可能不一样，现在的已经非常简单
 
 ### 下载源码
-`git clone [https://github.com/google/protobuf.git](https://github.com/google/protobuf.git)`
+`git clone https://github.com/google/protobuf.git`
 
 ### 编译
 `cd protobuf`
