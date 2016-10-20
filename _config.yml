@@ -5,6 +5,7 @@ email: 345106552@qq.com
 description: > # this means to ignore newlines until next "tag"
   Step By Step, a blog of jokinkuang
 
+#repository: jokinkuang/jokinkuang.github.io # solve the errors when change the post on jekyll running 
 
 # Site URL NOTE: if your site is base on subdir /blog you can change it to "www.XXX.com/blog"
 domain: "http://jokinkuang.github.io" # the domain URL for your site

@@ -2,7 +2,7 @@
 layout: post
 title: Visual Studio 快捷键
 categories:
-image:
+image: windows/vs.jpg
 date: 2016-10-11 17:20:10
 pid: 201610011-172010
 # excerpt: ""

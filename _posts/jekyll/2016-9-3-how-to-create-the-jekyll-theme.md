@@ -536,6 +536,12 @@ Jekyll内变量操作是使用[Liquid语法](https://github.com/Shopify/liquid/w
 
 > 注意：图片的规格最好一致，并且进行本地测试，否则即使提交了也很可能会被管理员拒绝合并代码
 
+## Jekyll
+Error: No repo name found. Specify using PAGES_REPO_NWO environment variables, 'repository' in your configuration, or set up an 'origin' git remote pointing to your github.com repository.
+
+ Error: No such file or directory - git rev-parse HEAD
+###
+
 ## 参考文档
 
 阅读·[Jekyll的中文文档](http://jekyll.bootcss.com/) | [英文文档](http://jekyllrb.com/)
