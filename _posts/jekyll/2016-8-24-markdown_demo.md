@@ -261,4 +261,4 @@ To see a list of every image we support, check out the Emoji Cheat Sheet.
 
 # 本文Markdown源码
 
-[本文源码](https://raw.githubusercontent.com/jokinkuang/jokinkuang.github.io/master/_posts/2016-8-24-markdown_demo.md)
+[本文源码](https://raw.githubusercontent.com/jokinkuang/jokinkuang.github.io/master/_posts/jekyll/2016-8-24-markdown_demo.md)

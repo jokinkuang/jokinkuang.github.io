@@ -83,7 +83,7 @@ Build Tools管理也在Android SDK管理工具里：
 
 
 
-[sdk-folder]: {{ site.images_url }}android/sdk-folder1.jpg
+[sdk-folder]: {{ site.images_url }}android/sdk-folder.jpg
 [sdk-manager]: {{ site.images_url }}android/sdk-manager.jpg
 [avd-manager]: {{ site.images_url }}android/avd-manager.jpg
 [build-tools-not-found]: {{ site.images_url }}android/build-tools-not-found.jpg
