@@ -1,0 +1,27 @@
+<script src="jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="rollups/rc4.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+		if(!String.prototype.trim) { 
+		   String.prototype.trim = function() { return this.replace(/^\s\s*/, '').replace(/\s\s*$/, ''); } 
+		}
+
+		var input = "";
+		var pwd = "iwantyou";
+
+		$.ajax({
+		   type: "GET",
+		   url: "output.txt",
+		   dataType: "text",
+		   success: function(data){
+				input = data;
+				output = CryptoJS.RC4.decrypt(input, pwd).toString(CryptoJS.enc.Utf8);
+				document.write(output);
+		   },
+		   error: function(){
+					$("#tip").text("由于脚本执行问题,您看到的不是动态生成的,要预览,请使用Sogou兼容模式,Firefox或IE9以上浏览器");
+				alert("Origin null is not allowed by Access-Control-Allow-Origin.\n 浏览器安全等级不允许本地Ajax操作文件 \n 请使用Sogou兼容模式,FireFox 或 IE 9预览");
+		   }
+		});
+});
+</script>
