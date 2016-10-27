@@ -4,7 +4,7 @@ title: 如何搭建Android的开发环境
 categories:
 date: 2016-10-14 16:31:35
 pid: 20161014-163135
-image: ios/ios.png
+image: android/android.jpg
 # you can override the settings in _config.yml here !!
 ---
 初接触Android需要了解的一系列东西
@@ -126,12 +126,58 @@ Gradle分为Gradle版本和AS Gradle Plugin插件版本，两者是不同的，�
 
 ![gradle-setting2][gradle-setting2]
 
+分别对应于根目录的`build.gradle`里的：
+
+```
+dependencies {
+    classpath 'com.android.tools.build:gradle:2.1.2'
+}
+```
+与根目录下`gradle\wrapper\gradle-wrapper.properties`里的：
+
+```
+distributionUrl=https\://services.gradle.org/distributions/gradle-2.10-all.zip
+```
+
 ### 字体设置
-字体设置很重要，因为习惯了大字体看代码，在`File - Settings - Editor - Font`设置。
+字体设置很重要，因为习惯了大字体看代码，在`File - Settings - Editor - Colors&Fonts - Font`设置。
 **注意**，需要先将默认方案另存为才能设置，默认的不支持改变。
 
 ![font-setting][font-setting]
 
+### Tab文件面板设置
+`Settings - Editor - General - EditorTabs`可以设置Tab的限制数目、打开文件的策略、布局等。
+
+还有另外一个地方设置，这里有一个上面不支持的选项：`Open New Tabs At The End`
+`Window - EditorTabs - 勾选Open New Tabs At The End`个人觉得这个选项挺好用
+
+### Build Variants设置
+`View - Tool Windows - Build Variants`可以选择项目编译的方案是Debug还是Release，对应于项目的`build.gradle`中的：
+
+```
+productFlavors {
+    instant {
+        minSdkVersion 21
+    }
+}
+```
+上面的配置在`Build - Make Project`操作后，将生成两个Build Variants：`instantDebug`与`instantRelease`。你可以在对应的Build Variants定制编译方案。
+
+### 设置文件头的作者信息
+`Settings - Editor - File and Code Templates - Includes - File Header`默认是
+
+```
+/**
+ * Created by ${USER} on ${DATE}.
+ */
+```
+修改为自己的名字即可
+
+### 插件管理
+`Settings - Plugins`这里可以禁用或启用Gradle插件。
+
+### 快捷键查看
+`Help - Default Keymap Reference`
 
 ## 错误与解决方案
 
