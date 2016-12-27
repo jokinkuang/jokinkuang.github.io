@@ -26,7 +26,7 @@ pid: 20161028-180450
 > 把上面的所有可选都去掉，最简的URL就是 协议://IP/，也即是 http://www.jokinkuang.info这样
 
 ## URL能直接使用中文吗
-URL是RFCXXX(比如RFC 1738)规定的，目前只有字母数字和它指定的部分符号才能使用。既然是个标准，说不定以后会变。目前的标准是，中文不能直接使用。
+URL是RFCXXX(比如RFC 1738)规定的，目前只有字母数字和它指定的部分符号才能使用。既然是个标准，说不定以后会变。目前的标准是，**中文不能直接使用**。
 
 计算机世界是，不能用不代表就没有办法。现在通常的做法是，将`中文`转换为`字符编码`最后转化为`URL编码`，`字符编码`几乎都是数字，所以可以安全地转换为`URL编码`。
 
@@ -40,7 +40,7 @@ URL是RFCXXX(比如RFC 1738)规定的，目前只有字母数字和它指定的�
 以`我`字为例，它的utf-8编码是`E6 88 91`，再转换为URL编码是`%E6%88%91`
 
 但不能排除有的浏览器会使用`gbk`编码：
-以`我`字为例，它的gbk编码是`CE D2`，再转换为URL编码是`%CE%D2`
+`我`字的gbk编码是`CE D2`，再转换为URL编码是`%CE%D2`
 
 所以，具体问题具体分析，如果`中文`转换为`字符编码`的过程是你自己控制的，那么解码时你指定对应的编码即可，如果这个过程不是你控制的（比如是浏览器控制的），那么你需要分析这个过程使用的编码，这样你才能从URL中得到正确的中文。
 
@@ -69,16 +69,75 @@ URL是RFCXXX(比如RFC 1738)规定的，目前只有字母数字和它指定的�
 
 
 ## 浏览器的地址栏为什么能够显示为中文？
-[前端系列]({{ site.base }}/article?category=%E5%89%8D%E7%AB%AF)
+既然URL不支持中文，为什么浏览器能够显示网址路径为中文呢？
 
-## URL的中文编码
+[url-chinese][url-chinese]
 
-## 例子1. 将中文放到URL里
-这个站点的URL，同样需要处理中文分类的问题。
+不知道什么时候开始的，浏览器认为网址里一大串奇妙的数字，不直观，于是，将地址栏里的这串奇怪的数字转码并显示为中文，方便阅读。**注意**，浏览器并不是修改了原来的网址，它只是用另一种方式显示，内里还是原来的URL地址。
 
-## 例子2. 从浏览器地址获取中文
+复制上图里面的中文网址，粘贴到文本，就能得到原始的URL地址：
+
+`http://www.jokinkuang.info/article?category=%E5%89%8D%E7%AB%AF`
+
+## 实例：本站点URL地址中的中文处理
+这个站点的URL包含分类信息，分类可能为中文，所以需要处理中文编码的问题，将`中文目录`转换为`URL编码`，然后再通过URL获取其中包含的中文分类。
+
+`中文目录`转换为`URL编码`：
+
+[article-url][article-url]
+
+这里，没有自己转换中文，而是交由浏览器自动处理含有中文的网址。这里埋下了一个缺陷。
+
+* 浏览器如何处理中文是不可确定的。
+
+它可能有以下的可能：
+
+1. 丢弃非标准URL的字符，也即是忽略中文
+2. 使用gbk编码中文
+3. 使用utf-8编码中文
+4. 你所想象不到的处理方式
+
+所以，此站点的做法是不完善的。此站点测试了几个浏览器，假想浏览器会使用网页的`charset meta`进行中文URL编码，本站点的`charset`是utf-8，所以脚本直接使用utf-8进行URL解码了。
+
+```javascript
+//Get URL Parameters
+function getUrlParam(name) {
+    var re = /<meta.*charset=([^"]+).*?>/i;
+    var charset = document.documentElement.innerHTML.match(re)[1];
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    // window.location.search 是指 "path？param=value" 中问号后面的字符串 "?param=value"
+    // substr(1) 是指 "param=value"
+    // match 是查找得到包含 "value" 的数组
+    if (r != null) {
+      if (charset == "utf-8") {
+        // alert("document charset utf-8");
+        return decodeURIComponent(r[2]);  // encode/decodeURIComponent 使用 UTF-8 编解码
+      }
+      else {
+        // alert("document charset gbk");
+        return unescape(r[2]); // ECMAScript v3 已从标准中删除了 unescape() 函数，并反对使用它
+      }
+    }
+    return null;
+}
+```
+**注释**：ECMAScript v3 已从标准中删除了 unescape() 函数，并反对使用它，因此应该用 decodeURI() 和 decodeURIComponent() 取而代之。
+
+如何修复上面的问题？
+
+不要直接使用含中文的URL，不要让浏览器转码，自己转码，使用URL编码后的地址`/article?category=%E5%89%8D%E7%AB%AF`作为链接，这样脚本里就知道该URL地址
+
+## encodeURI与encodeURIComponent区别
+上面出现了encodeURI和encodeURIComponent，所以一般情况下，都会看看这两者有什么区别。
+
+1. 两者都是
+
+
 这个站点的URL，同样需要处理中文分类的问题。
 
 [wo-zz-tool]: {{ site.images_url }}frontend/wo-zz-tool.jpg
 [wo-text-hex]: {{ site.images_url }}frontend/wo-text-hex.jpg
 [wo-unicode-list]: {{ site.images_url }}frontend/wo-unicode-list.jpg
+[url-chinese]: {{ site.images_url }}frontend/url-chinese.jpg
+[article-url]: {{ site.images_url }}frontend/article-url.jpg

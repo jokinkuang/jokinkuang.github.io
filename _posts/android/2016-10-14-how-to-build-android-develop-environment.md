@@ -40,6 +40,9 @@ API (Application Programming Interface)，中文为应用程序编程接口，�
 ### JNI
 Android项目里会看到不少jni，JNI (Java Native Interface)，中文为Java本地接口，提供了若干的API实现了Java和其他语言的通信（主要是C&C++），允许Java代码与其它代码进行交互。
 
+### NDK
+JNI的开发工具包即是NDK (Native Development Kit)，所以如果需要使用C++等语言开发Android，则需要NDK工具包，AndroidStudio插件管理可以安装。AndroidStudio默认不安装NDK，因为如果使用JAVA开发Android是不需要NDK工具包的。
+
 ### Android SDK
 安卓开发工具包，Android的SDK管理工具叫SDK Manager，在Android SDK根目录下。为什么不像JDK一样，Android SDK叫ADK呢~
 
@@ -138,6 +141,9 @@ dependencies {
 ```
 distributionUrl=https\://services.gradle.org/distributions/gradle-2.10-all.zip
 ```
+
+> 一般来说，修改了Gradle设置，就需要调用Sync Project with Gradle Files操作。曾经试过修改版本号，导致The APK file not exist on disk错误，清理项目重新编译都不行，直到同步Gradle后。
+
 
 ### 字体设置
 字体设置很重要，因为习惯了大字体看代码，在`File - Settings - Editor - Colors&Fonts - Font`设置。
