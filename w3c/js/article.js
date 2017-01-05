@@ -74,6 +74,14 @@ $(document).ready(function(){
     return tmp.posts;
   }
 
+  /** sort by desc */
+  var sortPostsByPin = function(posts) {
+    posts.sort(function(post1, post2) {
+      return post2.pin - post1.pin;
+    });
+    return posts;
+  }
+
   /** return the pagination-filtered posts (num >= 1) */
   var getPostsByPageNum = function(posts, num) {
     if (num <= 0) {
@@ -103,6 +111,7 @@ $(document).ready(function(){
     dataType: "json",
     success: function (data) {
       g_posts = getPostsWithCategory(data, g_category);
+      g_posts = sortPostsByPin(g_posts);
 
       $.jqPaginator('#paginator', {
         totalCounts: g_posts.length,
