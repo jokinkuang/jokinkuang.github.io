@@ -5,7 +5,7 @@ email: 345106552@qq.com
 description: > # this means to ignore newlines until next "tag"
   Step By Step, a blog of jokinkuang
 
-#repository: jokinkuang/jokinkuang.github.io # solve the errors when change the post on jekyll running 
+#repository: jokinkuang/jokinkuang.github.io # solve the errors when change the post on jekyll running
 
 # Site URL NOTE: if your site is base on subdir /blog you can change it to "www.XXX.com/blog"
 domain: "http://jokinkuang.github.io" # the domain URL for your site
@@ -16,6 +16,9 @@ w3c_url: "/w3c/"  # the base url of css js and images
 images_url: "/w3c/images/" # the base url of post images
 postfile: "/db/Postfile" # the Database
 sitefile: "/db/Sitefile" # the Database
+
+# pagination
+page_size: 5
 
 # 3rd URL
 duoshuo_short_name: "jokin" # the user of user.domain.com
