@@ -18,7 +18,7 @@ postfile: "/db/Postfile" # the Database
 sitefile: "/db/Sitefile" # the Database
 
 # pagination
-page_size: 5
+page_size: 7
 
 # 3rd URL
 duoshuo_short_name: "jokin" # the user of user.domain.com
