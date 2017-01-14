@@ -1,5 +1,4 @@
 # Site settings
-version: 1.1.0
 title: Step By Step
 author: jokin
 email: 345106552@qq.com
@@ -42,6 +41,7 @@ kramdown:
   hard_wrap: true # a newline in markdown text would be changed to <br>
 gems:
   - jemoji # install the emoji plugin
+version: 1.1.0
 
 # Following is got in Github Help With Configuring Jekyll
 
