@@ -87,8 +87,17 @@ $(document).ready(function(){
 
   /** sort by desc */
   var sortPostsByPin = function(posts) {
+    // temporary array holds objects with position and sort-value
     posts.sort(function(post1, post2) {
-      return post2.pin - post1.pin;
+      var ret = post2.pin - post1.pin;
+      // Array.sort() 是不稳定算法，也即是说，相等的元素，原来的顺序可能会被打乱，所以再使用日期比较
+      // FIXME 数组本来有序，可以优化
+      if (ret == 0) {
+        var date1 = new Date(post1.date);
+        var date2 = new Date(post2.date);
+        return date2.getTime() - date1.getTime();
+      }
+      return ret;
     });
     return posts;
   }
