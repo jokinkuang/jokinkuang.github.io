@@ -71,7 +71,7 @@ URL是RFCXXX(比如RFC 1738)规定的，目前只有字母数字和它指定的�
 ## 浏览器的地址栏为什么能够显示为中文？
 既然URL不支持中文，为什么浏览器能够显示网址路径为中文呢？
 
-[url-chinese][url-chinese]
+![url-chinese][url-chinese]
 
 不知道什么时候开始的，浏览器认为网址里一大串奇妙的数字，不直观，于是，将地址栏里的这串奇怪的数字转码并显示为中文，方便阅读。**注意**，浏览器并不是修改了原来的网址，它只是用另一种方式显示，内里还是原来的URL地址。
 
@@ -84,7 +84,7 @@ URL是RFCXXX(比如RFC 1738)规定的，目前只有字母数字和它指定的�
 
 `中文目录`转换为`URL编码`：
 
-[article-url][article-url]
+![category-url][category-url]
 
 这里，没有自己转换中文，而是交由浏览器自动处理含有中文的网址。这里埋下了一个缺陷。
 
@@ -97,10 +97,10 @@ URL是RFCXXX(比如RFC 1738)规定的，目前只有字母数字和它指定的�
 3. 使用utf-8编码中文
 4. 你所想象不到的处理方式
 
-所以，此站点的做法是不完善的。此站点测试了几个浏览器，假想浏览器会使用网页的`charset meta`进行中文URL编码，本站点的`charset`是utf-8，所以脚本直接使用utf-8进行URL解码了。
+所以，此站点的做法是不完善的。假想浏览器会使用网页的`charset meta`进行中文URL编码，本站点的`charset`是utf-8，所以脚本会使用utf-8进行URL解码（注：未作深入考究，也可能，现在的浏览器都使用UTF-8编码，即使如此，下面的代码仍旧生效，因为本页面的charset是utf-8，脚本会始终使用utf-8解码。
 
 ```javascript
-//Get URL Parameters
+// get URL parameters
 function getUrlParam(name) {
     var re = /<meta.*charset=([^"]+).*?>/i;
     var charset = document.documentElement.innerHTML.match(re)[1];
@@ -126,18 +126,69 @@ function getUrlParam(name) {
 
 如何修复上面的问题？
 
-不要直接使用含中文的URL，不要让浏览器转码，自己转码，使用URL编码后的地址`/article?category=%E5%89%8D%E7%AB%AF`作为链接，这样脚本里就知道该URL地址
+不要直接使用含中文的URL，不要让浏览器转码，而是自己转码，使用URL编码后的地址`/article?category=%E5%89%8D%E7%AB%AF`作为链接，这样自己的脚本里就知道该URL地址的编码方式，也就可以安全的转码。
 
 ## encodeURI与encodeURIComponent区别
-上面出现了encodeURI和encodeURIComponent，所以一般情况下，都会看看这两者有什么区别。
+上面出现了`encodeURI`和`encodeURIComponent`，所以一般情况下，都会看看这两者有什么区别。
 
-1. 两者都是
+**相同：**两者都是对一个URI进行编码，并且都不会对ASCII字母和数字进行编码，也不会对这些ASCII标点符号进行编码：`- _ . ! ~ * ' ( )`
+**区别：**前者会保留URI组成符号，后者连URI组成符号也进行编码
+**测试：**对`http://www.jokinkuang.info/article?category=前端`分别执行
 
+```javascript
+<script type="text/javascript">
+document.write(encodeURI("http://www.jokinkuang.info/article?category=前端"))
+document.write("<br />")
+document.write(encodeURIComponent("http://www.jokinkuang.info/article?category=前端"))
+document.write("<br />")
+document.write(encodeURIComponent("http://www.jokinkuang.info/article?category=前端    ,category/"))
+document.write("<br />")
+</script>
+```
+输出结果分别是：
+`http://www.jokinkuang.info/article?category=%E5%89%8D%E7%AB%AF`
+`http%3A%2F%2Fwww.jokinkuang.info%2Farticle%3Fcategory%3D%E5%89%8D%E7%AB%AF`
+`http%3A%2F%2Fwww.jokinkuang.info%2Farticle%3Fcategory%3D%E5%89%8D%E7%AB%AF%20%20%20%20%2Ccategory%2F`
 
-这个站点的URL，同样需要处理中文分类的问题。
+**总结：**
+`encodeURI`只会对空格、中文、特殊字符等进行编码，不会对URI的组成符号`;/?:@&=+$,#`进行编码。
+`encodeURIComponent`不仅会对空格、中文、特殊字符等进行编码，还会对URI的组成符号`;/?:@&=+$,#`进行编码。
+
+如果是URI的一部分，比如参数是协议、主机名、URL路径、查询字符串等，则需要先对参数值执行encodeURIComponent才加到URI参数里。
+如果是直接可访问的URI，则直接执行encodeURI。
+
+**实例：**
+把`http://www.jokinkuang.info/article?category=前端`作为URI参数传递
+
+```javascript
+<script type="text/javascript">
+// 1. encodeURIComponent
+document.write(encodeURIComponent("http://www.jokinkuang.info/article?category=前端")); document.write("<br />");
+// 2. encodeURI
+var uri = encodeURI("http://www.baidu.com?url="+encodeURIComponent("http://www.jokinkuang.info/article?category=前端"));
+document.write(uri); document.write("<br />"); document.write("解码<br />");
+// 3. decodeURI
+document.write(decodeURI(uri)); document.write("<br />")
+// 4. decodeURIComponent
+document.write(decodeURIComponent(decodeURI(uri))); document.write("<br />")
+</script>
+```
+输出
+
+```
+http%3A%2F%2Fwww.jokinkuang.info%2Farticle%3Fcategory%3D%E5%89%8D%E7%AB%AF
+http://www.baidu.com?url=http%253A%252F%252Fwww.jokinkuang.info%252Farticle%253Fcategory%253D%25E5%2589%258D%25E7%25AB%25AF
+解码
+http://www.baidu.com?url=http%3A%2F%2Fwww.jokinkuang.info%2Farticle%3Fcategory%3D%E5%89%8D%E7%AB%AF
+http://www.baidu.com?url=http://www.jokinkuang.info/article?category=前端
+```
+
+从结果来看，
+**encodeURIComponent的结果再执行encodeURI，还是会再进行编码，比如`%`会被再次编码为`%25`**。
+**decodeURIComponent可以将整个URI作为参数解码**。
 
 [wo-zz-tool]: {{ site.images_url }}frontend/wo-zz-tool.jpg
 [wo-text-hex]: {{ site.images_url }}frontend/wo-text-hex.jpg
 [wo-unicode-list]: {{ site.images_url }}frontend/wo-unicode-list.jpg
 [url-chinese]: {{ site.images_url }}frontend/url-chinese.jpg
-[article-url]: {{ site.images_url }}frontend/article-url.jpg
+[category-url]: {{ site.images_url }}frontend/category-url.jpg

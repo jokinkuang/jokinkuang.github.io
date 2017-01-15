@@ -201,25 +201,74 @@ Jekyll没有评论功能，所以需要第三方的评论插件。
 有一个思路是，利用Jekyll的特性，把文件作为数据库来处理，每次增删改查修改文件即可。
 这样虽然能够展示，但是有另一个功能无法实现，那就是别人对说说的评论。
 
-偶然的机会，注意到了多说的评论列表，这和我想要的效果差不多
+偶然的机会，注意到了多说的评论列表，突然醒悟，这和我想要的效果不是差不多么。
 
-![duoshuo](duoshuo)
+![duoshuo][duoshuo]
 
-只是多了：
+只要：
 
-1. 评论框
-2. 别人的评论
+* 除了自己外，禁止别人对此主题的评论
+* 修改文案，使其看起来不像评论
 
-所以，隐藏了评论框，禁止别人对这个主题的评论，效果就和说说列表一样了！另外，如果是自己的账号则显示评论框，通过评论就可以发表说说了！
+所以，页面展示时，先判断当前用户角色，如果是自己的账号，则展示评论框，自己的评论就会成为一条说说。如果角色不是自己的，则隐藏评论框。
 
+### 多说原始文案修改
+文案的修改思路是，监听多说插件的加载，加载完成的时候，替换成自己的文案。
 
-### 多说
+思路简单，但是多说插件并没有提供加载完成的通知，所以，只好使用轮询来监听，因为页面加载的时间非常短，所以轮询也不会持续太久。
+
+```javascript
+var executeOnLoad = function(selector, loaded_callback) {
+  var $elements = $(selector);
+  if($elements.length) {
+    $elements.each(function(){
+      loaded_callback.call($(this));
+    });
+  } else {
+    setTimeout(function() { executeOnLoad(selector, loaded_callback); }, 100);
+  }
+}
+executeOnLoad(".ds-comments-tab-duoshuo", function(){ this.text("博主的说说"); });
+```
 
 ## 锚点失效
+测试过程发现，设置的锚点链接经常不生效，从失效的频率来看，很可能是代码引起的。经过多次对比普通静态页面的锚点与当前页面的锚点，可以猜想原因是这样子：当前页面的锚点的内容是异步加载的，点击锚点链接的时候，页面其实已经跳转到锚点，由于锚点的内容还没加载完成，页面不需要滚动，后来锚点的内容动态加载完成，但页面已经不会再滚动了。反过来，如果锚点的内容及时加载完成，锚点就能正常跳转。这就是锚点总是失效的原因。
+
+要解决这个问题，必须保证锚点操作前，锚点节点已经加载完成；或者锚点节点加载完成的时候，再执行一次锚点跳转。
+
+锚点链接是浏览器的行为，所以这里只能在节点加载完成的时候，再次执行锚点跳转。
+
+由于锚点节点就是多说插件，所以无法知道它什么时候加载完成，也只好同样使用了上面的轮询方式。如果有Dom节点监听事件，应该会比轮询要好。
+
+```javascript
+// if found .ds-comments-info then consider comments has loaded
+executeOnLoad(".ds-comments-info", function(){
+  if ( $(window.location.hash).length > 0 ) {
+    $(window).scrollTop( $(window.location.hash).offset().top );
+  }
+// hash就是锚点
+});
+```
 
 ## TOC目录
+为什么要说TOC目录呢，因为在这里学到了一点有用的东西 :smile:
+
+说起markdown的TOC目录自动生成，只是看到网上各种教程说那样使用，其实并没有说明具体的语法。
+
+因为markdown解析器是kramdown，所以我尝试在kramdown的官方文档、Github仓库里查找，结果并没有发现TOC目录的任何语法说明。
+
+后来看到kramdown的简介: kramdown (sic, not Kramdown or KramDown, just kramdown) ...这段挺风趣... various extensions that have been made popular by the PHP Markdown Extra package and Maruku.
+
+于是猜想，TOC不会是继承于PHP Markdown 或 Maruku吧。
+
+结果，在Maruku的文档里，惊喜的发现了少量不太详尽，但至少说明了TOC目录语法的文档。
 
 ## SEO
+某日走在路上，突然想起网站SEO，SEO是什么缩写呢？脑袋里竟然一字一句的推敲出了Search Engine Optimization，因为曾经听说，SEO并不是一开始就有的，是有了搜索引擎后针对搜索引擎的搜索规则才衍生出的词，所以轻易就推导出Search Engine，后面的Optimization是因为VC总是有个O选项表示优化。
+
+搜索引擎优化，说白了就是迎合搜索引擎的搜索规则而进行的优化。所以真正要优化，需要了解具体的某个搜索引擎的规则。
+
+当前站点只是做了普通的SEO。
 
 [category]: {{ site.images_url }}jekyll/category.jpg
 [duoshuo]: {{ site.images_url }}jekyll/duoshuo.jpg
