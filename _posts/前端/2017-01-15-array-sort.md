@@ -48,7 +48,7 @@ var sortPostsByPin = function(posts) {
 }
 ```
 
-**明明原来的列表已经是有序的，再排序一次显然浪费了资源**，所以不使用日期来比较，而使用原来的次序来比较，可以节省资源。
+**原来的列表已经是有序的，再排序一次显然浪费了资源**，所以不使用日期来比较，而使用原来的次序来比较，可以节省资源。
 
 ```javascript
 var sortPostsByPin = function(posts) {
@@ -65,7 +65,9 @@ var sortPostsByPin = function(posts) {
 }
 ```
 
+**上面只优化了比较过程中创建对象的消耗，还没真正利用起原列表的有序性**，待续
+
 ## 参考文档
 
 [W3cSchool](http://www.w3school.com.cn/jsref/jsref_sort.asp) |
-[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) | 
+[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) |
