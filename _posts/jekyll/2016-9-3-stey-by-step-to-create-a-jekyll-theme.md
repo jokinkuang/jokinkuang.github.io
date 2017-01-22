@@ -384,12 +384,12 @@ if you want to do some logic operation, you need to learn the [Liquid language](
    ```liquid
    {% if site.title == "" %}
    {% assign title = "A" %}
-   ```
    {% elsif site.title == "stepbystep" %}
    {% assign title = "B" %}
    {% else %}
    {% assign title = "C" %}
    {% endif %}
+   ```
    {% endraw %}
 
 4. for
