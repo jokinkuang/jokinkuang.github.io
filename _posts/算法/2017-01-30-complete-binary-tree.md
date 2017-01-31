@@ -98,7 +98,7 @@ B 结点：深度为4，高度为1，度为0。
 当编号从n开始，就相当于数组往左移动了n位，思路参考上面，和高中数学里移动x、y坐标轴一样（没想到是高中数学）。
 ![math-x-y][math-x-y]
 
-
+学习笔记，仅供参考
 
 [tree-node]: {{ site.images_url }}algorithm/tree/tree-node.jpg
 [tree-deep-height-degree]: {{ site.images_url }}algorithm/tree/tree-deep-height-degree.jpg
