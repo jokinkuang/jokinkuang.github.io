@@ -217,7 +217,7 @@ a.grey-link, a.grey-link:hover, a.grey-link:visited {
     </div>
 		<div class="title">{{ page.title }}</div>
 		<div class="meta">
-            <span class="wordage">字数·{{ page.content | number_of_words }}</span>
+            <span class="wordage">字数·{{ page.content | strip_html | strip_newlines | size }}</span>
             <!-- <span class="views-count">阅读5448</span> -->
             <span ><a class="grey-link post-data" target="_parent" href="#comments" data-method="comments" data-thread-key="{{ page.pid }}" data-text="评论·%s">评论0</a></span>
 						<span class="post-data" data-method="likes" data-thread-key="{{ page.pid }}" data-text="喜欢·%s">喜欢0</span>

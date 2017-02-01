@@ -48,7 +48,7 @@
     {% assign categories = result | split:"," %}
     {
       "title": "{{ post.title }}",
-      "words": "{{ post.content | number_of_words }}",
+      "words": "{{ post.content | strip_html | strip_newlines | size }}",
       "author": "{{ site.author }}",
       "date": "{{ post.date | date:"%Y-%m-%d %H:%M:%S" }}",
       "url": "{{ post.url }}",
