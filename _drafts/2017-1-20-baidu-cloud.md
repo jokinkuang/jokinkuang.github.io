@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 在搭建这个站点过程我做了什么
+title: 给站点加入百度云加速
 categories: jekyll
 image: ""
-date: 2016-9-18 23:22:07
-pid: 20160918-232207
+date: 2017-1-20 15:50:17
+pid: 20170120-155017
 # excerpt: ""
 # you can override the settings in _config.yml here !!
 ---
