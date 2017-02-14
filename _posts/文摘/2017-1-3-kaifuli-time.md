@@ -5,7 +5,7 @@ categories:
 date: 2017-1-3 10:52:10
 pid: 20170103-105210
 image: prose/time.jpg
-pin: 1000
+pin: 0
 # you can override the settings in _config.yml here !!
 ---
 > 2016年尾，回想起过去一年做过的事情，能值得称道的寥寥无几，还是感概于自己的拖延症，逛别人的博客无意中看到了这篇文章，像被打了一针鸡血，于是决定把它搬过来，悠哉的时候读上一读

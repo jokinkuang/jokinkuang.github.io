@@ -5,9 +5,9 @@
     <title>个人HTML简历</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Bootstrap是Twitter推出的一个用于前端开发的开源工具包。它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。Bootstrap中文网致力于为广大国内开发者提供详尽的中文文档、代码实例等，助力开发者掌握并使用这一框架。">
-<meta name="keywords" content="Bootstrap,CSS,CSS框架,CSS framework,javascript,bootcss,bootstrap开发,bootstrap代码,bootstrap入门">
+    <meta name="keywords" content="Bootstrap,CSS,CSS框架,CSS framework,javascript,bootcss,bootstrap开发,bootstrap代码,bootstrap入门">
     <meta name="author" content="Bootstrap中文网">
-	
+
 
     <!-- Le styles -->
     <link href="assets/plugins/css/bootstrap.css" rel="stylesheet">
@@ -24,28 +24,26 @@
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="assets/ico/favicon.png">
-    
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
 
-	<!-- jQuery要比$(document)先引入 -->
-	<script src="assets/plugins/js/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src="assets/js/components/core-min.js"></script>
-	<script type="text/javascript" src="assets/js/rollups/rc4.js"></script>
+  	<!-- jQuery要比$(document)先引入 -->
+  	<script src="assets/plugins/js/jquery-1.11.0.min.js"></script>
+  	<script type="text/javascript" src="assets/js/components/core-min.js"></script>
+  	<script type="text/javascript" src="assets/js/rollups/rc4.js"></script>
   </head>
 
   <style type="text/css">
   body{
-	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+	   font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
   }
   body > .navbar .brand {
     color: rgb(100, 100, 100);
   }
   .page-header h1 small {
-	font-size: 12px;
-	color: #666;
-	display: block;
-	
+	  font-size: 12px;
+	  color: #666;
+	  display: block;
   }
 
   .footer a,.footer a:hover{
@@ -71,7 +69,7 @@
     left: 0px;
     display: block;
     float: none;
-    margin: 0px 10px 0   
+    margin: 0px 10px 0
   }
  /*Section*/
  section {
@@ -83,7 +81,7 @@
  }
  .tr-header td:after{
 	content: ':';
- }  
+ }
  /* 覆盖bootstrap.css的img的width,防止在IE显示异常 */
  img {
  	box-sizing: border-box;
@@ -101,7 +99,7 @@
     border-top: 1px solid rgb(221, 221, 221);
  }
  td.img{
-	text-align:center;	
+	text-align:center;
  }
  /* 覆盖bootstrap.css的pre */
  pre{
@@ -125,7 +123,7 @@
 	font-size: 14px;
 	font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
  }
- 
+
  /*Panel*/
  .pricing-table {
 	border: 1px solid rgba(204, 204, 204, 0.8);
@@ -147,7 +145,7 @@
 	-webkit-box-sizing: border-box;
 }
  blockquote pre {
-    margin-bottom: 0px;
+    margin-bottom: 15px;
     font-size: 17.5px;
     font-weight: 300;
     line-height: 1.25;
@@ -164,7 +162,7 @@
 	word-break: break-all;
 	word-wrap: break-word;
 	white-space: pre-wrap;
-	font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif; 
+	font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
  }
  pre {
     margin: 0px 0px 0px;
@@ -176,8 +174,8 @@
   //* Made By XK 2013.9
   //***************************
 	$(document).ready(function(){
-		if(!String.prototype.trim) { 
-		   String.prototype.trim = function() { return this.replace(/^\s\s*/, '').replace(/\s\s*$/, ''); } 
+		if(!String.prototype.trim) {
+		   String.prototype.trim = function() { return this.replace(/^\s\s*/, '').replace(/\s\s*$/, ''); }
 		}
 
 		var file = "";
@@ -200,7 +198,7 @@
 		   }
 		});
 
-		
+
 		$("#unlock").click(function() {
 			var pwd = $("#password").val();
 
@@ -220,7 +218,7 @@
 				$("#password").focus();
 			}
 		});
-		
+
         var resizeTable=function(_t_column){
             /**清空标签*/
 			$("#nav").empty();
@@ -230,7 +228,7 @@
 				if(_model.title.format=="table"){
 					models[_i].title.t_column=_t_column;
 				}
-			}  
+			}
 			init();
         };
 
@@ -244,14 +242,14 @@
 				if(_model.title.format=="table"){
 					models[_i].title.t_column=_t_column;
 				}
-			}  
+			}
 			init();
 		};
-		
+
 		//**Objects 只用于显示对象的结构以便被访问 和 存储对象常量属性 */
 		var model={
-			title:"",	//**对象 
-			datas:""	//**[对象|值]数组 
+			title:"",	//**对象
+			datas:""	//**[对象|值]数组
 		};
 		var title={
 			title:"",
@@ -285,10 +283,10 @@
 			type:0,
 			value:""
 		};
-		
+
 		//**全局变量,存储模块列表/
 		var models=new Array();
-		
+
 		var toObject = function(data){
 			var _models=data.split("/||");
 			var _model;
@@ -301,7 +299,7 @@
 				var _parts=_model.split("/|");
 				var _title=_parts[0].trim();
 				var _data=_parts[1].trim();
-				
+
 				//**标题段*/
 				if(_title==="" || _data===""){
 					alert("toObject空的模块标题或内容");
@@ -314,23 +312,23 @@
 				}else{
 					_title="{"+_title+"'}";
 				}
-				
+
 				var tt=eval("("+_title.trim()+")");
 				var _model = new Object();
 				_model.title=tt;
-				
+
 				//**数据段*/
 				_model.datas=_data;
-				
+
 				//**解析数据段*/
 				switch(_model.title.format){
 					case "table" : toTable(_model);break;
 					case "list" : toList(_model);break;
 					default : break;
 				}
-			}			
+			}
 		}
-		
+
 		var toTable = function(_model){
 			if(_model===""){
 				alert("toTable: 空的模块");
@@ -338,26 +336,26 @@
 			}
 			var _title=_model.title;
 			var _data=_model.datas;
-			
+
 			if(_data.charAt(_data.length-1)===';' && _data.charAt(_data.length-2)===';' && _data.charAt(_data.length-3)==='/'){	//**修正 a;;||与a|| 的兼容*/
 				_data=_data.substring(0,_data.length-3);
 			}
 			_data=_data.split("/;;");
-			
+
 			var _t_datas=new Array();
-			var _t_index=0;				
+			var _t_index=0;
 			var _cells=new Array();
 			var _c_index=0;
-	
+
 			for(_d in _data){
 				//**标题|行内容|单元格内容*/
 				if(_data[_d].indexOf(':')===-1){
 					if(_data[_d].indexOf('/;')===-1){
-						if(_d % 2===0){							//**下标为偶数->才是标题*/	
+						if(_d % 2===0){							//**下标为偶数->才是标题*/
 							if(_t_index>0){
 								_cells=new Array();				//**下一个数据段数组初始化*/
 								_c_index=0;						//**初始化*/
-							}							
+							}
 							_t_data=new Object();
 							_t_data.tip=_data[_d].trim();
 							_t_data.cells=_cells;				//**先将_cells存入数组,再改变_cells的值*/
@@ -371,7 +369,7 @@
 							_cell.type=cell.LINE;
 							_cell.value=_data[_d];
 							_cells[_c_index]=_cell;
-							_c_index=_c_index+1;							
+							_c_index=_c_index+1;
 						}
 					}else{
 						var _lines=_data[_d].split("/;");
@@ -394,14 +392,14 @@
 						_cell.value=_tbs[_t].trim();
 						_cells[_c_index]=_cell;
 						_c_index=_c_index+1;
-					}					
+					}
 				}
-			}			
+			}
 			_model.datas=_t_datas;
-			
+
 			models.push(_model);
 		}
-		
+
 		var initTable = function(_id,_model){
 			if(_model===""){
 				alert("initTable: 空的模块");
@@ -410,7 +408,7 @@
 			var _title=_model.title;
 			var _datas=_model.datas;
 			var _id=_id;
-			
+
 			var t_column;
 			if(_title.format=="table"){
 				t_column=_title.t_column;
@@ -418,30 +416,30 @@
 			//document.writeln("<h1>"+_model.title.title+"</h1>");
 			var table=document.createElement("table");
 			table.className="table table-bordered";
-			
+
 			for(_d in _datas){
-                //** Attention: old DOM would insert Row/Cell at the first of table, 
-                //              But new DOM would insert at the tail of table! 
+                //** Attention: old DOM would insert Row/Cell at the first of table,
+                //              But new DOM would insert at the tail of table!
                 //   Fix: insert by index -1 to force to insert at the tail.
                 //*/
-				var tr=table.insertRow(-1);   
+				var tr=table.insertRow(-1);
 				tr.className="tr-header";
 				var td=tr.insertCell(-1);
 				td.colSpan=t_column<=0 ? 1 : t_column;   				//**IE不支持colSpan<=0/
 				td.innerHTML=_datas[_d].tip;
-				
+
 				//document.writeln("<h6>"+_datas[_d].tip+"</h6>");
 				//**思路: 先存在tr 或 即时创建tr   使用后者*//*
 
 				var _cells=_datas[_d].cells;
 				var _n=0,_img=0,_row=0,_imgRow;
-				for(var _c=0;_c<_cells.length;_c++){						
-					///**行单元格*/					
+				for(var _c=0;_c<_cells.length;_c++){
+					///**行单元格*/
 					if(_cells[_c].type===cell.LINE){
 						td=table.insertRow(-1).insertCell(-1);
 						td.colSpan=t_column<=0 ? 1 : t_column; 			//**IE不支持colSpan<=0/
 						if(_cells[_c].value.charAt(0)==='\r'||_cells[_c].value.charAt(0)==='\n'){
-							_cells[_c].value="\n"+_cells[_c].value;  
+							_cells[_c].value="\n"+_cells[_c].value;
 						}
 						td.innerHTML="<pre>"+_cells[_c].value+"</pre>"; //**如第一个是换行,PRE忽略一个换行,唯有在前面添加一个换行符/
 					}else{
@@ -511,7 +509,7 @@
 							}
 							_n=_n+1;
 						}else{
-							_c=parseInt(_c) + 1;	
+							_c=parseInt(_c) + 1;
 							td.className="img";
 							td.colSpan=2;
 							td.rowSpan=4;
@@ -522,7 +520,7 @@
 							_imgRow=_n;	//**记录img的位置/
 							_n=_n+2;	//**相当于铺了2格/
 						}
-						
+
 					}
 					//
 				}
@@ -551,17 +549,17 @@
 			}
 			var _title=_model.title;
 			var _datas=_model.datas;
-			
+
 			if(_datas.charAt(_datas.length-1)===';' && _datas.charAt(_datas.length-2)===';' && _datas.charAt(_datas.length-3)==='/'){	//**修正 a;;||与a|| 的兼容*/
 				_datas=_datas.substring(0,_datas.length-3);
 			}
 			_datas=_datas.trim().split("/;;");
-			
+
 			var _l_datas=new Array();
-			var _i=0;				
+			var _i=0;
 			var _lists=new Array();
 			var _j=0;
-	
+
 			for(_d in _datas){
 				var _data = _datas[_d].trim();
 				//**标题|内容|*/
@@ -596,14 +594,14 @@
 						_oline.type = line.type;
 						_oline.value = _line;
 					}
-					_lines[_l] = _oline;	
+					_lines[_l] = _oline;
 				}
 			}
 			_model.datas=_l_datas;
-			
+
 			models.push(_model);
 		}
-		
+
 		var initList = function(_id,_model){
 			if(_model===""){
 				alert("initList: 空的模块");
@@ -612,12 +610,12 @@
 			var _title=_model.title;
 			var _datas=_model.datas;
 			var _id=_id;
-			
+
 			var _html="";
-			
+
 			//document.writeln("<h1>"+_model.title.title+"</h1>");
 			var _block_quote=document.createElement("blockquote");
-			
+
 			for(_d in _datas){
 				var _lines = _datas[_d];
 				_html = '<small>'+_lines[0].value.trim()+'</small>';
@@ -635,7 +633,7 @@
 						_line='<div style="display:inline-block;width:'+_width+';"><img src="'+_img+'" class="img-polaroid" align="left3" alt="图片加载失败!" width="100%"></div>';
 					}else if(_line.charAt(0)==='\r'||_line.charAt(0)==='\n'){
 						//alert("PRE自动忽略第一个换行符");
-						_line="\n"+_line;  
+						_line="\n"+_line;
 						_line='<pre>'+_line+'</pre>';
 					}else{
 						_line='<pre>'+_line+'</pre>';
@@ -667,22 +665,22 @@
 				'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>' +
 				'<img src="img/example_7.jpg" class="img-polaroid" align="left3" width="200">';
 			_block_quote.innerHTML=_html;	//**这个就不能先关联后赋值了!/
-			
+
 			document.getElementById("add").appendChild(_block_quote);*/
 		}
-				
+
 		var init = function(){
 			/**清空标签*/
 			$("#nav").empty();
 		    $("#sections").empty();
 			$("#unlockbox").empty();
-			
+
 			var _div = document.createElement("div");
 			_div.className="span10";
 			_div.innerHTML='<div style="float:right;"><br><br>Tips：你可以通过修改列来查看表格的动态布局，列:<input id="t_column" type="text" style="width:40px;margin:0px;" value="8"/><input id="t_input" class="btn btn-primary" type="button" value="预览"/></div>';
 			document.getElementById("sections").appendChild(_div);
 			$("#t_input").bind("click",changeColumn);
-			
+
 			var _model;
 			//**导航+块*/
 			for(_m in models){
@@ -696,7 +694,7 @@
 				var _html='<a href="#st'+_m+'"><i class="icon-chevron-right"></i> '+_title.title+'</a>';
 				_li.innerHTML=_html;
 				document.getElementById("nav").appendChild(_li);
-				
+
 				var _section=document.createElement("section");
 				_section.id="st"+_m;
 				_section.className="span12";
@@ -717,7 +715,7 @@
 			var _html='<a href="#footer_"><i class="icon-chevron-right"></i> 页脚</a>';
 			_li.innerHTML=_html;
 			document.getElementById("nav").appendChild(_li);
-			
+
 			for(_m in models){
 				_model=models[_m];
 				if(_model===""){
@@ -739,15 +737,15 @@
 				//options.offset=50;
 				$spy.scrollspy($spy.data());
 			})
-			
-			$("#ss2").hide();
-			$("#st3").hide();
-			$("#st4").hide();
-			$("#st5").hide();
-			$("#st2").append("<center><button id=\"loadmore\" class=\"btn\" type=\"submit\">点击加载更多...</button></center>");
-		    $("#loadmore").bind("click",loadmore);
+
+			//$("#ss2").hide();
+			//$("#st3").hide();
+			//$("#st4").hide();
+			//$("#st5").hide();
+			//$("#st2").append("<center><button id=\"loadmore\" class=\"btn\" type=\"submit\">点击加载更多...</button></center>");
+		    //$("#loadmore").bind("click",loadmore);
 		}
-		
+
 		var loadmore=function(){
 			$("#loadmore").toggle();
 			$("#ss2").toggle();
@@ -776,7 +774,7 @@
           <a class="brand" href="./Demo/demo.html">HTML简历Demo</a>
           <div class="nav-collapse collapse">
             <ul class="nav" id="nav">
-			  
+
             </ul>
           </div>
         </div>
@@ -805,13 +803,13 @@
 
         <!-- Base_
         ================================================== -->
-		<!-- if class spanX is included in section,section will not work perfectly,this is because The Section Block is not close to The spanX DIV 
+		<!-- if class spanX is included in section,section will not work perfectly,this is because The Section Block is not close to The spanX DIV
 			 The right way is to use spanX for The Section Block first,and then you can use any spanX in it.
 		-->
         <!-- 如果section没有使用spanX而内部却使用了spanX,则section标签会与其使用spanX的内容区隔离,导致跳转时跳转到section标签而并非与之对应的内容区,
 		     合理的做法是,section标签先使用spanX.这时section标签里就可以出现spanX了.
 	    -->
-		
+
 		</div>
     </div> <!-- row -->
 
@@ -840,26 +838,26 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    
 
-    <script src="assets/plugins/js/bootstrap-transition.js"></script>
-    <script src="assets/plugins/js/bootstrap-alert.js"></script>
-    <script src="assets/plugins/js/bootstrap-modal.js"></script>
-    <script src="assets/plugins/js/bootstrap-dropdown.js"></script>
+
     <script src="assets/plugins/js/bootstrap-scrollspy.js"></script>
-    <script src="assets/plugins/js/bootstrap-tab.js"></script>
-    <script src="assets/plugins/js/bootstrap-tooltip.js"></script>
-    <script src="assets/plugins/js/bootstrap-popover.js"></script>
-    <script src="assets/plugins/js/bootstrap-button.js"></script>
-    <script src="assets/plugins/js/bootstrap-collapse.js"></script>
-    <script src="assets/plugins/js/bootstrap-carousel.js"></script>
-    <script src="assets/plugins/js/bootstrap-typeahead.js"></script>
-    <script src="assets/plugins/js/bootstrap-affix.js"></script>
+    <!-- <script src="assets/plugins/js/bootstrap-transition.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-alert.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-modal.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-dropdown.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-tab.js"></script> -->
+    <!--<script src="assets/plugins/js/bootstrap-tooltip.js"></script>-->
+    <!--<script src="assets/plugins/js/bootstrap-popover.js"></script>-->
+    <!--<script src="assets/plugins/js/bootstrap-button.js"></script>-->
+    <!-- <script src="assets/plugins/js/bootstrap-collapse.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-carousel.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-typeahead.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-affix.js"></script> -->
 
-    <script src="assets/plugins/js/holder/holder.js"></script>
-    <script src="assets/plugins/js/google-code-prettify/prettify.js"></script>
+    <!-- <script src="assets/plugins/js/holder/holder.js"></script> -->
+    <!-- <script src="assets/plugins/js/google-code-prettify/prettify.js"></script> -->
 
-    <script src="assets/js/application.js"></script>
+    <!-- <script src="assets/js/application.js"></script> -->
 
 
 
