@@ -400,7 +400,7 @@
 			models.push(_model);
 		}
 
-		var initTable = function(_id,_model){
+  	var initTable = function(_id,_model){
 			if(_model===""){
 				alert("initTable: 空的模块");
 				return -1;
@@ -530,7 +530,7 @@
 			document.getElementById(_id).appendChild(table);
 
             /* auto fit to the web-page */
-            while( $("table").width() > $("body").width() ) {
+            if( $("table").width() > $("body").width() ) {
                 document.getElementById(_id).removeChild(table);
                 if (_model.title.t_column % 2 == 0)
                     _model.title.t_column -= 2;
@@ -672,7 +672,7 @@
 		var init = function(){
 			/**清空标签*/
 			$("#nav").empty();
-		    $("#sections").empty();
+		  $("#sections").empty();
 			$("#unlockbox").empty();
 
 			var _div = document.createElement("div");
@@ -746,16 +746,17 @@
 		    //$("#loadmore").bind("click",loadmore);
 		}
 
-		var loadmore=function(){
-			$("#loadmore").toggle();
-			$("#ss2").toggle();
-			$("#st3").toggle();
-			$("#st4").toggle();
-			$("#st5").toggle();
-		};
-        $(window).resize(function(){
-            resizeTable(8);
-        });
+		// var loadmore=function(){
+		// 	$("#loadmore").toggle();
+		// 	$("#ss2").toggle();
+		// 	$("#st3").toggle();
+		// 	$("#st4").toggle();
+		// 	$("#st5").toggle();
+		// };
+        // $(window).resize(function(){
+        //     console.log("resize");
+        //     resizeTable(8);
+        // });
 
 	});
   </script>
@@ -791,7 +792,7 @@
 	<br><br><br><br><br>
 	<input id="password" class="input-medium search-query" type="password"/><button id="unlock" class="btn" type="submit">解锁</button>
 	<br><br>
-	忘记密码请联系我:345106552@qq.com
+	忘记密码请联系我:jokinkuang@qq.com
 	</center>
     <!-- Docs nav
     ================================================== -->
@@ -822,9 +823,9 @@
 	<section id="footer_">
     <footer class="footer">
       <div class="container">
-	    <p><a href="MailTo:345106552@qq.com">Made By XK 2013</a></p>
+	    <p><a href="MailTo:jokinkuang@qq.com">Made By XK 2013</a></p>
 		<p><br></p>
-        <p>Designed and built with all the love in the world by <a href="MailTo:345106552@qq.com" target="_blank">@XK</a>.</p>
+        <p>Designed and built with all the love in the world by <a href="MailTo:jokinkuang@qq.com" target="_blank">@XK</a>.</p>
         <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
         <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
         <ul class="footer-links">
