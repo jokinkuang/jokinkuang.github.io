@@ -54,11 +54,11 @@ DNSPod接入百度云加速，使用百度云加速的免费CDN服务。其实Gi
   `jokinkuang.info.cname.yunjiasu-cdn.net`
   `www.jokinkuang.info.cname.yunjiasu-cdn.net`
   `TXT 5624xxxxxxxxx 一串唯一的标识字符串`
-  同样，`@`对应`jokinkuang.info.xxx`，`www`对应`www.jokinkuang.info.xxx`。
 5. 添加完，百度会提示需要将这3条记录添加到域名解析服务提供商那里。也即是在DNSPod里添加下面3条记录。
   `@   TXT   5624xxxxxxxxx`
   `@   CNAME jokinkuang.info.cname.yunjiasu-cdn.net`
   `www CNAME www.jokinkuang.info.cname.yunjiasu-cdn.net`
+  同样，`@`对应`jokinkuang.info.xxx`，`www`对应`www.jokinkuang.info.xxx`。
 6. 停用最上面的DNSPod到`jokinkuang.github.io`的记录，开启百度云加速的3条记录。也即是说，不使用DNSPod直接解析`jokinkuang.info`到`jokinkuang.github.io`，而是DNSPod将`jokinkuang.info`解析到`百度云加速`，由`百度云加速`再解析到`jokinkuang.github.io`。
 
 上面的步骤对应的图。
