@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>个人HTML简历</title>
+    <title>在线HTML简历</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Bootstrap是Twitter推出的一个用于前端开发的开源工具包。它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。Bootstrap中文网致力于为广大国内开发者提供详尽的中文文档、代码实例等，助力开发者掌握并使用这一框架。">
     <meta name="keywords" content="Bootstrap,CSS,CSS框架,CSS framework,javascript,bootcss,bootstrap开发,bootstrap代码,bootstrap入门">
@@ -711,7 +711,7 @@
             var _div = document.createElement("div");
             _div.className = "span10";
             _div.innerHTML =
-                '<div style="float:right;"><br><br>Tips：你可以通过修改列来查看表格的动态布局，列:<input id="t_column" type="text" style="width:40px;margin:0px;" value="8"/><input id="t_input" class="btn btn-primary" type="button" value="预览"/></div>';
+                '<div style="float:right;"><br><br>Tips：表格依据页面空间自动布局，你也可以自定义，列:<input id="t_column" type="text" style="width:40px;margin:0px;" value="8"/><input id="t_input" class="btn btn-primary" type="button" value="预览"/></div>';
             document.getElementById("sections").appendChild(_div);
             $("#t_input").bind("click", changeColumn);
 
@@ -791,10 +791,9 @@
         // 	$("#st4").toggle();
         // 	$("#st5").toggle();
         // };
-        // $(window).resize(function(){
-        //     console.log("resize");
-        //     resizeTable(8);
-        // });
+        $(window).resize(function(){
+            resizeTable(8);
+        });
 
     });
 </script>
