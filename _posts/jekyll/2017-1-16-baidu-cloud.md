@@ -2,7 +2,7 @@
 layout: post
 title: GoDaddy使用DNSPod解析并添加百度云加速
 categories: jekyll
-image: ""
+image: "dns/baiducloud-ico.jpg"
 date: 2017-1-16 15:50:17
 pid: 20170116-155017
 excerpt: ""
