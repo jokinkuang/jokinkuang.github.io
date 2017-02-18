@@ -710,8 +710,9 @@
 
             var _div = document.createElement("div");
             _div.className = "span10";
+            _div.style.display = "inline-block";
             _div.innerHTML =
-                '<div style="float:right;"><br><br>Tips：表格依据页面空间自动布局，你也可以自定义，列:<input id="t_column" type="text" style="width:40px;margin:0px;" value="8"/><input id="t_input" class="btn btn-primary" type="button" value="预览"/></div>';
+                '<div style="float:right;"><br><br>Tips：表格依据页面空间自动布局，你也可以自定义，列:<input id="t_column" type="text" style="width:40px;margin:0px;" value="8"/><input id="t_input" class="btn btn-primary" type="button" value="预览"/></div><br>';
             document.getElementById("sections").appendChild(_div);
             $("#t_input").bind("click", changeColumn);
 
