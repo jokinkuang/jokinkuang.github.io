@@ -776,24 +776,26 @@
                 $spy.scrollspy($spy.data());
             })
 
-            //$("#ss2").hide();
-            //$("#st3").hide();
-            //$("#st4").hide();
-            //$("#st5").hide();
-            //$("#st2").append("<center><button id=\"loadmore\" class=\"btn\" type=\"submit\">点击加载更多...</button></center>");
-            //$("#loadmore").bind("click",loadmore);
+            $("#ss2").hide();
+            $("#st3").hide();
+            $("#st4").hide();
+            $("#st5").hide();
+            $("#st2").append("<center><button id=\"loadmore\" class=\"btn\" type=\"submit\">点击加载更多...</button></center>");
+            $("#loadmore").bind("click",loadmore);
         }
 
-        // var loadmore=function(){
-        // 	$("#loadmore").toggle();
-        // 	$("#ss2").toggle();
-        // 	$("#st3").toggle();
-        // 	$("#st4").toggle();
-        // 	$("#st5").toggle();
-        // };
+        var loadmore=function(){
+        	$("#loadmore").toggle();
+        	$("#ss2").toggle();
+        	$("#st3").toggle();
+        	$("#st4").toggle();
+        	$("#st5").toggle();
+        };
+
         $(window).resize(function(){
-          alert("resize");
-            resizeTable(8);
+            // alert("resize");
+            // 移动端有的浏览器总是发出resize事件，一旦重新布局Table就会滚动到页首
+            // resizeTable(8);
         });
 
     });
