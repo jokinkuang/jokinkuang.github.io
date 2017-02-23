@@ -4,6 +4,7 @@ title: Minecraft我的世界
 categories:
 date: 2017-02-23 23:02:10
 pid: 20170223-230210
+image: minecraft/minecraft-ico.jpg
 # you can override the settings in _config.yml here !!
 ---
 平常也玩点小游戏，Minecraft这个游戏碰到过很多次，只是从来没有试玩过，这次算是机缘巧合，试玩了一下，感觉入了门，哈哈
