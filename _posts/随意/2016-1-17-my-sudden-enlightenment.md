@@ -4,7 +4,7 @@ title: 2016我的感悟
 categories:
 date: 2017-1-17 22:10:20
 pid: 20170117-221020
-pin: 1000
+pin: 0
 # you can override the settings in _config.yml here !!
 ---
 
