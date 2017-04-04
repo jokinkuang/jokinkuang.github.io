@@ -34,8 +34,46 @@ ________________________________________________________________________________
 2016.12           25                  7.1.1                        Nougat++（N_MR1）
 
 ## 显式Intent与隐式Intent
+显式Intent：通过指定特定的应用名来打开。
+    比如：
+    new Intent(MainActivity.this, SecondActivity.class);
+
+    // 显式指定目标方的PackageName和ComponentName。
+    Intent intent = new Intent();
+    intent.setPackage("com.example.project");
+		intent.setComponent(new ComponentName("com.example.project", "HelloActivity"));
+
+隐式Intent：通过intent-filter来打开。
+
+    // 隐式Intent
+    Intent intent = new Intent();
+    intent.setData(Uri.parse("http://www.baidu.com"));
+
+注：在Manifest里面指定了intent-filter的组件，exported会默认设为为true，这也是为什么为一个Activity添加intent-filter后不需要设置exported就可以被外部应用打开。
 
 ## StartActivity与StartActivityForResult
+
+new Intent(MainActivity.this, SecondActivity.class);
+StartActivity(intent); // 启动Activity。
+
+new Intent(MainActivity.this, SecondActivity.class);
+StartActivityForResult(intent, reqeustCode); // 等待回应。
+回应后，调用MainActivity的onActivityResult(int requestCode, int resultCode, Intent data)；
+
+1. SecondActivity通过setResult(int resCode, Intent intent)来设置结果。然后通过调用finish()结束自己，才会正在返回。
+2. 注意处理“返回键”的行为，否则返回键默认是设置RESULT_CANCELED。
+3. resCode的取值：RESULT_CANCELED、RESULT_OK、用户自定义返回码。
+4. 除了resCode外，还需要Intent来传递结果。intent.putExtra()来传递。
+5. 最好使用reqeustCode。因为一个Activity可能启动多个Activity等待结果，requestCode用于标识是哪个Activity的Result回调。
+6. SecondActivity结束后，结果返回，会回调MainActivity的onActivityResult方法。
+
+注：如果MainActivity调用StartActivityForResult后就结束自己，那么MainActivity是收不到结果返回的。
+之所以说这个，是因为如果MainActivity在Manifest里添加了android:noHistory = true，则相当于启动了另一个Activity后就结束自己，不会在留存在返回栈中。
+
+## 返回栈
+1. 在返回栈中的Activity因为内存低被回收，下一次前置时，系统会重新创建，但逻辑行为不会改变（即对应用而言，该Activity还是在返回栈中），比如如果需要调用onNewIntent还是会继续调用。
+2. 开发者主动销毁返回栈则不会发生上面的行为，上面的行为仅限于系统内部管理，开发者主动销毁已经是业务逻辑上的行为。
+3. 具体见下面Activity的启动模式分析。
 
 ## Manifest
 具体参考：<https://developer.android.google.cn/guide/topics/manifest/>
@@ -161,7 +199,7 @@ android:versionName="1.0.0-SnapShot"
 * android:resizeableActivity=["true" | "false"]  API24以上，默认true，是否支持多窗口模式
 - android:restrictedAccountType="string" API18以上
 * android:supportsRtl=["true" | "false"] API17以上，默认false，是否支持右到左(RTL)布局
-* android:taskAffinity="string"  返回栈
+* android:taskAffinity="string"  亲和关系，如果亲和关系不同，会创建新的返回栈。
 * android:testOnly=["true" | "false"]  只用于测试。This kind of application can be installed only through adb.
 * android:theme="resource or theme"  
 - android:uiOptions=["none" | "splitActionBarWhenNarrow"]  API14以上，默认none
@@ -204,7 +242,7 @@ tools:replace="android:icon,android:label,android:theme"  # 表示属性icon、l
                         "none" | "never"]
 - android:enabled=["true" | "false"]  默认true
 * android:excludeFromRecents=["true" | "false"]  默认false，是否出现在最近任务列表中。true表示不加入最近任务列表中。
-* android:exported=["true" | "false"]  默认true，是否暴露给别的应用，即别的应用是否能启动此Activity。
+* android:exported=["true" | "false"]  默认true，是否暴露给别的应用，即别的应用是否能启动此Activity，如果设置了intent-filter，默认为true，否则默认为false。
 - android:finishOnTaskLaunch=["true" | "false"]  
 Whether or not an existing instance of the activity should be shut down (finished) whenever the user again launches its task (chooses the task on the home screen) — "true" if it should be shut down, and "false" if not. The default value is "false".
 默认false，如果该属性和 allowTaskReparenting 均为“true”，则优先使用该属性。 Activity 的亲和关系会被忽略。 系统不是更改 Activity 的父项，而是将其销毁。
@@ -367,6 +405,8 @@ u0_a98    10074 1673  920848 39120 ffffffff b76e107b S com.remote
 
 注意：在当前应用使用android:process=":remote"方式创建的进程相当于另一个应用程序，每创建一个进程，都会执行一次Application的onCreate方法。这意味着，如果不根据当前进程区分初始化代码，每创建一个进程就执行一次当前应用的Application:onCreate初始化。通过android:name="com.xxx"可以指定具体要在新进程里执行的任务。可以指定Activity、Service等。
 
+Android ART虚拟机，为了管理这些进程，从一个进程诞生的所有进程都会被标记到这个进程，当该进程结束，标记到当前进程的其它进程也会被结束，这也是提高了系统的安全性。
+
 ### apk，task，android:process与android:sharedUserId的区别
 
 <http://blog.csdn.net/lynn0708/article/details/13624403>
@@ -422,7 +462,7 @@ android:syncable=["true" | "false"]
 android:writePermission="string"
 
 ### intent-filter
-隐式Intent，或者叫Intent声明，声明当前组件可以响应的Intent。
+隐式Intent，或者叫Intent声明，声明当前组件可以响应的Intent。设置了intent-filter则exported会设置为true，如果当前Activity仅仅用于当前应用，那么需要显式将exported设置为false。
 
 一定要包含：action
 可以包含：category、data
@@ -645,6 +685,8 @@ ActivityC是标准模式，默认依附到原来的ActivityA的任务栈中，�
 而ActivityB是独立的任务栈，启动ActivityC后，ActivityB进入后台，但由于ActivityB的任务栈只有它自己，所以没办法通过返回来恢复ActivityB，只能重新启动ActivityB来切换到前台。
 （注：之前测试的时候，应用退出后不会自动前置singleInstance的ActivityB，但后来测试的时候，应用退出后会自动前置singleInstance的ActivityB。虽然这里有点差异，但不影响singleInstance的特性。）
 
+可以通过当前Activity的getTaskId来打印当前Activity的返回栈。
+
 应用退出后，使用`dumpsys activity`还是能看到ActivityB任务栈还存在。只是没有办法调用出来。
 TaskRecord{4ab94f94 #20 A=com.yuanhh.appbinderdemo U=0 sz=1}
      Intent { cmp=com.yuanhh.appbinderdemo/.BActivity }
@@ -728,6 +770,11 @@ BpBinder 客户端
 JavaBBinder 服务端
 通信是双方可来回传递。
 
+启动一个Service也使用了Binder。
+隐式Intent也使用了Binder。
+getService时也是使用了Binder。
+Android组件中跨进程几乎都使用了Binder通信，只是封装了，Java层完全感觉不出来。
+
 ### FLAG_ONEWAY
 IBinder接口类中定义了一个叫FLAG_ONEWAY的整型，该变量的意义非常重要。
 当客户端利用Binder机制发起一个跨进程的函数调用时，调用方（即客户端）一般会阻塞，直到服务端返回结果。这种方式和普通的函数调用是一样的。
@@ -754,6 +801,68 @@ IBinder接口类中定义了一个叫FLAG_ONEWAY的整型，该变量的意义�
 ## ListView
 ## RecyclerView
 ## WebView
+
+## Dialog
+继承Dialog来实现各种对话框。
+比如：BottomDialog、CenterDialog、自定义的AlertDialog、自定义的InputDialog、自定义的ProgressDialog等等对话框。
+
+## AlertDialog
+## ProgressDialog
+## PopupWindow
+
+## Activity和Fragment和XXXActivity和XXXFragment区别
+Activity 基类
+Fragment 基类
+FragmentActivity -> Activity
+AppCompatActivity -> FragmentActivity
+ActionBarActivity（已过时） -> AppCompatActivity
+
+* Activity is the basic one.
+* Based on Activity, FragmentActivity provides the ability to use Fragment.
+* Based on FragmentActivity, AppCompatActivity provides features to ActionBar.
+
+- Activity是所有XXXActivity的基类。一个空白的Activity，不支持Fragment，没有提供ActionBar。
+- FragmentActivity是指能使用Fragment的增强版Activity。可以支持Fragment。
+- AppCompatActivity是指集成了ActionBar的增强版Activity。Activity默认存在ActionBar。
+
+详解：
+1. 首先明白，Android版本迭代过程中，Activity基类的功能逐渐增强，而因为市面上总是存在好几个不同的Android版本，所以开发者会面临一个困境，那就是高版本的Activity基类在低版本的Android中运行会异常（或效果不一致）。为了解决这个问题，Google提供了一个外部的support包（支持包），可以在低版本实现高版本的效果，对于开发者而言，使用support包可以解决不同版本的兼容问题，使得从低版本到高版本的Android系统都能呈现一致的效果，且不会有异常产生。
+比如：低版本的Activity基类是不支持Fragment的，新版本的Activity基类原生就支持Fragment。APP需要兼容新旧版本，如果使用新版本的Activity基类，那么在旧的Android系统上运行就会出错，反之，如果使用低版本的Activity基类，那么就不能使用Fragment的特性。Google的support包就是实现了这个兼容，只要使用support包提供的Activity，那么在低版本也可以使用Fragment，而不会出错。高版本本来就支持，所以也没什么好说的。所以，support包主要用于兼容旧版本。
+2. 当新版本的Activity支持Fragment时，为了在旧版本也能使用Fragment，support包提供了FragmentActivity。
+3. 当新版本的Activity默认提供ActionBar时，为了在旧版本也能默认提供ActionBar，support包提供了AppCompatActivity。
+4. 某个版本中support包额外提供了ActionBarActivity来提供ActionBar，但可能由于太多Activity了，最近的版本把ActionBarActivity中的功能集成到父类AppCompatActivity中。也即是说只需要一个AppCompatActivity即可完成兼容。
+5. 综上，兼容包中的Activity只剩下：FragmentActivity和AppCompatActivity。
+6. 自始至终，Fragment原生兼容性比较好，所以Fragment不需要提供兼容类。
+
+由于Android应用总是需要兼容一个区间的Android版本，比如从API 15到API 24等等。
+所以support兼容包几乎无法避免，几乎每个应用都需要引入。
+问题就来了，这么多Activity到底如何选择呢？
+1. 先明确最低兼容版本的Activity基类提供了什么功能。如果符合需求，就不需要考虑使用兼容包中的XXXActivity。即跳过下面的步骤。
+2. 如果最低兼容版本的Activity无法提供Fragment，而当前正好需要Fragment，那么可以考虑使用兼容包中的FragmentActivity。
+3. 如果最低兼容版本的Activity无法提供自带的ActionBar，而当前正好需要ActionBar，那么可以考虑使用兼容包中的AppCompatActivity。
+4. 以此类推。
+
+比如：
+1. 当前仅仅需要一个Activity页面来展示信息，那么可以直接使用Activity。
+2. 当前需要使用Fragment来实现Tab页面切换，而兼容的最低版本的Activity是不支持Fragment的，那么使用FragmentActivity代替。
+3. 当前希望每个页面自带ActionBar，而兼容的最低版本中Activity是不支持的，那么使用AppCompatActivity代替。
+反过来
+1. 当前的Activity是AppCompatActivity，它默认在每个Activity页面中加入了ActionBar，而如果有自己自实现的ActionBar，不需要系统的ActionBar，那么有两个选择：一，代码中手动隐藏系统的ActionBar；二，使用普通的Activity代替（如果普通的Activity已经默认加入ActionBar，那么没办法，只能选择方式一，当然这里是假设）。
+2. 如果看到Activity里有不同的处理代码，有的需要隐藏部分组件，有的不需要，那么先看一下当前Activity继承于哪个Activity，分析一下就能明白了。
+
+最后，这里没有分support-v4和support-v7，只需要知道support包的作用，和如何选择，那么道理都一样。
+
+一些额外信息：
+1. Fragment是在API 11引入，但不支持嵌套。
+2. FragmentActivity是support-v4引入，AppCompatActivity是support-v7引入。
+3. Fragment支持嵌套是在API 17才引入。如果在之前的版本中需要使用嵌套Fragment，那么需要使用FragmentActivity。（这里是不是有点奇怪，难道因为Fragment是依赖Activity的，所以修改Activity可以使Fragment支持嵌套？）
+4. ActionBar是在API 11引入的。
+5. AppCompatActivity的ActionBar加入了Material Design风格支持。
+
+So, given your minSdkVersion in the 15-16 range:
+If you want the backported Material Design look, use AppCompatActivity
+If not, but you want nested fragments, use FragmentActivity
+If not, use Activity
 
 ## Materail Design
 
@@ -805,7 +914,16 @@ mLruCache = new LruCache<String,Bitmap>(mTotalSize/5){
 
 
 ## 性能优化
+1. 使用多套图，减少图片的拉伸渲染。
+2. 使用缓存。
+3. 减少View的层级，可以提高View树的遍历，也可以减少不必要的布局对象的创建。
+4. 减少主线程的逻辑计算。
 
+## 内存优化
+1. 使用LruCache等缓存。
+2. 图片使用缓存。
+3. 减少不必要对象的创建，避开FULL GC。
+4.
 
 ## 性能优化工具篇
 
