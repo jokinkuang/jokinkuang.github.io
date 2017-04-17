@@ -1,0 +1,923 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>在线简历 — JokinKuang</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bootstrap是Twitter推出的一个用于前端开发的开源工具包。它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。Bootstrap中文网致力于为广大国内开发者提供详尽的中文文档、代码实例等，助力开发者掌握并使用这一框架。">
+    <meta name="keywords" content="Bootstrap,CSS,CSS框架,CSS framework,javascript,bootcss,bootstrap开发,bootstrap代码,bootstrap入门">
+    <meta name="author" content="Bootstrap中文网">
+
+
+    <!-- Le styles -->
+    <link href="assets/plugins/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/plugins/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/css/docs.css" rel="stylesheet">
+    <link href="assets/plugins/css/prettify.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
+
+    <!-- jQuery要比$(document)先引入 -->
+    <script src="assets/plugins/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="assets/js/components/core-min.js"></script>
+    <script type="text/javascript" src="assets/js/rollups/rc4.js"></script>
+</head>
+
+<style type="text/css">
+    body {
+        font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei UI", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    }
+
+    body>.navbar .brand {
+        color: rgb(100, 100, 100);
+    }
+
+    .page-header h1 small {
+        font-size: 12px;
+        color: #666;
+        display: block;
+    }
+
+    .footer a,
+    .footer a:hover {
+        color: rgb(119, 119, 119);
+        text-decoration: underline;
+    }
+
+    .page-header .icon {
+        float: left;
+        display: block;
+        margin-right: 10px;
+        width: 32px;
+        height: 32px;
+        border: 3px solid #999;
+        padding: 2px;
+        margin-top: 7px;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        text-align: center;
+    }
+
+    .navbar .nav {
+        position: relative;
+        left: 0px;
+        display: block;
+        float: none;
+        margin: 0px 10px 0
+    }
+    /*Section*/
+
+    section {
+        padding-top: 40px;
+        /*锚点上偏移*/
+    }
+    /*Table*/
+
+    .tr-header {
+        background-color: #EEE;
+    }
+
+    .tr-header td:after {
+        content: ':';
+    }
+    /* 覆盖bootstrap.css的img的width,防止在IE显示异常 */
+
+    img {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    td img {
+        width: 100px;
+    }
+
+    .table th,
+    .table td {
+        padding: 6px;
+        line-height: 20px;
+        text-align: left;
+        vertical-align: top;
+        border-top: 1px solid rgb(221, 221, 221);
+    }
+
+    td.img {
+        text-align: center;
+    }
+    /* 覆盖bootstrap.css的pre */
+
+    pre {
+        display: block;
+        padding: 0px;
+        margin: 0px 0px 0px;
+        font-size: ;
+        line-height: ;
+        word-break: break-all;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        background-color: transparent;
+        border: 0px solid rgba(0, 0, 0, 0.15);
+        border-radius: 4px 4px 4px 4px;
+        /**使之与table样式一致*/
+        line-height: 20px;
+        text-align: left;
+        vertical-align: top;
+        color: rgb(51, 51, 51);
+        line-height: 20px;
+        font-size: 14px;
+        font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei UI", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    }
+    /*Panel*/
+
+    .pricing-table {
+        border: 1px solid rgba(204, 204, 204, 0.8);
+        padding: 10px;
+        background-color: #f1f2f2;
+    }
+
+    div.desc p {
+        font-size: 14px;
+        line-height: 20px;
+        color: rgb(51, 51, 51);
+    }
+
+    blockquote .img-polaroid {
+        padding: 0px;
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgba(135, 135, 135, 0.3);
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    blockquote pre {
+        margin-bottom: 15px;
+        font-size: 17.5px;
+        font-weight: 300;
+        line-height: 1.25;
+        word-break: break-all;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei UI", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    }
+
+    .pricing-table pre {
+        margin-bottom: 0px;
+        font-size: 13.5px;
+        font-weight: 300;
+        line-height: 1.25;
+        word-break: break-all;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei UI", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    }
+
+    pre {
+        margin: 0px 0px 0px;
+    }
+</style>
+
+<script type="text/javascript">
+    //***************************
+    //* Made By XK 2013.9
+    //***************************
+    $(document).ready(function() {
+        if (!String.prototype.trim) {
+            String.prototype.trim = function() {
+                return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+            }
+        }
+
+        var file = "";
+
+        $.ajax({
+            type: "GET",
+            url: "info.txt",
+            dataType: "text",
+            success: function(data) {
+                /**清空标签*/
+                $("#nav").empty();
+                $("#sections").empty();
+                file = data;
+                $("#password").focus();
+                $("#password").val("iwantyou");
+				
+				/**好像很多人对密码感冒，所以去掉了，囧*/
+				toObject(data);
+                init();
+            },
+            error: function() {
+                $("#tip").text("由于脚本执行问题,您看到的不是动态生成的,要预览,请使用Sogou兼容模式,Firefox或IE9以上浏览器");
+                alert("Origin null is not allowed by Access-Control-Allow-Origin.\n 浏览器安全等级不允许本地Ajax操作文件 \n 请使用Sogou兼容模式,FireFox 或 IE 9预览");
+            }
+        });
+
+
+        $("#unlock").click(function() {
+            var pwd = $("#password").val();
+
+            var ok = false;
+            try {
+                var _text = CryptoJS.RC4.decrypt(file, pwd).toString(CryptoJS.enc.Utf8);
+                ok = true;
+            } catch (e) {
+                ok = false;
+            }
+
+            if (ok) {
+                toObject(_text);
+                init();
+            } else {
+                alert("Invalid Password!");
+                $("#password").focus();
+            }
+        });
+
+        var resizeTable = function(_t_column) {
+            /**清空标签*/
+            $("#nav").empty();
+            $("#sections").empty();
+            for (_i in models) {
+                var _model = models[_i];
+                if (_model.title.format == "table") {
+                    models[_i].title.t_column = _t_column;
+                }
+            }
+            init();
+        };
+
+        var changeColumn = function() {
+            var _t_column = $("#t_column").val();
+            /**清空标签*/
+            $("#nav").empty();
+            $("#sections").empty();
+            for (_i in models) {
+                var _model = models[_i];
+                if (_model.title.format == "table") {
+                    models[_i].title.t_column = _t_column;
+                }
+            }
+            init();
+        };
+
+        //**Objects 只用于显示对象的结构以便被访问 和 存储对象常量属性 */
+        var model = {
+            title: "", //**对象
+            datas: "" //**[对象|值]数组
+        };
+        var title = {
+            title: "",
+            icon: "",
+            desc: "",
+            format: "",
+            id: ""
+        };
+        //**Table model.datas=t_data[],t_data.cells=cell[]/
+        var t_data = {
+            tip: "",
+            cells: ""
+        };
+        //**单元格类型/
+        var cell = {
+            CELL: 0,
+            LINE: 1,
+            type: 0, //**单元格0 行1*/  //**访问必须不能使用this.CELL,无效*/
+            value: ""
+        };
+        //**List/
+        var list = {
+            lines: ""
+        };
+        //**行类型/
+        var line = {
+            DESC: 0,
+            TITLE: 1,
+            TEXT: 2,
+            IMG: 3,
+            type: 0,
+            value: ""
+        };
+
+        //**全局变量,存储模块列表/
+        var models = new Array();
+
+        var toObject = function(data) {
+            var _models = data.split("/||");
+            var _model;
+            for (each in _models) {
+                _model = _models[each].trim();
+                if (_model === "") {
+                    alert("toObject空的模块");
+                    continue;
+                }
+                var _parts = _model.split("/|");
+                var _title = _parts[0].trim();
+                var _data = _parts[1].trim();
+
+                //**标题段*/
+                if (_title === "" || _data === "") {
+                    alert("toObject空的模块标题或内容");
+                    continue;
+                }
+                _title = _title.trim().replace(/:/g, ":'"); //**默认只替换第一个,//g表示替换所有*/
+                _title = _title.replace(/,/g, "',");
+                if (_title.charAt(_title.length - 1) === ',') { //**json能兼容处理{'a',}与{'a'},故不作修正;但json不兼容处理{'a','}*/
+                    _title = "{" + _title + "}";
+                } else {
+                    _title = "{" + _title + "'}";
+                }
+
+                var tt = eval("(" + _title.trim() + ")");
+                var _model = new Object();
+                _model.title = tt;
+
+                //**数据段*/
+                _model.datas = _data;
+
+                //**解析数据段*/
+                switch (_model.title.format) {
+                    case "table":
+                        toTable(_model);
+                        break;
+                    case "list":
+                        toList(_model);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        var toTable = function(_model) {
+            if (_model === "") {
+                alert("toTable: 空的模块");
+                return -1;
+            }
+            var _title = _model.title;
+            var _data = _model.datas;
+
+            if (_data.charAt(_data.length - 1) === ';' && _data.charAt(_data.length - 2) === ';' && _data.charAt(_data.length - 3) === '/') { //**修正 a;;||与a|| 的兼容*/
+                _data = _data.substring(0, _data.length - 3);
+            }
+            _data = _data.split("/;;");
+
+            var _t_datas = new Array();
+            var _t_index = 0;
+            var _cells = new Array();
+            var _c_index = 0;
+
+            for (_d in _data) {
+                //**标题|行内容|单元格内容*/
+                if (_data[_d].indexOf(':') === -1) {
+                    if (_data[_d].indexOf('/;') === -1) {
+                        if (_d % 2 === 0) { //**下标为偶数->才是标题*/
+                            if (_t_index > 0) {
+                                _cells = new Array(); //**下一个数据段数组初始化*/
+                                _c_index = 0; //**初始化*/
+                            }
+                            _t_data = new Object();
+                            _t_data.tip = _data[_d].trim();
+                            _t_data.cells = _cells; //**先将_cells存入数组,再改变_cells的值*/
+                            _t_datas[_t_index] = _t_data;
+                            _t_index = _t_index + 1;
+                        } else {
+                            if (_data[_d].charAt(0) === '\r' || _data[_d].charAt(0) === '\n') {
+                                _data[_d] = _data[_d].substring(2); //**UTF8 1字符=2字节 */
+                            }
+                            _cell = new Object();
+                            _cell.type = cell.LINE;
+                            _cell.value = _data[_d];
+                            _cells[_c_index] = _cell;
+                            _c_index = _c_index + 1;
+                        }
+                    } else {
+                        var _lines = _data[_d].split("/;");
+                        for (_l in _lines) {
+                            if (_lines[_l].charAt(0) === '\r' || _lines[_l].charAt(0) === '\n') {
+                                _lines[_l] = _lines[_l].substring(2); //**UTF8 1字符=2字节 */
+                            }
+                            _cell = new Object();
+                            _cell.type = cell.LINE;
+                            _cell.value = _lines[_l];
+                            _cells[_c_index] = _cell;
+                            _c_index = _c_index + 1;
+                        }
+                    }
+                } else {
+                    var _tbs = _data[_d].trim().replace(/:/g, ",").split(",");
+                    for (_t in _tbs) {
+                        _cell = new Object();
+                        _cell.type = cell.CELL;
+                        _cell.value = _tbs[_t].trim();
+                        _cells[_c_index] = _cell;
+                        _c_index = _c_index + 1;
+                    }
+                }
+            }
+            _model.datas = _t_datas;
+
+            models.push(_model);
+        }
+
+        var initTable = function(_id, _model) {
+            if (_model === "") {
+                alert("initTable: 空的模块");
+                return -1;
+            }
+            var _title = _model.title;
+            var _datas = _model.datas;
+            var _id = _id;
+
+            var t_column;
+            if (_title.format == "table") {
+                t_column = _title.t_column;
+            }
+            //document.writeln("<h1>"+_model.title.title+"</h1>");
+            var table = document.createElement("table");
+            table.className = "table table-bordered";
+
+            for (_d in _datas) {
+                //** Attention: old DOM would insert Row/Cell at the first of table,
+                //              But new DOM would insert at the tail of table!
+                //   Fix: insert by index -1 to force to insert at the tail.
+                //*/
+                var tr = table.insertRow(-1);
+                tr.className = "tr-header";
+                var td = tr.insertCell(-1);
+                td.colSpan = t_column <= 0 ? 1 : t_column; //**IE不支持colSpan<=0/
+                td.innerHTML = _datas[_d].tip;
+
+                //document.writeln("<h6>"+_datas[_d].tip+"</h6>");
+                //**思路: 先存在tr 或 即时创建tr   使用后者*//*
+
+                var _cells = _datas[_d].cells;
+                var _n = 0,
+                    _img = 0,
+                    _row = 0,
+                    _imgRow;
+                for (var _c = 0; _c < _cells.length; _c++) {
+                    ///**行单元格*/
+                    if (_cells[_c].type === cell.LINE) {
+                        td = table.insertRow(-1).insertCell(-1);
+                        td.colSpan = t_column <= 0 ? 1 : t_column; //**IE不支持colSpan<=0/
+                        if (_cells[_c].value.charAt(0) === '\r' || _cells[_c].value.charAt(0) === '\n') {
+                            _cells[_c].value = "\n" + _cells[_c].value;
+                        }
+                        td.innerHTML = "<pre>" + _cells[_c].value + "</pre>"; //**如第一个是换行,PRE忽略一个换行,唯有在前面添加一个换行符/
+                    } else {
+                        //**根据情况创建单元格*/
+                        if (_c == 0 || _n > t_column - 1) { //**铺满一行*/          //** _c默认是字符串型,所以不能使用===;初始化为0也不可以*/
+                            tr = table.insertRow(-1);
+                            if (_img == 1 && _row < 4) { //**有照片后,照片占位*/
+                                _row = _row + 1; //**已占行数: 1开始  colSpan=4，相当于0,1,2,3 故下标最大为4,因为这里是即时创建._row=1时表示准备创建第2个.所以这里下标为4*/  /**下标为4但出错的页面较少,是因为row没有机会大于3,若row>3则异常*/
+                                _n = 2; //**显示图片*/
+                                if (_n > t_column - 1) { //**仅图片就占了一行,但注意不是直接continue,而是先恢复数据.*/
+                                    _c = _c - 1;
+                                    /*for(;_row<3;_row++)	//**要不要无所谓,不要思路更容易理解/
+                                    	tr=table.insertRow(-1);*/
+                                    continue; //**continue是必须的,下面是内容处理,不能进入.*/
+                                } else {
+                                    td = tr.insertCell(-1); //**插入新单元格*/
+                                }
+                            } else {
+                                td = tr.insertCell(-1); //**插入新单元格*/
+                                _n = 0;
+                            }
+                        } else {
+                            td = tr.insertCell(-1);
+                        }
+                        //**根据情况处理单元格内容*/
+                        if (_cells[_c].value.indexOf("头像") === -1) {
+                            td.innerHTML = _cells[_c].value;
+                            if (_c == _cells.length - 1) { //**处理每一个信息段最后一个单元格*/
+                                var _colSpan = 1,
+                                    _nums = 0;
+                                if (_img == 1)
+                                    _nums = _cells.length - 2;
+                                else {
+                                    _nums = _cells.length;
+                                }
+                                if (_img == 1) { //**有图片,且 未超过|超过 图片的rowSpan*/
+                                    if (t_column - 2 <= 0) {
+                                        _colSpan = 1; //**当_colSpan<=0时,IE不支持/
+                                    } else if (_row < 4) { //**图像夹在中间/
+                                        _colSpan = t_column - 2 - (_nums) % (t_column - 2) + 1;
+                                        _colSpan = _imgRow - _n + 2;
+                                        if (isNaN(_colSpan)) {
+                                            _colSpan = 1;
+                                        }
+                                        //**图片前面单元格*/
+                                        td.colSpan = _colSpan <= 0 ? 1 : _colSpan;
+                                        //**图片后面单元格/
+                                        td = tr.insertCell(-1);
+                                        _colSpan = t_column - 1 - _imgRow;
+                                        if (isNaN(_colSpan)) {
+                                            _colSpan = 1;
+                                        }
+                                        td.colSpan = _colSpan <= 0 ? 1 : _colSpan;
+                                    } else { //**图像在里面,与图像位置无关/
+                                        _colSpan = t_column - (_nums - (t_column - 2) * 4) % t_column + 1;
+                                        if (isNaN(_colSpan)) {
+                                            _colSpan = 1;
+                                        }
+                                        td.colSpan = _colSpan <= 0 ? 1 : _colSpan;
+                                    }
+                                } else {
+                                    _colSpan = t_column - _nums % t_column + 1;
+                                    if (isNaN(_colSpan)) {
+                                        _colSpan = 1;
+                                    }
+                                    td.colSpan = t_column <= 0 ? 1 : _colSpan;
+                                }
+                            }
+                            _n = _n + 1;
+                        } else {
+                            _c = parseInt(_c) + 1;
+                            td.className = "img";
+                            td.colSpan = 2;
+                            td.rowSpan = 4;
+                            td.innerHTML = '<img alt="照片" style="width:100px" src="' + _cells[_c].value + '"></img>';
+
+                            _img = 1;
+                            _row = 1; //**表示已经占有1行,正处于第1行/
+                            _imgRow = _n; //**记录img的位置/
+                            _n = _n + 2; //**相当于铺了2格/
+                        }
+
+                    }
+                    //
+                }
+                //
+            }
+
+            document.getElementById(_id).appendChild(table);
+
+            /* auto fit to the web-page */
+            if ($("table").width() > $("body").width()) {
+                document.getElementById(_id).removeChild(table);
+                if (_model.title.t_column % 2 == 0)
+                    _model.title.t_column -= 2;
+                else
+                    _model.title.t_column -= 1;
+                if (_model.title.t_column <= 0)
+                    _model.title.t_column = 1;
+                initTable(_id, _model);
+            }
+        }
+
+        var toList = function(_model) {
+            if (_model === "") {
+                alert("toList: 空的模块");
+                return -1;
+            }
+            var _title = _model.title;
+            var _datas = _model.datas;
+
+            if (_datas.charAt(_datas.length - 1) === ';' && _datas.charAt(_datas.length - 2) === ';' && _datas.charAt(_datas.length - 3) === '/') { //**修正 a;;||与a|| 的兼容*/
+                _datas = _datas.substring(0, _datas.length - 3);
+            }
+            _datas = _datas.trim().split("/;;");
+
+            var _l_datas = new Array();
+            var _i = 0;
+            var _lists = new Array();
+            var _j = 0;
+
+            for (_d in _datas) {
+                var _data = _datas[_d].trim();
+                //**标题|内容|*/
+                if (_data.charAt(_data.length - 1) === ';' && _data.charAt(_data.length - 2) === '/') { //**修正 a/;/;;与a/;; 的兼容*/
+                    _data = _data.substring(0, _data.length - 2);
+                }
+                var _lines = _data.split("/;");
+                for (_l in _lines) {
+                    if (_lines[_l].charAt(0) === '\r' || _lines[_l].charAt(0) === '\n') {
+                        _lines[_l] = _lines[_l].substring(2); //**UTF8 1字符=2字节 */
+                    }
+                }
+                _l_datas[_i] = _lines;
+                _i = _i + 1;
+            }
+
+            //**通过改变引用的值来改变原数组内容,起数据过滤作用*/
+            for (var _d = 0; _d < _l_datas.length; _d++) {
+                var _lines = _l_datas[_d];
+                for (var _l = 0; _l < _lines.length; _l++) {
+                    var _line = _lines[_l];
+                    if (_line.indexOf('图片[') !== -1) {
+                        var _oline = new Object();
+                        _oline.type = line.IMG;
+                        _oline.value = _line;
+                    } else if (_l > 1) {
+                        var _oline = new Object();
+                        _oline.type = line.TEXT;
+                        _oline.value = _line;
+                    } else {
+                        var _oline = new Object();
+                        _oline.type = line.type;
+                        _oline.value = _line;
+                    }
+                    _lines[_l] = _oline;
+                }
+            }
+            _model.datas = _l_datas;
+
+            models.push(_model);
+        }
+
+        var initList = function(_id, _model) {
+            if (_model === "") {
+                alert("initList: 空的模块");
+                return -1;
+            }
+            var _title = _model.title;
+            var _datas = _model.datas;
+            var _id = _id;
+
+            var _html = "";
+
+            //document.writeln("<h1>"+_model.title.title+"</h1>");
+            var _block_quote = document.createElement("blockquote");
+
+            for (_d in _datas) {
+                var _lines = _datas[_d];
+                _html = '<small>' + _lines[0].value.trim() + '</small>';
+                for (var _l = 1; _l < _lines.length; _l++) {
+                    var _oline = _lines[_l];
+                    var _line = _lines[_l].value;
+                    if (_oline.type === line.IMG) {
+                        var _width = _line.split(":")[0].trim().split('[')[1].trim();
+                        if (_width.indexOf('%') === -1) {
+                            _width = parseInt(_width) + "px";
+                        } else {
+                            _width = parseInt(_width) + "%";
+                        }
+                        var _img = _line.split(":")[1].trim();
+                        _line = '<div style="display:inline-block;width:' + _width + ';"><img src="' + _img + '" class="img-polaroid" align="left3" alt="图片加载失败!" width="100%"></div>';
+                    } else if (_line.charAt(0) === '\r' || _line.charAt(0) === '\n') {
+                        //alert("PRE自动忽略第一个换行符");
+                        _line = "\n" + _line;
+                        _line = '<pre>' + _line + '</pre>';
+                    } else {
+                        _line = '<pre>' + _line + '</pre>';
+                    }
+                    //**文本/
+                    if (_oline.type === line.TEXT) {
+                        //**最后一个文本/
+                        var _isPricing = 1;
+                        for (var _t = _l + 1; _t < _lines.length; _t++) {
+                            var _t_line = _lines[_t];
+                            if (_t_line.type == line.TEXT) {
+                                _isPricing = 0;
+                                break;
+                            }
+                        }
+                        ///**若非图片,且是第二个后面,且是最后一个文本,且非空/
+                        if (_isPricing == 1)
+                            _line = '<div class="pricing-table">' + _line + '</div>';
+                    }
+                    _html = _html + _line;
+                }
+                _block_quote.innerHTML = _html;
+                document.getElementById(_id).appendChild(_block_quote);
+                _block_quote = document.createElement("blockquote");
+            }
+            /*
+            alert(_lines[0]);
+            _html = '<small>'+_lines[0]+'</small>' +
+            	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>' +
+            	'<img src="img/example_7.jpg" class="img-polaroid" align="left3" width="200">';
+            _block_quote.innerHTML=_html;	//**这个就不能先关联后赋值了!/
+
+            document.getElementById("add").appendChild(_block_quote);*/
+        }
+
+        var init = function() {
+            /**清空标签*/
+            $("#nav").empty();
+            $("#sections").empty();
+            $("#unlockbox").empty();
+
+            var _div = document.createElement("div");
+            _div.className = "span10";
+            _div.style.display = "inline-block";
+            _div.innerHTML =
+                '<div style="float:right;"><br><br>Tips：表格依据页面空间自动布局，你也可以自定义，列:<input id="t_column" type="text" style="width:40px;margin:0px;" value="8"/><input id="t_input" class="btn btn-primary" type="button" value="预览"/></div><br>';
+            document.getElementById("sections").appendChild(_div);
+            $("#t_input").bind("click", changeColumn);
+
+            var _model;
+            //**导航+块*/
+            for (_m in models) {
+                _model = models[_m];
+                if (_model === "") {
+                    //alert("init:空的模块");
+                    continue;
+                }
+                var _title = models[_m].title;
+                var _li = document.createElement("li");
+                var _html = '<a href="#st' + _m + '"><i class="icon-chevron-right"></i> ' + _title.title + '</a>';
+                _li.innerHTML = _html;
+                document.getElementById("nav").appendChild(_li);
+
+                var _section = document.createElement("section");
+                _section.id = "st" + _m;
+                _section.className = "span12";
+                var _html = '<div class="page-header">' +
+                    '	<div class="icon">' +
+                    '		<span>' + _title.icon + '</span>' +
+                    '	</div>' +
+                    '	<h1>' + _title.title + '<small>' + _title.desc + '</small></h1>' +
+                    '</div>' +
+                    '<div class="span0"></div>' +
+                    '<div class="span10" id="ss' + _m + '"></div>' +
+                    '<div class="span0"></div>';
+                _section.innerHTML = _html;
+                document.getElementById("sections").appendChild(_section);
+            }
+            //**页脚*/
+            var _li = document.createElement("li");
+            var _html = '<a href="#footer_"><i class="icon-chevron-right"></i> 页脚</a>';
+            _li.innerHTML = _html;
+            document.getElementById("nav").appendChild(_li);
+
+            for (_m in models) {
+                _model = models[_m];
+                if (_model === "") {
+                    //alert("init:空的模块");
+                    continue;
+                }
+                var _id = "ss" + _m;
+                switch (_model.title.format) {
+                    case "table":
+                        initTable(_id, _model);
+                        document.getElementById("t_column").value = _model.title.t_column;
+                        break;
+                    case "list":
+                        initList(_id, _model);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            //**重新启动Scroll Spy插件*/
+            $('[data-spy="scroll"]').each(function() {
+                var $spy = $(window);
+                //options.offset=50;
+                $spy.scrollspy($spy.data());
+            })
+
+            // $("#ss2").hide();
+            // $("#st3").hide();
+            // $("#st4").hide();
+            // $("#st5").hide();
+            // $("#st2").append("<center><button id=\"loadmore\" class=\"btn\" type=\"submit\">点击加载更多...</button></center>");
+            // $("#loadmore").bind("click",loadmore);
+        }
+
+        var loadmore=function(){
+        	$("#loadmore").toggle();
+        	$("#ss2").toggle();
+        	$("#st3").toggle();
+        	$("#st4").toggle();
+        	$("#st5").toggle();
+        };
+
+        $(window).resize(function(){
+            // alert("resize");
+            // 移动端有的浏览器总是发出resize事件，一旦重新布局Table就会滚动到页首
+            // resizeTable(8);
+        });
+
+    });
+</script>
+
+<body data-spy="scroll" data-target=".nav-collapse">
+
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="./Demo/demo.html">HTML简历Demo</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav" id="nav">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Subhead
+================================================== -->
+
+
+
+    <div class="container">
+        <center id="unlockbox">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <input id="password" class="input-medium search-query" type="password" />
+            <button id="unlock" class="btn" type="submit">解锁</button>
+            <br>
+            <br> 忘记密码请联系我:jokinkuang@qq.com
+        </center>
+        <!-- Docs nav
+    ================================================== -->
+        <div class="row">
+
+            <div class="span12" id="sections">
+
+                <h3 id="tip"></h3>
+
+                <!-- Base_
+        ================================================== -->
+                <!-- if class spanX is included in section,section will not work perfectly,this is because The Section Block is not close to The spanX DIV
+			 The right way is to use spanX for The Section Block first,and then you can use any spanX in it.
+		-->
+                <!-- 如果section没有使用spanX而内部却使用了spanX,则section标签会与其使用spanX的内容区隔离,导致跳转时跳转到section标签而并非与之对应的内容区,
+		     合理的做法是,section标签先使用spanX.这时section标签里就可以出现spanX了.
+	    -->
+
+            </div>
+        </div>
+        <!-- row -->
+
+    </div>
+    <!-- container -->
+
+
+
+    <!-- Footer
+    ================================================== -->
+    <section id="footer_">
+        <footer class="footer">
+            <div class="container">
+                <p><a href="MailTo:jokinkuang@qq.com">Made By XK 2013</a></p>
+                <p>
+                    <br>
+                </p>
+                <p>Designed and built with all the love in the world by <a href="MailTo:jokinkuang@qq.com" target="_blank">@XK</a>.</p>
+                <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+                <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+                <ul class="footer-links">
+                    <li><a href="MailTo:345106552@qq.com">联系我</a></li>
+                </ul>
+            </div>
+        </footer>
+    </section>
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+
+    <script src="assets/plugins/js/bootstrap-scrollspy.js"></script>
+    <!-- <script src="assets/plugins/js/bootstrap-transition.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-alert.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-modal.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-dropdown.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-tab.js"></script> -->
+    <!--<script src="assets/plugins/js/bootstrap-tooltip.js"></script>-->
+    <!--<script src="assets/plugins/js/bootstrap-popover.js"></script>-->
+    <!--<script src="assets/plugins/js/bootstrap-button.js"></script>-->
+    <!-- <script src="assets/plugins/js/bootstrap-collapse.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-carousel.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-typeahead.js"></script> -->
+    <!-- <script src="assets/plugins/js/bootstrap-affix.js"></script> -->
+
+    <!-- <script src="assets/plugins/js/holder/holder.js"></script> -->
+    <!-- <script src="assets/plugins/js/google-code-prettify/prettify.js"></script> -->
+
+    <!-- <script src="assets/js/application.js"></script> -->
+
+
+
+
+</body>
+
+</html>
