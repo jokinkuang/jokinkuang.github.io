@@ -114,7 +114,7 @@ format:list
 	额外技术: json+jQuery
 	主要功能：说说、评论、文章置顶、文章归类、响应式页面
 /;
-图片[]:img/pro/stepbystep.jpg/;
+	图片[]:img/pro/stepbystep.jpg/;
 /;;
 
 /;
@@ -124,7 +124,7 @@ OA办公自动化系统/;/;
 	额外技术: Ajax+json+jQuery+Bootstrap
 	主要功能：流程逐级审批、邮件通知功能、用户权限管理
 /;
-图片[100%]:img/pro/oa-system.jpg/;
+	图片[100%]:img/pro/oa-system.jpg/;
 /;;
 /||
 
@@ -140,7 +140,7 @@ netkuu文件修复工具/;/;
 	开发语言: masm32
 	主要功能：文件拖放功能、内存映射方式修改内容、加密解密
 /;
-图片[]:img/pro/netkuu-file-fix-tool.jpg/;
+	图片[]:img/pro/netkuu-file-fix-tool.jpg/;
 /;;
 
 
@@ -150,7 +150,7 @@ netkuu文件修复工具/;/;
 	开发语言: C#
 	主要功能：UDP通信、网络协议封包与解包、局域网文本或文件传输
 /;
-图片[100%]:img/pro/lan-chat.jpg/;
+	图片[100%]:img/pro/lan-chat.jpg/;
 /;;
 
 
@@ -160,8 +160,8 @@ netkuu文件修复工具/;/;
 	开发语言: C++ MFC
 	主要功能：多进程通信、文件下载、文件智能命名
 /;
-图片[50%]:img/pro/university-vod.jpg/;
-图片[50%]:img/pro/university-vod-2.jpg/;
+	图片[50%]:img/pro/university-vod.jpg/;
+	图片[50%]:img/pro/university-vod-2.jpg/;
 /;;
 
 
@@ -172,7 +172,7 @@ netkuu文件修复工具/;/;
 	开发语言: C++ MFC
 	主要功能：UDP通信、数据包解析与模拟
 /;
-图片[]:img/pro/hmt-crowd.jpg/;
+	图片[]:img/pro/hmt-crowd.jpg/;
 /;;
 
 
@@ -183,5 +183,5 @@ netkuu文件修复工具/;/;
 	应用技术：命令行、管道
 	实现功能：大小写自动转换、一键编译运行
 /;
-图片[100%]:img/pro/masm-editor.jpg/;
+	图片[100%]:img/pro/masm-editor.jpg/;
 /;;
