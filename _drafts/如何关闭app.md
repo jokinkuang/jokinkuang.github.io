@@ -156,7 +156,7 @@ public class MyAPP extends Application implements Application.ActivityLifecycleC
 
   // APP的清理工作
   public void exit() {
-
+    finishAllActivity();
   }
 }
 ```
