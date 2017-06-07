@@ -1,0 +1,2 @@
+export PATH=$PATH:~/MaxhubInitShell/
+export PS1='\h:\u:\w\$ '
