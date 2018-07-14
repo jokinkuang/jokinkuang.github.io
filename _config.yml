@@ -31,6 +31,13 @@ baiduTemplate_url: "/w3c/js/baiduTemplate.js" #use local
 google_analytics_id: "UA-83197743-1"
 baidu_tongji_id: "3f311334a3288e33165cf21fa135b331"
 
+# gitment
+gitment_git_account: "jokinkuang"    # jokinkuang (git user name, shown in Profile)
+gitment_git_comment_repo: "comments" # jokinkuang/comments.git (repo to store the issues )
+gitment_oauth_id: "e6e8f10c00d72ac522d1"
+gitment_oauth_secret: "5c6b9bb43f6c0eb89ecf6336ec360535c6f9e99a"
+
+
 # Build Settings
 future: true
 excerpt_separator: "\n\n" # you can specify your own separator here, default is "\n\n" String

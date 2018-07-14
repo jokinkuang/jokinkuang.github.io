@@ -139,9 +139,6 @@ body {
 </div>
 <div class="footer"></div>
 
-<!-- duoshuo -->
-{% include duoshuo.js %}
-
 <!-- jQuery -->
 <script src="{{ site.jquery_url }}"></script>
 
@@ -160,23 +157,6 @@ $(function(){
   }
   // jquery 3.x remove selector method so I can not get the selector inner
   // OR I can change it to $(selecor).executeOnLoad(function(){ // code here });
-  executeOnLoad(".ds-meta", function(){ this.remove(); });
-  executeOnLoad("#ds-hot-posts", function(){ this.remove(); });
-  executeOnLoad(".ds-comments-tab-duoshuo", function(){ this.text("博主的说说"); });
-  executeOnLoad(".ds-replybox", function(){
-    // Don't forget the length
-    if (this.find("img[alt="+ duoshuoUserName +"]").length) {
-      this.show();
-    } else {
-      this.remove();
-    }
-  });
-	// if found .ds-comments-info then consider comments has loaded
-	executeOnLoad(".ds-comments-info", function(){
-		if ( $(window.location.hash).length > 0 ) {
-			$(window).scrollTop( $(window.location.hash).offset().top );
-		}
-	});
 });
 </script>
 </body>

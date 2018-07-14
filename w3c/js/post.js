@@ -10,8 +10,6 @@ $(document).ready(function(){
     dataType: "json",
     success: function (data) {
       loadSiteData(data);
-      loadDuoshuoData();
-      loadShuoshuoData();
     },
     error: function (XMLHttpRequest, textStatus, errorThrown) {
       alert("Sitefile的JSON格式化错误" + errorThrown);

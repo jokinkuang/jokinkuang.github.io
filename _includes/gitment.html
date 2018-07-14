@@ -1,0 +1,18 @@
+<!-- gitment -->
+
+<div id="gitment-container"></div>
+
+<link rel="stylesheet" href="{{ site.w3c_url }}/gitment/default.css">
+<script src="{{ site.w3c_url }}/gitment/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: '{{ page.pid }}', // 可选。默认为 location.href
+  owner: '{{ site.gitment_git_account }}',
+  repo: '{{ site.gitment_git_comment_repo }}',
+  oauth: {
+	client_id: '{{ site.gitment_oauth_id }}',
+	client_secret: '{{ site.gitment_oauth_secret }}',
+  },
+})
+gitment.render('gitment-container')
+</script>

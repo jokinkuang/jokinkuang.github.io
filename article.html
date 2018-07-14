@@ -413,13 +413,7 @@ a.white, a.white:hover, a.white:visited {
 				<img style="width:20px;height:20px;" src="{{ site.images_url }}rss.svg" alt="" border="0"/>
 			</a>
 		</div>
-		<!-- duoshuo -->
-		<div id="recent-comment-panel" style="display:none;style="border: solid 1px #ddd;"">
-			<p style="color:#666;margin: 15px 0 10px 0;">最新评论</p>
-			<div class="ds-recent-comments" data-num-items="1" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="0" data-excerpt-length="70"></div>
-		</div>
-		<!-- 评论列表 -->
-		<div class="ds-thread" data-thread-key="index" data-max-depth="{{ site.duoshuo_max_depth }}" data-title="{{ site.title }}" data-url="{{ site.domain }}{{ page.url }}"></div>
+		{% include gitment.html %}
 	</div>
 </div>
 <div class="footer"></div>
