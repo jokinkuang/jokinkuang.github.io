@@ -60,6 +60,16 @@ jekyll server
 如果出现`bundle exec jekyll serve`能启动，而`jekyll serve`不能启动，则删除Gemfile和Gemfile.lock重新运行`jekyll serve`即可。
 更多Github Pages本地化环境搭建，可参考[github-helper-setting-up-your-github-pages-site-locally-with-jekyll](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll)
 
+### bundle install失败
+
+Fetching json 1.8.3
+An error occurred while installing json (1.8.3), and Bundler cannot continue.
+Make sure that `gem install json -v '1.8.3'` succeeds before bundling.
+
+原因：json 1.8.3 安装失败，可能是不兼容原因。
+解决：打开`Gemfile.lock`，搜索1.8.3，把`json (1.8.3)`改为`json (1.8.5)`或其他更高版本。
+重试：`bundle install`
+
 ## Windows下搭建Jekyll环境
 因为不少的时间在Windows平台下工作，所以后来还是搭建了Windows下的Jekyll环境。
 

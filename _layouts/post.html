@@ -253,22 +253,22 @@ a.grey-link, a.grey-link:hover, a.grey-link:visited {
 
 		<div style="height: 20px;"></div>
 		<div class="ds-share flat" data-thread-key="{{ page.pid }}" data-title="{{ page.title }}" data-images="{{ image_url }}" data-content="{{ post.excerpt | strip | replace:'"', "'" | strip_newlines }}" data-url="{{ site.domain }}{{ page.url }}">
-    <div class="ds-share-inline">
-      <ul  class="ds-share-icons-16">
-      	<li ><span class="ds-more">分享到：</span></li>
-        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-				<li><a class="ds-facebook" href="javascript:void(0);" data-service="facebook">Facebook</a></li>
-      </ul>
-      <div class="ds-share-icons-more">
-      </div>
-    </div>
  		</div>
-		<!-- duoshuo -->
-		<div name="comments" id="comments">
-		<div class="ds-thread" data-thread-key="{{ page.pid }}" data-max-depth="{{ site.duoshuo_max_depth }}" data-title="{{ page.title }}" data-url="{{ site.domain }}{{ page.url }}"></div>
-		</div>
+		<div id="container"></div>
+		<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+		<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+		<script>
+		var gitment = new Gitment({
+		  id: '{{ page.pid }}', // 可选。默认为 location.href
+		  owner: 'jokinkuang@qq.com',
+		  repo: 'jokinkuang.github.io',
+		  oauth: {
+		    client_id: 'a9fff2a011483ad17b71',
+		    client_secret: 'ba70e86b0afd251978ac9756e816c1671b2d446c',
+		  },
+		})
+		gitment.render('container')
+		</script>
 	</div>
 </div>
 
